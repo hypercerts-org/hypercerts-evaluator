@@ -16,6 +16,7 @@ import {
 
 import { ConnectButton } from "@/components/ConnectButton";
 import { Pivot as Hamburger } from "hamburger-react";
+import Image from "next/image";
 import Link from "next/link";
 import { ProfileInfo } from "@/components/ProfileInfo";
 import React from "react";
@@ -35,9 +36,12 @@ export const Header = () => {
       borderBottom={"1px solid"}
     >
       <HStack height={"100%"} gap={10}>
-        <Heading fontFamily="Switzer" size={"md"} mr={4} ml={[4, 4, 0]}>
-          Hypercerts Evaluator
-        </Heading>
+        <Image
+          src="/hypercerts_logo.svg"
+          alt="Hypercerts Logo"
+          width={30}
+          height={30}
+        />
         <Link href="/">
           <Heading textStyle={"secondary"} fontWeight={"100"}>
             Hypercerts
