@@ -34,13 +34,23 @@ export const Header = () => {
       backgroundColor={"grey.300"}
       borderBottom={"1px solid"}
     >
-      <HStack height={"100%"}>
+      <HStack height={"100%"} gap={10}>
         <Heading fontFamily="Switzer" size={"md"} mr={4} ml={[4, 4, 0]}>
           Hypercerts Evaluator
         </Heading>
-        <Show above={"md"}>
+        <Link href="/">
+          <Heading textStyle={"secondary"} fontWeight={"100"}>
+            Hypercerts
+          </Heading>
+        </Link>
+        <Link href="/">
+          <Heading textStyle={"secondary"} fontWeight={"100"}>
+            Evaluators
+          </Heading>
+        </Link>
+        {/* <Show above={"md"}>
           <BrowseMenu />
-        </Show>
+        </Show> */}
       </HStack>
       <Flex ml={"auto"} alignItems={"center"} height={"100%"}>
         <Show above={"md"}>
