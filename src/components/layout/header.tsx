@@ -43,7 +43,7 @@ export const Header = () => {
             Hypercerts
           </Heading>
         </Link>
-        <Link href="/">
+        <Link href="/evaluators">
           <Heading textStyle={"secondary"} fontWeight={"100"}>
             Evaluators
           </Heading>
