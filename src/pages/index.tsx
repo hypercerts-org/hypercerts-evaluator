@@ -1,23 +1,33 @@
-import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-import {
-  Box,
-  Button,
-  Center,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Stack,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
+import { Claim, useAllClaims } from "../claims/useAllClaims";
 
 import Head from "next/head";
-import { Header } from "../components/layout/header";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import { Layout } from "../components/layout";
+import { Suspense } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+function TestClaimBox(claim: Claim) {
+  return (
+    <Box border="1px" borderColor="black" w="200px" h="300px">
+      {claim.id}
+    </Box>
+  );
+}
+
+function TestClaimsList() {
+  const { data, isPending, error } = useAllClaims(3, 0);
+
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
+  return (
+    <Stack direction={["column", "row"]} spacing="24px">
+      {data.claims.map((claim) => (
+        <TestClaimBox key={claim.id} {...claim} />
+      ))}
+    </Stack>
+  );
+}
 
 export default function Home() {
   return (
@@ -29,17 +39,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Stack direction={["column", "row"]} spacing="24px">
-          <Box border="1px" borderColor="black" w="200px" h="300px">
-            1
-          </Box>
-          <Box border="1px" borderColor="black" w="200px" h="300px">
-            2
-          </Box>
-          <Box border="1px" borderColor="black" w="200px" h="300px">
-            3
-          </Box>
-        </Stack>
+        <TestClaimsList />
       </Layout>
     </>
   );
