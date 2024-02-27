@@ -10,10 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 
-import { EAS_SCHEMA_UID_EVALUATIONS } from "../../../config";
-import { useEasConfig } from "../../../eas/hooks/useEasConfig";
+import { EAS_SCHEMA_UID_EVALUATIONS } from "../../config";
+import { useEasConfig } from "../../eas/hooks/useEasConfig";
 import { useNetwork } from "wagmi";
-import { useSigner } from "../../../wagmi/hooks/useSigner";
+import { useSigner } from "../../wagmi/hooks/useSigner";
 import { useState } from "react";
 
 export function AttestModal({

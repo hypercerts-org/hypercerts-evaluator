@@ -1,5 +1,7 @@
-import { ConnectButton as ConnectButtonInternal } from "@rainbow-me/rainbowkit";
 import { Button, ButtonProps } from "@chakra-ui/react";
+
+import { ConnectButton as ConnectButtonInternal } from "@rainbow-me/rainbowkit";
+import Image from "next/image";
 
 export const ConnectButton = ({ ...buttonProps }: ButtonProps) => {
   return (
@@ -81,7 +83,7 @@ export const ConnectButton = ({ ...buttonProps }: ButtonProps) => {
                         }}
                       >
                         {chain.iconUrl && (
-                          <img
+                          <Image
                             alt={chain.name ?? "Chain icon"}
                             src={chain.iconUrl}
                             style={{ width: 12, height: 12 }}

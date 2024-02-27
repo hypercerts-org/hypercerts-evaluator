@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import router, { useRouter } from "next/router";
 
-import { AttestModal } from "./components/AttestModal";
+import { AttestModal } from "../../components/evaluate/AttestModal";
 import { ClaimFragment } from "../../claims/fragments";
 import { FaCheckSquare } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
