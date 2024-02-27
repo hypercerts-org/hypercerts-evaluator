@@ -1,6 +1,17 @@
-import { Button } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Heading,
+  Tag,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+
 import { ClaimFragment } from "../../claims/fragments";
 import Head from "next/head";
+import Image from "next/image";
 import { Layout } from "../../components/layout";
 import Link from "next/link";
 import { readFragment } from "gql.tada";
@@ -9,6 +20,7 @@ import { useRouter } from "next/router";
 
 function ClaimDetails({ id }: { id: string }) {
   const { data, isPending, error } = useClaim(id);
+  const router = useRouter();
 
   if (isPending) return "Loading...";
 
@@ -20,11 +32,112 @@ function ClaimDetails({ id }: { id: string }) {
 
   return (
     <>
-      <h2>Claim</h2>
-      <div>{claim.metadata?.name}</div>
-      <div>{claim.id}</div>
-      <div>{claim.metadata?.description}</div>
-      <Link href={`/evaluate/${claim.id}`}>Evaluate</Link>
+      <Flex>
+        {claim.metadata?.image && (
+          <Box borderRight={"1px solid black"} padding={"20px"}>
+            <Image
+              src={claim.metadata?.image}
+              alt="Hypercert"
+              width="160"
+              height="200"
+            />
+          </Box>
+        )}
+        <Flex flexDirection={"column"} width="100%">
+          <Flex flexDirection={"column"} gap="5" width="100%" p="5">
+            <Heading as="h2" size="md" textStyle="secondary" fontWeight={100}>
+              {claim.metadata?.name}
+            </Heading>
+            <Text>{claim.metadata?.description}</Text>
+          </Flex>
+          <VStack
+            px={4}
+            py={5}
+            alignItems={"flex-start"}
+            width="100%"
+            borderTop={"1px solid black"}
+          >
+            <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+              Creator
+            </Text>
+            <Text>{claim.creator as string}</Text>
+          </VStack>
+        </Flex>
+      </Flex>
+
+      <Flex flexDirection={"column"} width="100%">
+        <VStack
+          px={4}
+          py={5}
+          alignItems={"flex-start"}
+          width="100%"
+          borderTop={"1px solid black"}
+        >
+          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+            Work
+          </Text>
+          <Text>…</Text>
+        </VStack>
+      </Flex>
+
+      <Flex flexDirection={"column"} width="100%">
+        <VStack
+          px={4}
+          py={5}
+          alignItems={"flex-start"}
+          width="100%"
+          borderTop={"1px solid black"}
+        >
+          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+            Contributors
+          </Text>
+          <Text>…</Text>
+        </VStack>
+      </Flex>
+
+      <Flex flexDirection={"column"} width="100%">
+        <VStack
+          px={4}
+          py={5}
+          alignItems={"flex-start"}
+          width="100%"
+          borderTop={"1px solid black"}
+        >
+          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+            Properties
+          </Text>
+          <Text>…</Text>
+        </VStack>
+      </Flex>
+
+      <Flex flexDirection={"column"} width="100%">
+        <VStack
+          px={4}
+          py={5}
+          alignItems={"flex-start"}
+          width="100%"
+          borderTop={"1px solid black"}
+        >
+          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+            Evaluations
+          </Text>
+          <Text>…</Text>
+        </VStack>
+      </Flex>
+
+      <Flex
+        width="100%"
+        justifyContent={"center"}
+        borderTop={"1px solid black"}
+        p={5}
+      >
+        <Button
+          variant="blackAndWhite"
+          onClick={() => router.push(`/evaluate/${claim.id}`)}
+        >
+          Evaluate this Hypercert
+        </Button>
+      </Flex>
     </>
   );
 }

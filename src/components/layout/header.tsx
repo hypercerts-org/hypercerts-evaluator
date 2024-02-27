@@ -31,6 +31,7 @@ export const Header = () => {
       width={"100%"}
       height={headerHeight}
       alignItems={"center"}
+      justifyContent={"center"}
       paddingX={[0, 0, "40px"]}
       backgroundColor={"grey.300"}
       borderBottom={"1px solid"}

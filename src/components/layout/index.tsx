@@ -11,10 +11,17 @@ export const Layout = ({ children }: PropsWithChildren) => {
       width={"100vw"}
       minHeight={"100vh"}
       backgroundColor={colors.background}
-      gap={"20px"}
     >
       <Header />
-      {children}
+      <Flex
+        flexDirection={"column"}
+        width={"700px"}
+        borderBottom={"1px solid black"}
+        borderLeft={"1px solid black"}
+        borderRight={"1px solid black"}
+      >
+        {children}
+      </Flex>
     </Flex>
   );
 };

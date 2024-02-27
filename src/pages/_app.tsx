@@ -1,40 +1,33 @@
 import "@/styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
+import { GQL_QUERY_STALE_TIME, supportedChains, wagmiConfig } from "../config";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RainbowKitProvider, getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { optimism, sepolia } from "viem/chains";
 
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import Fonts from "../fonts";
-import { QUERY_STALE_TIME } from "../config";
-import { WagmiProvider } from "wagmi";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { WagmiConfig } from "wagmi";
 import { hyperTheme } from "../theme";
-
-const config = getDefaultConfig({
-  appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
-  chains: [sepolia, optimism],
-});
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { staleTime: QUERY_STALE_TIME, gcTime: QUERY_STALE_TIME },
+    queries: { staleTime: GQL_QUERY_STALE_TIME, gcTime: GQL_QUERY_STALE_TIME },
   },
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <WagmiProvider config={config}>
+    <WagmiConfig config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider chains={supportedChains}>
           <ChakraProvider theme={hyperTheme}>
             <Fonts />
             <Component {...pageProps} />
           </ChakraProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
-    </WagmiProvider>
+    </WagmiConfig>
   );
 }
