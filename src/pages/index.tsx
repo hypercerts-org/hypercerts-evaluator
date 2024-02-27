@@ -10,7 +10,7 @@ import { useAllClaims } from "../claims/useClaims";
 function TestClaimBox({ data }: { data: FragmentOf<typeof ClaimFragment> }) {
   const claim = readFragment(ClaimFragment, data);
   return (
-    <Link href={`/claims/${claim.id}`}>
+    <Link href={`/claim/${claim.id}`}>
       <Box border="1px" borderColor="black" w="200px" h="300px">
         {claim.metadata ? claim.metadata.name : claim.id}
       </Box>
