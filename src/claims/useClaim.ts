@@ -1,6 +1,6 @@
 import { ResultOf, graphql } from "gql.tada";
 
-import { ClaimFragment } from "./fragments";
+import { FullClaimFragment } from "./fragments";
 import { HYPERCERTS_API_URL } from "../config";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
@@ -9,11 +9,11 @@ const query = graphql(
   `
     query claim($id: ID!) {
       claim(id: $id) {
-        ...ClaimFragment
+        ...FullClaimFragment
       }
     }
   `,
-  [ClaimFragment]
+  [FullClaimFragment]
 );
 
 export const useClaim = (id: string) => {

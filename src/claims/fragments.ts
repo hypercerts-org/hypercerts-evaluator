@@ -1,9 +1,26 @@
 import { graphql } from "gql.tada";
 
-export const ClaimFragment = graphql(`
-  fragment ClaimFragment on Claim {
+export const FullClaimFragment = graphql(`
+  fragment FullClaimFragment on Claim {
     id
     creator
+    owner
+    metadata {
+      name
+      description
+      image
+      external_url
+      work_scope
+      work_timeframe_from
+      work_timeframe_to
+      contributors
+    }
+  }
+`);
+
+export const ListClaimFragment = graphql(`
+  fragment ListClaimFragment on Claim {
+    id
     metadata {
       name
       description

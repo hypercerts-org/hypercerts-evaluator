@@ -1,19 +1,18 @@
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Heading,
-  Tag,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 
-import { ClaimFragment } from "../../claims/fragments";
+import ClaimContributors from "../../components/claim/ClaimContributors";
+import ClaimCreator from "../../components/claim/ClaimCreator";
+import ClaimOwner from "../../components/claim/ClaimOwner";
+import ClaimOwners from "../../components/claim/ClaimOwners";
+import ClaimProperties from "../../components/claim/ClaimProperties";
+import ClaimTitle from "../../components/claim/ClaimTitle";
+import ClaimWorkScope from "../../components/claim/ClaimWorkScope";
+import ClaimWorkTimeFrame from "../../components/claim/ClaimWorkTimeFrame";
+import { FullClaimFragment } from "../../claims/fragments";
+import FullpageLoader from "../../components/FullpageLoader";
 import Head from "next/head";
 import Image from "next/image";
 import { Layout } from "../../components/layout";
-import Link from "next/link";
 import { readFragment } from "gql.tada";
 import { useClaim } from "../../claims/useClaim";
 import { useRouter } from "next/router";
@@ -22,13 +21,13 @@ function ClaimDetails({ id }: { id: string }) {
   const { data, isPending, error } = useClaim(id);
   const router = useRouter();
 
-  if (isPending) return "Loading...";
+  if (isPending) return <FullpageLoader />;
 
   if (error) return "An error has occurred: " + error.message;
 
-  const claim = readFragment(ClaimFragment, data.claim);
+  const claim = readFragment(FullClaimFragment, data.claim);
 
-  if (!claim) return null;
+  if (!claim || !data.claim) return null;
 
   return (
     <>
@@ -44,85 +43,40 @@ function ClaimDetails({ id }: { id: string }) {
           </Box>
         )}
         <Flex flexDirection={"column"} width="100%">
-          <Flex flexDirection={"column"} gap="5" width="100%" p="5">
-            <Heading as="h2" size="md" textStyle="secondary" fontWeight={100}>
-              {claim.metadata?.name}
-            </Heading>
-            <Text>{claim.metadata?.description}</Text>
+          <ClaimTitle claim={data.claim} />
+          <Flex>
+            <ClaimCreator
+              claim={data.claim}
+              borderTop="1px solid black"
+              borderRight="1px solid black"
+            />
+            <ClaimOwner claim={data.claim} borderTop="1px solid black" />
           </Flex>
-          <VStack
-            px={4}
-            py={5}
-            alignItems={"flex-start"}
-            width="100%"
-            borderTop={"1px solid black"}
-          >
-            <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-              Creator
-            </Text>
-            <Text>{claim.creator as string}</Text>
-          </VStack>
         </Flex>
       </Flex>
 
-      <Flex flexDirection={"column"} width="100%">
-        <VStack
-          px={4}
-          py={5}
-          alignItems={"flex-start"}
-          width="100%"
-          borderTop={"1px solid black"}
-        >
-          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-            Work
-          </Text>
-          <Text>…</Text>
-        </VStack>
-      </Flex>
-
-      <Flex flexDirection={"column"} width="100%">
-        <VStack
-          px={4}
-          py={5}
-          alignItems={"flex-start"}
-          width="100%"
-          borderTop={"1px solid black"}
-        >
-          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-            Contributors
-          </Text>
-          <Text>…</Text>
-        </VStack>
-      </Flex>
-
-      <Flex flexDirection={"column"} width="100%">
-        <VStack
-          px={4}
-          py={5}
-          alignItems={"flex-start"}
-          width="100%"
-          borderTop={"1px solid black"}
-        >
-          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-            Properties
-          </Text>
-          <Text>…</Text>
-        </VStack>
-      </Flex>
-
-      <Flex flexDirection={"column"} width="100%">
-        <VStack
-          px={4}
-          py={5}
-          alignItems={"flex-start"}
-          width="100%"
-          borderTop={"1px solid black"}
-        >
-          <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-            Evaluations
-          </Text>
-          <Text>…</Text>
-        </VStack>
+      <Flex>
+        <Flex flexDirection={"column"} w="50%">
+          <ClaimWorkScope
+            claim={data.claim}
+            borderTop="1px solid black"
+            borderRight="1px solid black"
+          />
+          <ClaimWorkTimeFrame
+            claim={data.claim}
+            borderTop="1px solid black"
+            borderRight="1px solid black"
+          />
+          <ClaimContributors
+            claim={data.claim}
+            borderTop="1px solid black"
+            borderRight="1px solid black"
+          />
+        </Flex>
+        <Flex flexDirection={"column"} w="50%">
+          <ClaimProperties claim={data.claim} borderTop="1px solid black" />
+          <ClaimOwners claim={data.claim} borderTop="1px solid black" />
+        </Flex>
       </Flex>
 
       <Flex

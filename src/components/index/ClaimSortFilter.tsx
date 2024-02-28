@@ -21,6 +21,7 @@ export default function ClaimSortFilter() {
             as={Button}
             rightIcon={<FaSortAmountDown />}
             variant="blackAndWhiteOutline"
+            size={"sm"}
           >
             Sort
           </MenuButton>
@@ -34,6 +35,7 @@ export default function ClaimSortFilter() {
             as={Button}
             rightIcon={<FaFilter />}
             variant="blackAndWhiteOutline"
+            size={"sm"}
           >
             Filter
           </MenuButton>
