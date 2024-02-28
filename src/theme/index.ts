@@ -86,5 +86,14 @@ export const hyperTheme: ThemeOverride = extendTheme({
         isCentered: true,
       },
     },
+    Alert: {
+      variants: {
+        solid: {
+          container: {
+            bg: "gray.900",
+          },
+        },
+      },
+    },
   },
 } as ThemeOverride);
