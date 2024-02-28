@@ -1,8 +1,7 @@
 import { Box } from "@chakra-ui/react";
-import Image from "next/image";
-import { Jazzicon } from "@ukstv/jazzicon-react";
+import { Jazzicon as _Jazzicon } from "@ukstv/jazzicon-react";
 
-export default function JazziconImage({
+export default function Jazzicon({
   address,
   ...props
 }: {
@@ -14,7 +13,7 @@ export default function JazziconImage({
       style={{ width: "15px", height: "15px", marginBottom: "4px" }}
       {...props}
     >
-      <Jazzicon address={address} />
+      <_Jazzicon address={address} />
     </Box>
   );
 }

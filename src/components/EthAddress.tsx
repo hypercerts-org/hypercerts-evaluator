@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 
 import { CopyButton } from "./CopyButton";
-import JazziconImage from "./JazzIconImage";
+import JazziconImage from "./Jazzicon";
 
 export default function EthAddress({ address }: { address?: string }) {
   if (!address) {

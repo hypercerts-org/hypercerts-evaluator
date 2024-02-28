@@ -10,9 +10,9 @@ import {
 import router, { useRouter } from "next/router";
 
 import { AttestModal } from "../../components/evaluate/AttestModal";
-import { ClaimFragment } from "../../claims/fragments";
 import { FaCheckSquare } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
+import { FullClaimFragment } from "../../claims/fragments";
 import Head from "next/head";
 import Image from "next/image";
 import { Layout } from "../../components/layout";
@@ -27,7 +27,7 @@ function ClaimDetails({ id }: { id: string }) {
 
   if (error) return "An error has occurred: " + error.message;
 
-  const claim = readFragment(ClaimFragment, data.claim);
+  const claim = readFragment(FullClaimFragment, data.claim);
 
   if (!claim) return null;
 
