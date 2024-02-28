@@ -2,7 +2,7 @@ import { Head, Html, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" style={{ height: "100%" }}>
       <Head>
         <meta
           name="description"
@@ -11,7 +11,7 @@ export default function Document() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body>
+      <body style={{ minHeight: "100%" }}>
         <Main />
         <NextScript />
       </body>

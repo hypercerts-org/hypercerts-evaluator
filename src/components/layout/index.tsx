@@ -8,7 +8,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
     <Flex
       flexDirection={"column"}
       alignItems={"center"}
-      width={"100vw"}
+      width={"100%"}
       minHeight={"100vh"}
       backgroundColor={colors.background}
     >
@@ -16,6 +16,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <Flex
         flexDirection={"column"}
         width={"700px"}
+        grow={1}
         borderBottom={"1px solid black"}
         borderLeft={"1px solid black"}
         borderRight={"1px solid black"}

@@ -1,7 +1,8 @@
-import { Box, Grid, GridItem, Stack } from "@chakra-ui/react";
-import { FragmentOf, graphql, readFragment } from "gql.tada";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { FragmentOf, readFragment } from "gql.tada";
 
 import { ClaimFragment } from "../claims/fragments";
+import ClaimGridSkeleton from "../components/index/ClaimGridSkeleton";
 import Head from "next/head";
 import Image from "next/image";
 import { Layout } from "../components/layout";
@@ -33,9 +34,9 @@ function TestClaimBox({ data }: { data: FragmentOf<typeof ClaimFragment> }) {
 }
 
 function ClaimsList() {
-  const { data, isPending, error } = useAllClaims(9, 0);
+  const { data, isPending, error } = useAllClaims(12, 0);
 
-  if (isPending) return "Loading...";
+  if (isPending) return <ClaimGridSkeleton />;
 
   if (error) return "An error has occurred: " + error.message;
 
