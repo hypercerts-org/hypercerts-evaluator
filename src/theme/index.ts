@@ -35,6 +35,21 @@ export const hyperTheme: ThemeOverride = extendTheme({
     Button,
     Badge,
     Tag,
+    Select: {
+      variants: {
+        black: {
+          field: {
+            border: "1px",
+            borderRadius: "0",
+            _focus: {
+              ring: "2px",
+              ringColor: "gray.300",
+            },
+          },
+          text: {},
+        },
+      },
+    },
     Input: {
       variants: {
         gray: {
@@ -42,6 +57,17 @@ export const hyperTheme: ThemeOverride = extendTheme({
             backgroundColor: "rgba(242,242,242,1)",
             borderRadius: "8px",
             textAlign: "right",
+          },
+          text: {},
+        },
+        black: {
+          field: {
+            border: "1px",
+            borderRadius: "0",
+            _focus: {
+              ring: "2px",
+              ringColor: "gray.300",
+            },
           },
           text: {},
         },
