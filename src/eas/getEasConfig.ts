@@ -1,6 +1,6 @@
-import { EAS_CONFIG } from "../../config";
+import { EAS_CONFIG } from "../config";
 
-export function useEasConfig(chainId?: number) {
+export function getEasConfig(chainId?: number) {
   if (!chainId) {
     return undefined;
   }

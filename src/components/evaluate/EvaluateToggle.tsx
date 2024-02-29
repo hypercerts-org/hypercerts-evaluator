@@ -1,18 +1,17 @@
 import { Button, Flex, IconButton } from "@chakra-ui/react";
 
+import { EvaluationStates } from "../../eas/evaluation-states.type";
 import { FaCheckSquare } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
-
-export type ToggleState = "valid" | "invalid" | "none";
 
 export default function EvaluateToggle({
   state,
   setState,
 }: {
-  state: ToggleState;
-  setState: (state: ToggleState) => void;
+  state: EvaluationStates;
+  setState: (state: EvaluationStates) => void;
 }) {
-  const handleClick = (s: ToggleState) => {
+  const handleClick = (s: EvaluationStates) => {
     if (state === s) {
       setState("none");
     } else {
