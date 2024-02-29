@@ -4,6 +4,7 @@ import { FragmentOf, readFragment } from "gql.tada";
 import Image from "next/image";
 import Link from "next/link";
 import { ListClaimFragment } from "../../claims/fragments";
+import { isValidImageSrc } from "../../utils/isValidImageSrc";
 
 export default function ClaimBox({
   data,
@@ -12,13 +13,9 @@ export default function ClaimBox({
 }) {
   const claim = readFragment(ListClaimFragment, data);
 
-  console.log(claim);
-
-  const imageSrc =
-    claim.metadata?.image?.startsWith("https") ||
-    claim.metadata?.image?.startsWith("data:image/")
-      ? claim.metadata?.image
-      : null;
+  const imageSrc = isValidImageSrc(claim.metadata?.image)
+    ? claim.metadata?.image
+    : null;
 
   return (
     <GridItem w="200px" h="200px" mt={5}>
@@ -29,7 +26,6 @@ export default function ClaimBox({
             alt="Hypercert"
             width="200"
             height="200"
-            objectFit="contain"
             style={{ objectFit: "contain", width: "200px", height: "200px" }}
           />
         ) : (

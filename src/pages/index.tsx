@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
-  console.log(router.query);
 
   const page = router.query.p ? Number(router.query.p) : 1;
 

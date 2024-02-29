@@ -30,11 +30,9 @@ type AllToggleState = {
 export function AttestModal({
   isOpen,
   onClose,
-  data,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  data: any;
 }) {
   const { chain } = useNetwork();
   const easConfig = useEasConfig(chain?.id);
@@ -74,7 +72,6 @@ export function AttestModal({
         },
       });
       await tx.wait();
-      console.log("Attestation sent");
       onClose();
     } catch (e) {
       console.error(e);

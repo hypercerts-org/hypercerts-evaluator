@@ -1,7 +1,8 @@
 import { FragmentOf, readFragment } from "gql.tada";
-import { Text, VStack } from "@chakra-ui/react";
+import { List, ListIcon, ListItem, Text, VStack } from "@chakra-ui/react";
 
 import EthAddress from "../EthAddress";
+import { FaUser } from "react-icons/fa";
 import { FullClaimFragment } from "../../claims/fragments";
 import { isAddress } from "viem";
 
@@ -27,13 +28,28 @@ export default function ClaimContributors({
       <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
         Contributors
       </Text>
-      <Text>
+      <List spacing={2}>
         {contributors?.map((c, i) => {
           if (!c) return null;
-          if (isAddress(c)) return <EthAddress address={c} key={i} />;
-          return c;
+          if (isAddress(c))
+            return (
+              <ListItem key={i}>
+                <EthAddress address={c} key={i} />
+              </ListItem>
+            );
+          return (
+            <ListItem key={i}>
+              <ListIcon
+                as={FaUser}
+                color="gray.500"
+                style={{ width: "15px", height: "15px" }}
+                mb={"3px"}
+              />
+              {c}
+            </ListItem>
+          );
         })}
-      </Text>
+      </List>
     </VStack>
   );
 }
