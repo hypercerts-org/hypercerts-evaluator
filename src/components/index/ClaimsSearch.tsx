@@ -2,7 +2,7 @@ import { Box, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 
 import { FaSearch } from "react-icons/fa";
 
-export default function ClaimSearch() {
+export default function ClaimsSearch() {
   return (
     <Box borderBottom={"1px solid black"} padding={"20px"}>
       <InputGroup>

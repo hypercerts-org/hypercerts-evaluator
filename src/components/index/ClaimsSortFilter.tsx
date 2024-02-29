@@ -12,7 +12,7 @@ import {
 import { FaFilter } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 
-export default function ClaimSortFilter() {
+export default function ClaimsSortFilter() {
   return (
     <Box pt={10} pr={10}>
       <Flex gap="5" justifyContent={"flex-end"}>

@@ -13,14 +13,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       backgroundColor={colors.background}
     >
       <Header />
-      <Flex
-        flexDirection={"column"}
-        width={"700px"}
-        grow={1}
-        borderBottom={"1px solid black"}
-        borderLeft={"1px solid black"}
-        borderRight={"1px solid black"}
-      >
+      <Flex flexDirection={"column"} width={"700px"} grow={1}>
         {children}
       </Flex>
     </Flex>

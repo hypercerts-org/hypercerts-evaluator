@@ -82,6 +82,12 @@ export const hyperTheme: ThemeOverride = extendTheme({
       },
     },
     Modal: {
+      baseStyle: {
+        dialog: {
+          padding: "30",
+          borderRadius: "0",
+        },
+      },
       defaultProps: {
         isCentered: true,
       },

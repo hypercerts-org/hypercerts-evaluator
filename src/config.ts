@@ -55,3 +55,7 @@ export const wagmiConfig = createConfig({
   connectors,
   publicClient,
 });
+
+// UI
+
+export const CLAIMS_PER_PAGE = 12;

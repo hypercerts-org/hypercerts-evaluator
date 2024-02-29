@@ -11,23 +11,32 @@ export default function ClaimBox({
   data: FragmentOf<typeof ListClaimFragment>;
 }) {
   const claim = readFragment(ListClaimFragment, data);
-  return claim.metadata?.image ? (
-    <GridItem w="100%" h="250px" pt={5}>
+
+  console.log(claim);
+
+  const imageSrc =
+    claim.metadata?.image?.startsWith("https") ||
+    claim.metadata?.image?.startsWith("data:image/")
+      ? claim.metadata?.image
+      : null;
+
+  return (
+    <GridItem w="200px" h="200px" mt={5}>
       <Link href={`/claim/${claim.id}`}>
-        <Image
-          src={claim.metadata.image}
-          alt="Hypercert"
-          width="200"
-          height="250"
-        />
-      </Link>
-    </GridItem>
-  ) : (
-    <GridItem w="100%" h="240px" p={5}>
-      <Link href={`/claim/${claim.id}`}>
-        <Box border="1px" borderColor="black" p={5} h="100%">
-          No name available
-        </Box>
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt="Hypercert"
+            width="200"
+            height="200"
+            objectFit="contain"
+            style={{ objectFit: "contain", width: "200px", height: "200px" }}
+          />
+        ) : (
+          <Box border="1px" borderColor="black" p={5} h="100%">
+            <Box>{claim.metadata?.name}</Box>
+          </Box>
+        )}
       </Link>
     </GridItem>
   );
