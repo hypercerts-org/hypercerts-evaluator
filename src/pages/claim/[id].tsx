@@ -23,7 +23,6 @@ import { useState } from "react";
 
 function ClaimDetails({ id }: { id: string }) {
   const { data, isPending, error } = useClaim(id);
-  const router = useRouter();
   const [attestModalOpen, setAttestModalOpen] = useState(false);
 
   if (isPending) return <FullpageLoader />;
@@ -99,6 +98,7 @@ function ClaimDetails({ id }: { id: string }) {
           Evaluate this Hypercert
         </Button>
         <AttestModal
+          claimId={id}
           isOpen={attestModalOpen}
           onClose={() => setAttestModalOpen(false)}
         />

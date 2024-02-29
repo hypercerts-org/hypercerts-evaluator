@@ -1,5 +1,9 @@
 @import url("https://fonts.cdnfonts.com/css/switzer");
 
+a {
+  text-decoration: underline !important;
+}
+
 .spin {
   animation-name: spin;
   animation-duration: 5000ms;

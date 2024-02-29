@@ -14,8 +14,11 @@ export const GQL_QUERY_STALE_TIME = 1000 * 60 * 30; // 30 minutes
 
 // Ethereum Attetation Service (EAS)
 
-export const EAS_SCHEMA_UID_EVALUATIONS =
-  "0x33e9094830a5cba5554d1954310e4fbed2ef5f859ec1404619adea4207f391fd";
+export const EVALUATIONS_SCHEMA_UID =
+  "0x6fc5f6423ba06f5ce1fd293d0eee50c24adf802e085fae755ad7296e35dd3f00";
+
+export const EVALUATIONS_SCHEMA =
+  "string hypercert_id,bytes32 evaluate_basic,bytes32 evaluate_work,bytes32 evaluate_contributors,bytes32 evaluate_properties,string comments,string[] tags";
 
 type EasConfig = {
   id: number;
