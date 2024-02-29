@@ -31,6 +31,14 @@ export const ButtonTheme = defineStyleConfig({
       color: "black",
       borderRadius: "8px",
     },
+    ghost: {
+      backgroundColor: "none",
+      _hover: {
+        backgroundColor: "rgba(0,0,0,0.1)",
+      },
+      color: "black",
+      borderRadius: "8px",
+    },
   },
   defaultProps: {},
 });

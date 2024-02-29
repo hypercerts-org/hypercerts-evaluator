@@ -44,12 +44,12 @@ export const Header = () => {
           height={30}
         />
         <Link href="/">
-          <Heading textStyle={"secondary"} fontWeight={"100"}>
+          <Heading textStyle={"secondary"} fontWeight={"100"} size={"lg"}>
             Hypercerts
           </Heading>
         </Link>
         <Link href="/evaluators">
-          <Heading textStyle={"secondary"} fontWeight={"100"}>
+          <Heading textStyle={"secondary"} fontWeight={"100"} size={"lg"}>
             Evaluators
           </Heading>
         </Link>

@@ -34,13 +34,12 @@ export default function ClaimsPagination({
       p={5}
       mb={20}
     >
-      <Flex w="40" justifyContent={"start"}>
+      <Flex alignItems="center" justifyContent="start" gap={2} w="250px">
         {/* First Button */}
         <Button
           display={currentPage > 1 ? "inline-block" : "none"}
-          mr="4"
           aria-label="First"
-          leftIcon={<FaArrowLeft />}
+          leftIcon={<FaArrowLeft style={{ width: "10px", height: "10px" }} />}
           onClick={() => navigate(1)}
           variant="ghost"
         >
@@ -51,7 +50,7 @@ export default function ClaimsPagination({
         <Button
           display={currentPage > 1 ? "inline-block" : "none"}
           aria-label="Previous"
-          leftIcon={<FaArrowLeft />}
+          leftIcon={<FaArrowLeft style={{ width: "10px", height: "10px" }} />}
           onClick={() => navigate(currentPage - 1)}
           variant="ghost"
         >
@@ -64,24 +63,22 @@ export default function ClaimsPagination({
         {currentPage} of {totalPages}
       </Box>
 
-      <Flex alignItems="center" justifyContent="end" w="40">
+      <Flex alignItems="center" justifyContent="end" gap={2} w="250px">
         {/* Next Button */}
         <Button
           display={currentPage < totalPages ? "inline-block" : "none"}
-          mr="4"
           aria-label="Next"
-          rightIcon={<FaArrowRight />}
+          rightIcon={<FaArrowRight style={{ width: "10px", height: "10px" }} />}
           onClick={() => navigate(currentPage + 1)}
           variant="ghost"
         >
           Next
-        </Button>
-
+        </Button>{" "}
         {/* Last Button */}
         <Button
           display={currentPage < totalPages ? "inline-block" : "none"}
           aria-label="Last"
-          rightIcon={<FaArrowRight />}
+          rightIcon={<FaArrowRight style={{ width: "10px", height: "10px" }} />}
           onClick={() => navigate(totalPages)}
           variant="ghost"
         >
