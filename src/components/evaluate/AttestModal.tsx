@@ -1,3 +1,5 @@
+import "@yaireo/tagify/dist/tagify.css"; // Tagify CSS
+
 import {
   Button,
   Flex,
@@ -9,12 +11,14 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import EvaluateToggle, { ToggleState } from "./EvaluateToggle";
 
 import { EAS_SCHEMA_UID_EVALUATIONS } from "../../config";
+import Tags from "@yaireo/tagify/dist/react.tagify";
 import { useEasConfig } from "../../eas/hooks/useEasConfig";
 import { useNetwork } from "wagmi";
 import { useSigner } from "../../wagmi/hooks/useSigner";
@@ -80,7 +84,12 @@ export function AttestModal({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size={"xl"}
+      scrollBehavior="inside"
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Evaluate Hypercert</ModalHeader>
@@ -161,6 +170,10 @@ export function AttestModal({
                 />
               </Flex>
             </VStack>
+
+            <Tags defaultValue="a,b,c" className="tags" />
+
+            <Textarea>Leave a comment (optional)</Textarea>
           </Flex>
         </ModalBody>
 
