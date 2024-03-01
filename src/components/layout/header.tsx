@@ -36,25 +36,27 @@ export const Header = () => {
       backgroundColor={"grey.300"}
       borderBottom={"1px solid"}
     >
-      <Flex gap={10} w={"400px"}>
-        <Image
-          src="/hypercerts_logo.svg"
-          alt="Hypercerts Logo"
-          width={30}
-          height={30}
-        />
-        <Heading
-          textStyle={"secondary"}
-          fontWeight={"100"}
-          size={"md"}
-          whiteSpace={"nowrap"}
-        >
-          Hypercerts Evaluator
-        </Heading>
-        {/* <Show above={"md"}>
+      <Link href="/">
+        <Flex gap={10} w={"400px"}>
+          <Image
+            src="/hypercerts_logo.svg"
+            alt="Hypercerts Logo"
+            width={30}
+            height={30}
+          />
+          <Heading
+            textStyle={"secondary"}
+            fontWeight={"100"}
+            size={"md"}
+            whiteSpace={"nowrap"}
+          >
+            Hypercerts Evaluator
+          </Heading>
+          {/* <Show above={"md"}>
           <BrowseMenu />
         </Show> */}
-      </Flex>
+        </Flex>
+      </Link>
       <Flex ml={"auto"} alignItems={"center"} height={"100%"}>
         <Show above={"md"}>
           <ConnectButton />

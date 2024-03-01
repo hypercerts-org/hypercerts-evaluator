@@ -17,17 +17,16 @@ export default function TopMenu() {
         borderLeft={"1px solid black"}
         borderRight={"1px solid black"}
       >
-        <Box
-          w="50%"
-          justifyContent={"center"}
-          display={"flex"}
-          p={5}
-          backgroundColor={isCertRoute ? "black" : "inherit"}
-          _hover={{
-            backgroundColor: isCertRoute ? "black" : "rgba(0,0,0,0.1)",
-          }}
-        >
-          <Link href="/">
+        <Link href="/" style={{ width: "50%" }}>
+          <Box
+            justifyContent={"center"}
+            display={"flex"}
+            p={5}
+            backgroundColor={isCertRoute ? "black" : "inherit"}
+            _hover={{
+              backgroundColor: isCertRoute ? "black" : "rgba(0,0,0,0.1)",
+            }}
+          >
             <Heading
               textStyle={"secondary"}
               fontWeight={"100"}
@@ -36,24 +35,23 @@ export default function TopMenu() {
             >
               Hypercerts
             </Heading>
-          </Link>
-        </Box>
-        <Box
-          w="50%"
-          justifyContent={"center"}
-          display={"flex"}
-          borderLeft={"1px solid black"}
-          p={5}
-          backgroundColor={
-            router.pathname.startsWith("/evaluator") ? "black" : "inherit"
-          }
-          _hover={{
-            backgroundColor: router.pathname.startsWith("/evaluator")
-              ? "black"
-              : "rgba(0,0,0,0.1)",
-          }}
-        >
-          <Link href="/evaluators">
+          </Box>
+        </Link>
+        <Link href="/evaluators" style={{ width: "50%" }}>
+          <Box
+            justifyContent={"center"}
+            display={"flex"}
+            borderLeft={"1px solid black"}
+            p={5}
+            backgroundColor={
+              router.pathname.startsWith("/evaluator") ? "black" : "inherit"
+            }
+            _hover={{
+              backgroundColor: router.pathname.startsWith("/evaluator")
+                ? "black"
+                : "rgba(0,0,0,0.1)",
+            }}
+          >
             <Heading
               textStyle={"secondary"}
               fontWeight={"100"}
@@ -64,8 +62,8 @@ export default function TopMenu() {
             >
               Evaluators
             </Heading>
-          </Link>
-        </Box>
+          </Box>
+        </Link>
       </Flex>
     </Flex>
   );
