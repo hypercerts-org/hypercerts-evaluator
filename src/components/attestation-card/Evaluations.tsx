@@ -79,22 +79,3 @@ export default function Evaluations({
     </VStack>
   );
 }
-
-{
-  /* <IconButton
-aria-label="Valid"
-icon={<FaCheckSquare />}
-onClick={() => handleClick("valid")}
-color={state === "valid" ? "limegreen" : "gray"}
-size="lg"
-variant="ghost"
-/>
-<IconButton
-aria-label="Invalid"
-icon={<FaMinusCircle />}
-onClick={() => handleClick("invalid")}
-color={state === "invalid" ? "red" : "gray"}
-size="lg"
-variant="ghost"
-/> */
-}

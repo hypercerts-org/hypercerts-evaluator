@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 
 type SvgIconProps = {
-  size?: "tiny" | "small" | "large";
+  size?: "tiny" | "small" | "large" | "huge";
 };
 
 const sizeInPx = (size: SvgIconProps["size"]) => {
@@ -10,6 +10,9 @@ const sizeInPx = (size: SvgIconProps["size"]) => {
   }
   if (size === "large") {
     return "40px";
+  }
+  if (size === "huge") {
+    return "100px";
   }
   return "25px";
 };

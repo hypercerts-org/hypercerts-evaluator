@@ -7,7 +7,7 @@ import { useState } from "react";
 
 type ImageIconProps = {
   url: string;
-  size?: "tiny" | "small" | "large";
+  size?: "tiny" | "small" | "large" | "huge";
 };
 
 const sizeInPx = (size: ImageIconProps["size"]) => {
@@ -16,6 +16,9 @@ const sizeInPx = (size: ImageIconProps["size"]) => {
   }
   if (size === "large") {
     return "40px";
+  }
+  if (size === "huge") {
+    return "100px";
   }
   return "25px";
 };

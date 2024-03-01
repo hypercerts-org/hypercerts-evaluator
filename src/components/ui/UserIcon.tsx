@@ -7,7 +7,7 @@ import { SvgIcon } from "./user-icon/SvgIcon";
 type UserIconProps = {
   address?: string;
   variant?: "round" | "square";
-  size?: "tiny" | "small" | "large";
+  size?: "tiny" | "small" | "large" | "huge";
   className?: string;
   plusOne?: boolean;
 };

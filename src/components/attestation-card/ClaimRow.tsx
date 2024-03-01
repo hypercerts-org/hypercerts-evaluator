@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 
+import ClaimRowSkeleton from "./ClaimRowSkeleton";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import Image from "next/image";
 import { isValidImageSrc } from "../../utils/isValidImageSrc";
@@ -10,12 +11,12 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
   const { data, isPending, error } = useClaim(claimId);
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <ClaimRowSkeleton />;
   }
 
   if (error) {
     console.error(error);
-    return <div>Error loading claim</div>;
+    return null;
   }
 
   const claim = readFragment(FullClaimFragment, data?.claim);
