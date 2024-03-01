@@ -62,5 +62,5 @@ export async function createAttestation({
       data: encodedData,
     },
   });
-  await tx.wait();
+  return tx.wait();
 }

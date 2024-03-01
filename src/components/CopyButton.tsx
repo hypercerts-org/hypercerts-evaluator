@@ -4,7 +4,7 @@ import { IconButton, useToast } from "@chakra-ui/react";
 import { FaCopy } from "react-icons/fa6";
 
 interface CopyButtonProps {
-  textToCopy: string;
+  textToCopy?: string;
 }
 
 export function CopyButton({ textToCopy }: CopyButtonProps): JSX.Element {
@@ -14,6 +14,9 @@ export function CopyButton({ textToCopy }: CopyButtonProps): JSX.Element {
       aria-label="Search database"
       icon={<FaCopy />}
       onClick={(): void => {
+        if (!textToCopy) {
+          return;
+        }
         void navigator.clipboard.writeText(textToCopy);
         toast({
           title: "Copied.",
@@ -27,6 +30,7 @@ export function CopyButton({ textToCopy }: CopyButtonProps): JSX.Element {
       size={"xs"}
       isRound={true}
       pl="6px"
+      variant={"ghost"}
     />
   );
 }

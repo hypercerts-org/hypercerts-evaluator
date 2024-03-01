@@ -73,18 +73,19 @@ export function AttestModalBody() {
   };
 
   const attest = async () => {
-    if (!signer || !chain?.id || !attestContext?.claimId) {
+    if (!signer || !chain?.id || !attestContext) {
       return;
     }
     setIsAttesting(true);
     try {
-      await createAttestation({
+      const uid = await createAttestation({
         chainId: chain.id,
         signer,
         claimId: attestContext.claimId,
         allEvaluationStates,
         comments,
       });
+      attestContext.setCreatedAttestationUid(uid);
       attestContext.closeAttestModal({ success: true });
     } catch (e) {
       if (errorHasReason(e)) {
