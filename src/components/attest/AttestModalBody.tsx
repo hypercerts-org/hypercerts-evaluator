@@ -203,9 +203,11 @@ export function AttestModalBody() {
               Comments
             </Text>
             <Textarea
-              placeholder="Any comments entered here are saved with the attetstation. A comment is required when a section has been dismissed."
+              placeholder="Any comments entered here are saved with the attestation. A comment is required when a section has been dismissed."
               value={comments}
               onChange={(e) => setComments(e.target.value)}
+              variant={"black"}
+              maxLength={250}
             />
           </VStack>
         </Flex>

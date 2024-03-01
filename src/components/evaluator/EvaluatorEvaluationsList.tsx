@@ -19,6 +19,10 @@ export default function EvaluatorEvaluationsList({
     return <div>Error loading evaluations</div>;
   }
 
+  if (!data?.attestations.length) {
+    return <div>No evaluations found.</div>;
+  }
+
   return (
     <Grid templateColumns="repeat(2, 1fr)" gap={5}>
       {data?.attestations.map((attestationFragment, i) => (

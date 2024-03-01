@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <WagmiConfig config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
-          <RainbowKitProvider chains={supportedChains}>
+          <RainbowKitProvider chains={supportedChains} modalSize="compact">
             <ChakraProvider theme={hyperTheme}>
               <Fonts />
               <Component {...pageProps} />

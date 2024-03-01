@@ -1,8 +1,7 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
-import { createContext, useContext } from "react";
+import { Button, Flex } from "@chakra-ui/react";
 
 import { AttestContext } from "../../pages/claim/[id]";
-import { AttestModal } from "./AttestModal";
+import { AttestModal } from "../attest/AttestModal";
 import ClaimContributors from "../../components/claim/ClaimContributors";
 import ClaimCreator from "../../components/claim/ClaimCreator";
 import ClaimOwner from "../../components/claim/ClaimOwner";
@@ -18,6 +17,7 @@ import LoadError from "../../components/LoadError";
 import { isValidImageSrc } from "../../utils/isValidImageSrc";
 import { readFragment } from "gql.tada";
 import { useClaim } from "../../hypercerts/hooks/useClaim";
+import { useContext } from "react";
 
 export default function ClaimDetails() {
   const attestContext = useContext(AttestContext);

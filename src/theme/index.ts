@@ -81,6 +81,27 @@ export const hyperTheme: ThemeOverride = extendTheme({
         },
       },
     },
+    Textarea: {
+      variants: {
+        black: {
+          border: "1px",
+          borderRadius: "0",
+          _focus: {
+            ring: "2px",
+            ringColor: "gray.300",
+          },
+          text: {},
+        },
+      },
+      baseStyle: {
+        field: {
+          borderRadius: "0",
+        },
+        addon: {
+          borderRadius: "0",
+        },
+      },
+    },
     Modal: {
       baseStyle: {
         dialog: {
