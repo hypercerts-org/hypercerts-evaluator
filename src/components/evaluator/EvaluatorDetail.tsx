@@ -50,7 +50,13 @@ export default function EvaluatorDetails() {
           w="100%"
         >
           <Flex direction={"column"} gap={2} p={10} justifyContent={"center"}>
-            <EnsName address={attestor.eth_address} fontSize="lg" />
+            <EnsName
+              address={attestor.eth_address}
+              as="h2"
+              fontSize="lg"
+              textStyle="secondary"
+              fontWeight={100}
+            />
             <EthAddress address={attestor.eth_address} />{" "}
           </Flex>
           <Flex

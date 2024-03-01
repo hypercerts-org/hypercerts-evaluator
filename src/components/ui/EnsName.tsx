@@ -16,9 +16,5 @@ export default function EnsName({
 
   if (!address || !ensName) return null;
 
-  return (
-    <Text as="b" {...props}>
-      {ensName}
-    </Text>
-  );
+  return <Text {...props}>{ensName}</Text>;
 }

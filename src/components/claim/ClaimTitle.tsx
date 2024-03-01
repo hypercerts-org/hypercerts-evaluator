@@ -16,10 +16,10 @@ export default function ClaimTitle({
     : null;
 
   return (
-    <Flex flexDirection={"column"} gap="5" width="100%" p="5">
-      <Heading as="h2" size="md" textStyle="secondary" fontWeight={100}>
+    <Flex flexDirection={"column"} gap="2" width="100%" p="10">
+      <Text as="h2" fontSize="lg" textStyle="secondary" fontWeight={100}>
         {_claim.metadata?.name}
-      </Heading>
+      </Text>
       <Text>{_claim.metadata?.description}</Text>
       {externalUrl && (
         <Text>

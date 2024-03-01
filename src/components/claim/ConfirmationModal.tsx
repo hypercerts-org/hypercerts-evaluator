@@ -63,7 +63,7 @@ export function ConfirmationModal() {
             >
               <FaRegThumbsUp style={{ width: "70px", height: "70px" }} />
             </motion.div>
-            <Flex flexDirection={"column"} gap={3}>
+            <Flex flexDirection={"column"} gap={2}>
               <Text fontSize="m">
                 Your evaluation has been successfully submitted and saved as an
                 attestation.

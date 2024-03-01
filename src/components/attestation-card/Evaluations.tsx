@@ -43,7 +43,7 @@ export default function Evaluations({
   [key: string]: any;
 }) {
   return (
-    <VStack py={5} alignItems={"flex-start"} width="100%" {...props}>
+    <VStack alignItems={"flex-start"} width="100%" {...props}>
       {basic && (
         <Flex justifyContent="space-between" w="100%" alignItems="center">
           <Text as="span" textStyle={"secondary"} fontSize={"sm"}>

@@ -28,7 +28,7 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
     : null;
 
   return (
-    <Flex w={"100%"} gap={3}>
+    <Flex w={"100%"} gap={2}>
       {imageSrc && (
         <Image
           src={imageSrc}

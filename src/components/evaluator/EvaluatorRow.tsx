@@ -18,7 +18,7 @@ export default function EvaluatorRow({
     <Flex gap={2} {...props}>
       <UserIcon address={attestor.eth_address} size="large" />
       <Flex direction={"column"} justifyContent={"center"} alignItems={"start"}>
-        <EnsName address={attestor.eth_address} />
+        <EnsName address={attestor.eth_address} as="b" />
         <EthAddress address={attestor.eth_address} />{" "}
       </Flex>
       <Flex grow={1} />

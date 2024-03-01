@@ -42,9 +42,14 @@ export default function ClaimDetails() {
     <>
       <Flex borderLeft={"1px solid black"} borderRight={"1px solid black"}>
         {imageSrc && (
-          <Box borderRight={"1px solid black"} padding={"20px"}>
+          <Flex
+            borderRight={"1px solid black"}
+            p={10}
+            direction={"column"}
+            justifyContent={"center"}
+          >
             <Image src={imageSrc} alt="Hypercert" width="160" height="200" />
-          </Box>
+          </Flex>
         )}
         <Flex flexDirection={"column"} width="100%">
           <ClaimTitle claim={data.claim} />

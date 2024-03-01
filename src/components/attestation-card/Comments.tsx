@@ -9,7 +9,7 @@ export default function Comments({
 }) {
   if (!comments) return null;
   return (
-    <VStack py={5} alignItems={"flex-start"} width="100%" {...props}>
+    <VStack alignItems={"flex-start"} width="100%" {...props}>
       <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
         Comments
       </Text>

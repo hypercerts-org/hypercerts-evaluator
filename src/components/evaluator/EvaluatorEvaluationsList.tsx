@@ -1,4 +1,5 @@
 import AttestationCard from "../attestation-card/AttestationCard";
+import EvaluatorEvaluationsListSkeleton from "./EvaluatorEvaluationsListSkeleton";
 import { Grid } from "@chakra-ui/react";
 import { useEvaluatorAttestations } from "../../eas/useEvaluatorAttestations";
 
@@ -10,7 +11,7 @@ export default function EvaluatorEvaluationsList({
   const { data, isPending, error } = useEvaluatorAttestations(address);
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <EvaluatorEvaluationsListSkeleton />;
   }
 
   if (error) {
