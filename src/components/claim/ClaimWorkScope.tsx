@@ -2,7 +2,7 @@ import { Badge, Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
 import EthAddress from "../ui/EthAddress";
-import { FullClaimFragment } from "../../claims/fragments";
+import { FullClaimFragment } from "../../hypercerts/fragments";
 
 export default function ClaimWorkScope({
   claim,

@@ -1,7 +1,7 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
-import { FullClaimFragment } from "../../claims/fragments";
+import { FullClaimFragment } from "../../hypercerts/fragments";
 import { isValidUrl } from "../../utils/isValidUrl";
 
 export default function ClaimTitle({

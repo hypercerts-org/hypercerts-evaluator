@@ -1,7 +1,7 @@
 import { FragmentOf, readFragment } from "gql.tada";
 import { Text, VStack } from "@chakra-ui/react";
 
-import { FullClaimFragment } from "../../claims/fragments";
+import { FullClaimFragment } from "../../hypercerts/fragments";
 
 export default function ClaimOwners({
   claim,
