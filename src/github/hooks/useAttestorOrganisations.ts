@@ -1,5 +1,5 @@
-import { AttestorOrganisation } from "./attestor-organisation.type";
-import { TrustedAttestor } from "./trusted-attestor.type";
+import { AttestorOrganisation } from "../types/attestor-organisation.type";
+import { TrustedAttestor } from "../types/trusted-attestor.type";
 import { useQuery } from "@tanstack/react-query";
 
 export const useAttestorOrganisations = () => {

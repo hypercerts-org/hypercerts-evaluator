@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
-import { AllEvaluationStates } from "../../eas/all-evaluation-states";
+import { AllEvaluationStates } from "../../eas/types/all-evaluation-states.type";
 import { AttestContext } from "../../pages/claim/[id]";
 import EvaluateToggle from "./EvaluateToggle";
 import Tags from "@yaireo/tagify/dist/react.tagify";

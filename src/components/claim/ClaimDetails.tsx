@@ -11,13 +11,13 @@ import ClaimProperties from "../../components/claim/ClaimProperties";
 import ClaimTitle from "../../components/claim/ClaimTitle";
 import ClaimWorkScope from "../../components/claim/ClaimWorkScope";
 import ClaimWorkTimeFrame from "../../components/claim/ClaimWorkTimeFrame";
-import { FullClaimFragment } from "../../hypercerts/fragments";
+import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import FullpageLoader from "../../components/FullpageLoader";
 import Image from "next/image";
 import LoadError from "../../components/LoadError";
 import { isValidImageSrc } from "../../utils/isValidImageSrc";
 import { readFragment } from "gql.tada";
-import { useClaim } from "../../hypercerts/useClaim";
+import { useClaim } from "../../hypercerts/hooks/useClaim";
 
 export default function ClaimDetails() {
   const attestContext = useContext(AttestContext);

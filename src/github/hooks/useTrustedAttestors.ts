@@ -1,4 +1,4 @@
-import { TrustedAttestor } from "./trusted-attestor.type";
+import { TrustedAttestor } from "../types/trusted-attestor.type";
 import { useQuery } from "@tanstack/react-query";
 
 export const useTrustedAttestors = () => {

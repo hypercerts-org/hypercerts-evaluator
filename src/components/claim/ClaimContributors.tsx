@@ -3,7 +3,7 @@ import { List, ListIcon, ListItem, Text, VStack } from "@chakra-ui/react";
 
 import EthAddress from "../ui/EthAddress";
 import { FaUser } from "react-icons/fa";
-import { FullClaimFragment } from "../../hypercerts/fragments";
+import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import { isAddress } from "viem";
 
 export default function ClaimContributors({

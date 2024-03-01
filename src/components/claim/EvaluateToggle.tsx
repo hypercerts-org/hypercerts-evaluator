@@ -1,6 +1,6 @@
 import { Flex, IconButton } from "@chakra-ui/react";
 
-import { EvaluationStates } from "../../eas/evaluation-states.type";
+import { EvaluationStates } from "../../eas/types/evaluation-states.type";
 import { FaCheckSquare } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
 

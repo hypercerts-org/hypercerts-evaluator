@@ -2,7 +2,7 @@ import { FragmentOf, readFragment } from "gql.tada";
 import { Text, VStack } from "@chakra-ui/react";
 
 import EthAddress from "../ui/EthAddress";
-import { FullClaimFragment } from "../../hypercerts/fragments";
+import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 
 export default function ClaimWorkTimeFrame({
   claim,

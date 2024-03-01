@@ -17,14 +17,3 @@ export const FullClaimFragment = graphql(`
     }
   }
 `);
-
-export const ListClaimFragment = graphql(`
-  fragment ListClaimFragment on Claim {
-    id
-    metadata {
-      name
-      description
-      image
-    }
-  }
-`);

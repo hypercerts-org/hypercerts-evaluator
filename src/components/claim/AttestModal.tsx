@@ -18,7 +18,7 @@ import { AttestModalBody } from "./AttestModalBody";
 import { BiSolidErrorAlt } from "react-icons/bi";
 import { isChainIdSupported } from "../../wagmi/isChainIdSupported";
 import { isTrustedAttestor } from "../../github/isTrustedAttestor";
-import { useTrustedAttestors } from "../../github/useTrustedAttestors";
+import { useTrustedAttestors } from "../../github/hooks/useTrustedAttestors";
 
 export function AttestModal() {
   const { chain } = useNetwork();

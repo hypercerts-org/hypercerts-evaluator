@@ -2,7 +2,7 @@ import { CLAIMS_PER_PAGE } from "../../config";
 import ClaimBox from "./ClaimBox";
 import ClaimsGridSkeleton from "./ClaimGridSkeleton";
 import { Grid } from "@chakra-ui/react";
-import { useAllClaims } from "../../hypercerts/useClaims";
+import { useAllClaims } from "../../hypercerts/hooks/useClaims";
 
 export default function ClaimsList({ page }: { page: number }) {
   page = page || 1;

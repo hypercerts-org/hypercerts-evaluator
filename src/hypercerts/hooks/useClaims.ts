@@ -1,5 +1,5 @@
-import { HYPERCERTS_API_URL } from "../config";
-import { ListClaimFragment } from "./fragments";
+import { HYPERCERTS_API_URL } from "../../config";
+import { ListClaimFragment } from "../fragments/list-claim.fragment";
 import { graphql } from "gql.tada";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";

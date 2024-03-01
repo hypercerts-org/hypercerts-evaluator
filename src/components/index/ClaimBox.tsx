@@ -3,7 +3,7 @@ import { FragmentOf, readFragment } from "gql.tada";
 
 import Image from "next/image";
 import Link from "next/link";
-import { ListClaimFragment } from "../../hypercerts/fragments";
+import { ListClaimFragment } from "../../hypercerts/fragments/list-claim.fragment";
 import { isValidImageSrc } from "../../utils/isValidImageSrc";
 
 export default function ClaimBox({

@@ -1,7 +1,7 @@
 import { ResultOf, graphql } from "gql.tada";
 
-import { FullClaimFragment } from "./fragments";
-import { HYPERCERTS_API_URL } from "../config";
+import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HYPERCERTS_API_URL } from "../../config";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
