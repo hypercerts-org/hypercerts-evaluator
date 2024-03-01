@@ -2,6 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 
 import EnsName from "../ui/EnsName";
 import EthAddress from "../ui/EthAddress";
+import EvaluationsCount from "./EvaluationsCount";
 import OrgIcons from "./OrgIcons";
 import { TrustedAttestor } from "../../github/types/trusted-attestor.type";
 import { UserIcon } from "../ui/UserIcon";
@@ -26,7 +27,7 @@ export default function EvaluatorRow({
       </Flex>
       <Flex grow={1} />
       <Flex direction={"column"} justifyContent={"center"}>
-        Evaluations: 12
+        <EvaluationsCount address={attestor.eth_address} />
       </Flex>
     </Flex>
   );
