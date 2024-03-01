@@ -1,4 +1,5 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
+import { createContext, useContext, useState } from "react";
 
 import { AttestModal } from "../../components/evaluate/AttestModal";
 import ClaimContributors from "../../components/claim/ClaimContributors";
@@ -19,11 +20,21 @@ import { isValidImageSrc } from "../../utils/isValidImageSrc";
 import { readFragment } from "gql.tada";
 import { useClaim } from "../../claims/useClaim";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
-function ClaimDetails({ id }: { id: string }) {
-  const { data, isPending, error } = useClaim(id);
-  const [attestModalOpen, setAttestModalOpen] = useState(false);
+type AttestContext = {
+  claimId: string;
+  isAttestModalOpen: boolean;
+  closeAttestModal: ({ success }: { success: boolean }) => void;
+  openAttestModal: () => void;
+};
+
+export const AttestContext = createContext<AttestContext | undefined>(
+  undefined
+);
+
+function ClaimDetails() {
+  const attestContext = useContext(AttestContext);
+  const { data, isPending, error } = useClaim(attestContext?.claimId);
 
   if (isPending) return <FullpageLoader />;
 
@@ -32,9 +43,9 @@ function ClaimDetails({ id }: { id: string }) {
     return <LoadError>Failed to load claim.</LoadError>;
   }
 
-  const claim = readFragment(FullClaimFragment, data.claim);
+  const claim = readFragment(FullClaimFragment, data?.claim);
 
-  if (!claim || !data.claim) return <LoadError>Claim not found.</LoadError>;
+  if (!claim || !data?.claim) return <LoadError>Claim not found.</LoadError>;
 
   const imageSrc = isValidImageSrc(claim.metadata?.image)
     ? claim.metadata?.image
@@ -93,15 +104,11 @@ function ClaimDetails({ id }: { id: string }) {
       >
         <Button
           variant="blackAndWhite"
-          onClick={() => setAttestModalOpen(true)}
+          onClick={() => attestContext?.openAttestModal()}
         >
           Evaluate this Hypercert
         </Button>
-        <AttestModal
-          claimId={id}
-          isOpen={attestModalOpen}
-          onClose={() => setAttestModalOpen(false)}
-        />
+        <AttestModal />
       </Flex>
     </>
   );
@@ -110,8 +117,17 @@ function ClaimDetails({ id }: { id: string }) {
 export default function Page() {
   const router = useRouter();
   const { id } = router.query;
+  const [isAttestModalOpen, setIsAttestModalOpen] = useState(false);
 
   if (typeof id !== "string") return null;
+
+  const context = {
+    claimId: id,
+    isAttestModalOpen,
+    closeAttestModal: ({ success }: { success: boolean }) =>
+      setIsAttestModalOpen(false),
+    openAttestModal: () => setIsAttestModalOpen(true),
+  };
 
   return (
     <>
@@ -119,7 +135,9 @@ export default function Page() {
         <title>Claims - Hypercerts Evaluator</title>
       </Head>
       <Layout>
-        <ClaimDetails id={id} />
+        <AttestContext.Provider value={context}>
+          <ClaimDetails />
+        </AttestContext.Provider>
       </Layout>
     </>
   );

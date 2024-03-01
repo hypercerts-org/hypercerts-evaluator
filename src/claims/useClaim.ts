@@ -16,9 +16,12 @@ const query = graphql(
   [FullClaimFragment]
 );
 
-export const useClaim = (id: string) => {
+export const useClaim = (id?: string) => {
   return useQuery({
     queryKey: ["claim", id],
-    queryFn: async () => request(HYPERCERTS_API_URL, query, { id }),
+    queryFn: async () => {
+      if (!id) return;
+      return request(HYPERCERTS_API_URL, query, { id });
+    },
   });
 };

@@ -10,8 +10,10 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
+import { useContext, useState } from "react";
 
 import { AllEvaluationStates } from "../../eas/all-evaluation-states";
+import { AttestContext } from "../../pages/claim/[id]";
 import EvaluateToggle from "./EvaluateToggle";
 import Tags from "@yaireo/tagify/dist/react.tagify";
 import { createAttestation } from "../../eas/createAttestation";
@@ -19,7 +21,6 @@ import { errorHasMessage } from "../../utils/errorHasMessage";
 import { errorHasReason } from "../../utils/errorHasReason";
 import { useNetwork } from "wagmi";
 import { useSigner } from "../../wagmi/hooks/useSigner";
-import { useState } from "react";
 
 function isAnySectionEvaluated(state: AllEvaluationStates) {
   return (
@@ -39,16 +40,11 @@ function isAnySectionInvalid(state: AllEvaluationStates) {
   );
 }
 
-export function AttestModalBody({
-  onClose,
-  claimId,
-}: {
-  onClose: () => void;
-  claimId: string;
-}) {
+export function AttestModalBody() {
   const { chain } = useNetwork();
   const signer = useSigner();
   const toast = useToast();
+  const attestContext = useContext(AttestContext);
 
   // Local state
   const [isAttesting, setIsAttesting] = useState(false);
@@ -77,7 +73,7 @@ export function AttestModalBody({
   };
 
   const attest = async () => {
-    if (!signer || !chain?.id) {
+    if (!signer || !chain?.id || !attestContext?.claimId) {
       return;
     }
     setIsAttesting(true);
@@ -85,10 +81,11 @@ export function AttestModalBody({
       await createAttestation({
         chainId: chain.id,
         signer,
-        claimId,
+        claimId: attestContext.claimId,
         allEvaluationStates,
         comments,
       });
+      attestContext.closeAttestModal({ success: true });
     } catch (e) {
       if (errorHasReason(e)) {
         errorToast(e.reason);
@@ -215,7 +212,11 @@ export function AttestModalBody({
 
       <ModalFooter>
         <Flex gap={5} justifyContent={"center"} w="100%">
-          <Button onClick={onClose} variant="blackAndWhiteOutline" w="50%">
+          <Button
+            onClick={() => attestContext.closeAttestModal({ success: false })}
+            variant="blackAndWhiteOutline"
+            w="50%"
+          >
             Cancel
           </Button>
           <Button

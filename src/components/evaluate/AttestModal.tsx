@@ -11,26 +11,22 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useAccount, useNetwork } from "wagmi";
+import { useContext, useState } from "react";
 
+import { AttestContext } from "../../pages/claim/[id]";
 import { AttestModalBody } from "./AttestModalBody";
 import { BiSolidErrorAlt } from "react-icons/bi";
 import { isChainIdSupported } from "../../wagmi/isChainIdSupported";
 import { isTrustedAttestor } from "../../github/isTrustedAttestor";
-import { useState } from "react";
 import { useTrustedAttestors } from "../../github/useTrustedAttestors";
 
-export function AttestModal({
-  isOpen,
-  onClose,
-  claimId,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  claimId: string;
-}) {
+export function AttestModal() {
   const { chain } = useNetwork();
   const { address } = useAccount();
   const { data: trustedAttestors, isPending, error } = useTrustedAttestors();
+  const attestContext = useContext(AttestContext);
+
+  // Local state
   const [isAttesting, setIsAttesting] = useState(false);
 
   const createDisabled =
@@ -77,8 +73,8 @@ export function AttestModal({
 
   return (
     <Modal
-      isOpen={isOpen}
-      onClose={onClose}
+      isOpen={attestContext?.isAttestModalOpen || false}
+      onClose={() => attestContext?.closeAttestModal({ success: false })}
       size={"xl"}
       scrollBehavior="inside"
     >
@@ -100,7 +96,7 @@ export function AttestModal({
             </Flex>
           </ModalBody>
         ) : (
-          <AttestModalBody onClose={onClose} claimId={claimId} />
+          <AttestModalBody />
         )}
       </ModalContent>
     </Modal>
