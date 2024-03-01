@@ -14,7 +14,7 @@ type AttestContext = {
   isConfirmationModalOpen: boolean;
   openConfirmationModal: () => void;
   closeConfirmationModal: () => void;
-  createdAttestationUid: string;
+  createdAttestationUid?: string;
   setCreatedAttestationUid: (uid: string) => void;
 };
 

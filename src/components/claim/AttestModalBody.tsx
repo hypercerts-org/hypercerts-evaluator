@@ -24,10 +24,10 @@ import { useSigner } from "../../wagmi/hooks/useSigner";
 
 function isAnySectionEvaluated(state: AllEvaluationStates) {
   return (
-    state.basics !== "none" ||
-    state.work !== "none" ||
-    state.properties !== "none" ||
-    state.contributors !== "none"
+    state.basics !== "not-evaluated" ||
+    state.work !== "not-evaluated" ||
+    state.properties !== "not-evaluated" ||
+    state.contributors !== "not-evaluated"
   );
 }
 
@@ -50,10 +50,10 @@ export function AttestModalBody() {
   const [isAttesting, setIsAttesting] = useState(false);
   const [allEvaluationStates, setAllEvaluationStates] =
     useState<AllEvaluationStates>({
-      basics: "none",
-      work: "none",
-      properties: "none",
-      contributors: "none",
+      basics: "not-evaluated",
+      work: "not-evaluated",
+      properties: "not-evaluated",
+      contributors: "not-evaluated",
     });
   const [comments, setComments] = useState<string>("");
 
@@ -214,7 +214,7 @@ export function AttestModalBody() {
       <ModalFooter>
         <Flex gap={5} justifyContent={"center"} w="100%">
           <Button
-            onClick={() => attestContext.closeAttestModal({ success: false })}
+            onClick={() => attestContext?.closeAttestModal({ success: false })}
             variant="blackAndWhiteOutline"
             w="50%"
           >

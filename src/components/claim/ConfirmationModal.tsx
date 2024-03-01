@@ -25,7 +25,10 @@ export function ConfirmationModal() {
 
   const easConfig = getEasConfig(chain?.id);
 
-  if (!attestContext?.isConfirmationModalOpen) {
+  if (
+    !attestContext?.isConfirmationModalOpen ||
+    !attestContext?.createdAttestationUid
+  ) {
     return null;
   }
 
@@ -69,9 +72,11 @@ export function ConfirmationModal() {
                 View at easscan.org:{" "}
                 <a
                   href={`${easConfig?.explorerUrl}/attestation/view/${attestContext?.createdAttestationUid}`}
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  {attestContext?.createdAttestationUid.substring(0, 8)}...
-                  {attestContext?.createdAttestationUid.slice(-8)}
+                  {attestContext.createdAttestationUid.substring(0, 8)}...
+                  {attestContext.createdAttestationUid.slice(-8)}
                 </a>
                 <CopyButton textToCopy={attestContext?.createdAttestationUid} />
               </Text>

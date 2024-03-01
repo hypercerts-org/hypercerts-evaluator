@@ -13,7 +13,7 @@ export default function EvaluateToggle({
 }) {
   const handleClick = (s: EvaluationStates) => {
     if (state === s) {
-      setState("none");
+      setState("not-evaluated");
     } else {
       setState(s);
     }

@@ -2,7 +2,7 @@ import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { EVALUATIONS_SCHEMA, EVALUATIONS_SCHEMA_UID } from "../config";
 
 import { AllEvaluationStates } from "./all-evaluation-states";
-import { Signer } from "ethers";
+import { JsonRpcSigner } from "@ethersproject/providers";
 import { getEasConfig } from "./getEasConfig";
 
 export async function createAttestation({
@@ -13,7 +13,7 @@ export async function createAttestation({
   comments,
 }: {
   chainId: number;
-  signer: Signer;
+  signer: JsonRpcSigner;
   claimId: string;
   allEvaluationStates: AllEvaluationStates;
   comments: string;

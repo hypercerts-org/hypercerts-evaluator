@@ -1,1 +1,1 @@
-export type EvaluationStates = "valid" | "invalid" | "none";
+export type EvaluationStates = "valid" | "invalid" | "not-evaluated";
