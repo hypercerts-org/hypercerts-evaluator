@@ -1,5 +1,5 @@
-import { EAS } from "@ethereum-attestation-service/eas-sdk";
-import { EVALUATIONS_SCHEMA_UID } from "../config";
+import { ETH_DEFAULT_CHAIN_ID, EVALUATIONS_SCHEMA_UID } from "../config";
+
 import { getEasConfig } from "./getEasConfig";
 import { graphql } from "gql.tada";
 import request from "graphql-request";
@@ -26,12 +26,11 @@ const query = graphql(
 );
 
 export const useCountEvaluatorAttestations = (address?: string) => {
-  const { chain } = useNetwork();
-  const easConfig = getEasConfig(chain?.id);
+  const easConfig = getEasConfig(ETH_DEFAULT_CHAIN_ID);
   return useQuery({
-    queryKey: ["CountEvaluatorAttestations", address, chain?.id],
+    queryKey: ["CountEvaluatorAttestations", address, ETH_DEFAULT_CHAIN_ID],
     queryFn: async () => {
-      if (!address || !chain || !easConfig) return null;
+      if (!address || !easConfig) return null;
       return request(easConfig.graphqlUrl, query, {
         address,
         schemaId: EVALUATIONS_SCHEMA_UID,

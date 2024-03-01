@@ -40,6 +40,8 @@ export const EAS_CONFIG: EasConfig[] = [
 
 // Wagmi
 
+export const ETH_DEFAULT_CHAIN_ID = 11155111;
+
 const { chains, publicClient } = configureChains(
   [sepolia, mainnet],
   [
