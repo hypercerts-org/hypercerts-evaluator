@@ -8,8 +8,8 @@ export default function ClaimsGridSkeleton() {
           <Skeleton
             w="100%"
             h="100%"
-            startColor="gray.200"
-            endColor="gray.300"
+            startColor="rgba(0,0,0,0.1)"
+            endColor="rgba(0,0,0,0.2)"
             fadeDuration={2}
           />
         </GridItem>

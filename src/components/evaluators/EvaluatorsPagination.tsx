@@ -2,6 +2,7 @@ import { ATTESTORS_PER_PAGE, CLAIMS_PER_PAGE } from "../../config";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
+import EvaluatorsPaginationSkeleton from "./EvaluatorsPaginationSkeleton";
 import { useRouter } from "next/router";
 import { useTrustedAttestors } from "../../github/hooks/useTrustedAttestors";
 
@@ -15,9 +16,9 @@ export default function EvaluatorsPagination({
   const router = useRouter();
   const { data: attestors, isPending } = useTrustedAttestors();
 
-  if (isPending || !attestors) return null;
+  if (isPending) return <EvaluatorsPaginationSkeleton />;
 
-  const totalPages = Math.ceil(attestors.length / ATTESTORS_PER_PAGE);
+  const totalPages = Math.ceil((attestors?.length || 0) / ATTESTORS_PER_PAGE);
   currentPage = Number(currentPage);
 
   const navigate = (page: number) => {

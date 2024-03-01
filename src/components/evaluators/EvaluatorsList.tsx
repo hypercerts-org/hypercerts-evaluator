@@ -2,6 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 
 import { ATTESTORS_PER_PAGE } from "../../config";
 import EvaluatorRow from "../evaluator/EvaluatorRow";
+import EvaluatorsListSkeleton from "./EvaluatorsListSkeleton";
 import FullpageLoader from "../FullpageLoader";
 import LoadError from "../LoadError";
 import { useRouter } from "next/router";
@@ -15,9 +16,7 @@ export default function EvaluatorsList({
   const { data: attestors, isPending, error } = useTrustedAttestors();
   const router = useRouter();
 
-  if (!attestors) return null;
-
-  if (isPending) return <FullpageLoader />;
+  if (isPending) return <EvaluatorsListSkeleton />;
 
   if (error) {
     console.error(error);
