@@ -22,64 +22,58 @@ import { ProfileInfo } from "@/components/ProfileInfo";
 import React from "react";
 import { useAccount } from "wagmi";
 
-export const headerHeight = "64px";
-
 export const Header = () => {
   const { isConnected, address } = useAccount();
   return (
-    <Flex
-      width={"100%"}
-      height={headerHeight}
-      alignItems={"center"}
-      justifyContent={"center"}
-      paddingX={[0, 0, "40px"]}
-      backgroundColor={"grey.300"}
-      borderBottom={"1px solid"}
-    >
-      <Link href="/">
-        <Flex gap={10} w={"400px"}>
-          <Image
-            src="/hypercerts_logo.svg"
-            alt="Hypercerts Logo"
-            width={30}
-            height={30}
-          />
-          <Heading
-            textStyle={"secondary"}
-            fontWeight={"100"}
-            size={"md"}
-            whiteSpace={"nowrap"}
-          >
-            Hypercerts Evaluator
-          </Heading>
-          {/* <Show above={"md"}>
+    <Flex width={"100%"} alignItems={"center"} justifyContent={"center"} my={5}>
+      <Flex
+        width={"700px"}
+        height={"100%"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        border={"1px solid black"}
+        p={5}
+      >
+        <Link href="/">
+          <Flex gap={5} w={"400px"}>
+            <Image
+              src="/hypercerts_logo.svg"
+              alt="Hypercerts Logo"
+              width={30}
+              height={30}
+            />
+            <Heading fontWeight={"100"} fontSize={"lg"} whiteSpace={"nowrap"}>
+              Hypercerts Evaluator
+            </Heading>
+            {/* <Show above={"md"}>
           <BrowseMenu />
         </Show> */}
-        </Flex>
-      </Link>
-      <Flex ml={"auto"} alignItems={"center"} height={"100%"}>
-        <Show above={"md"}>
-          <ConnectButton />
-        </Show>
-        <Show below={"md"}>
-          {isConnected && address && (
+          </Flex>
+        </Link>
+        <Flex ml={"auto"} alignItems={"center"} height={"100%"}>
+          <Show above={"md"}>
+            <ConnectButton />
+          </Show>
+          <Show below={"md"}>
+            {isConnected && address && (
+              <Flex
+                px={4}
+                borderLeft={"1px solid black"}
+                backgroundColor={"white"}
+                height={"100%"}
+              >
+                <ProfileInfo address={address} />
+              </Flex>
+            )}
             <Flex
-              px={4}
+              alignItems={"center"}
               borderLeft={"1px solid black"}
-              backgroundColor={"white"}
               height={"100%"}
             >
-              <ProfileInfo address={address} />
+              <MobileMenuButton />
             </Flex>
-          )}
-          <Flex
-            alignItems={"center"}
-            borderLeft={"1px solid black"}
-            height={"100%"}
-          >
-            <MobileMenuButton />
-          </Flex>
-        </Show>
+          </Show>
+        </Flex>
       </Flex>
     </Flex>
   );

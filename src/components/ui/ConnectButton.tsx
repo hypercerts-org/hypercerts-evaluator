@@ -44,7 +44,7 @@ export const ConnectButton = ({ ...buttonProps }: ButtonProps) => {
                     onClick={openConnectModal}
                     type="button"
                   >
-                    Connect wallet
+                    Connect
                   </Button>
                 );
               }
@@ -66,46 +66,11 @@ export const ConnectButton = ({ ...buttonProps }: ButtonProps) => {
                 <div style={{ display: "flex", gap: 12 }}>
                   <Button
                     {...buttonProps}
-                    variant={"blackAndWhiteOutline"}
-                    onClick={openChainModal}
-                    style={{ display: "flex", alignItems: "center" }}
-                    type="button"
-                  >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: "hidden",
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <Image
-                            alt={chain.name ?? "Chain icon"}
-                            src={chain.iconUrl}
-                            width={12}
-                            height={12}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </Button>
-
-                  <Button
-                    {...buttonProps}
                     onClick={openAccountModal}
                     type="button"
                     variant={"blackAndWhite"}
                   >
                     {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""}
                   </Button>
                 </div>
               );
