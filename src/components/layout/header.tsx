@@ -36,27 +36,25 @@ export const Header = () => {
       backgroundColor={"grey.300"}
       borderBottom={"1px solid"}
     >
-      <HStack height={"100%"} gap={10}>
+      <Flex gap={10} w={"400px"}>
         <Image
           src="/hypercerts_logo.svg"
           alt="Hypercerts Logo"
           width={30}
           height={30}
         />
-        <Link href="/">
-          <Heading textStyle={"secondary"} fontWeight={"100"} size={"lg"}>
-            Hypercerts
-          </Heading>
-        </Link>
-        <Link href="/evaluators">
-          <Heading textStyle={"secondary"} fontWeight={"100"} size={"lg"}>
-            Evaluators
-          </Heading>
-        </Link>
+        <Heading
+          textStyle={"secondary"}
+          fontWeight={"100"}
+          size={"md"}
+          whiteSpace={"nowrap"}
+        >
+          Hypercerts Evaluator
+        </Heading>
         {/* <Show above={"md"}>
           <BrowseMenu />
         </Show> */}
-      </HStack>
+      </Flex>
       <Flex ml={"auto"} alignItems={"center"} height={"100%"}>
         <Show above={"md"}>
           <ConnectButton />

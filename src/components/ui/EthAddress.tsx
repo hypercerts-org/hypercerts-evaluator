@@ -7,6 +7,7 @@ export default function EthAddress({ address }: { address?: string }) {
   if (!address) {
     return <Text>Unknown</Text>;
   }
+
   return (
     <>
       <Flex alignItems={"center"} gap={1}>

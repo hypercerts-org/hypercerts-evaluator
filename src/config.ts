@@ -39,7 +39,7 @@ export const EAS_CONFIG: EasConfig[] = [
 // Wagmi
 
 const { chains, publicClient } = configureChains(
-  [sepolia],
+  [sepolia, mainnet],
   [
     alchemyProvider({ apiKey: "hmHpo1v4GNpkau5frOZ744RIS5nOxtXF" }),
     publicProvider(),
@@ -62,3 +62,4 @@ export const wagmiConfig = createConfig({
 // UI
 
 export const CLAIMS_PER_PAGE = 12;
+export const ATTESTORS_PER_PAGE = 2;

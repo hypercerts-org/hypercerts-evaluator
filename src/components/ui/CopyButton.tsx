@@ -13,7 +13,8 @@ export function CopyButton({ textToCopy }: CopyButtonProps): JSX.Element {
     <IconButton
       aria-label="Search database"
       icon={<FaCopy />}
-      onClick={(): void => {
+      onClick={(event): void => {
+        event.stopPropagation();
         if (!textToCopy) {
           return;
         }

@@ -1,43 +1,30 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { Layout } from "../../components/layout";
+
+import { Box } from "@chakra-ui/react";
+import EvaluatorsList from "../../components/evaluators/EvaluatorsList";
+import EvaluatorsPagination from "../../components/evaluators/EvaluatorsPagination";
+import EvaluatorsSearch from "../../components/evaluators/EvaluatorsSearch";
+import EvaluatorsSortFilter from "../../components/evaluators/EvaluatorsSortFilter";
 import Head from "next/head";
+import { Layout } from "../../components/layout";
+import { useRouter } from "next/router";
 
-const ATTESTORS_REVALIDATE = 60 * 60; // 1 hour
+export default function Page() {
+  const router = useRouter();
+  const page = router.query.p ? Number(router.query.p) : 1;
 
-type Attestor = {
-  eth_address: string;
-  orgs: string[];
-};
-
-export const getStaticProps = (async (context) => {
-  const res = await fetch(
-    "https://github.com/hypercerts-org/hypercerts-attestor-registry/raw/main/attestor.json"
-  );
-  const attestors: Attestor[] = await res.json();
-  return { props: { attestors }, revalidate: ATTESTORS_REVALIDATE };
-}) satisfies GetStaticProps<{
-  attestors: Attestor[];
-}>;
-
-export default function Page({
-  attestors,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
         <title>Evaluators - Hypercerts Evalutaor</title>
       </Head>
       <Layout>
-        {attestors.map((attestor) => (
-          <div key={attestor.eth_address}>
-            <h2>{attestor.eth_address}</h2>
-            <ul>
-              {attestor.orgs.map((org) => (
-                <li key={org}>{org}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <Box borderLeft={"1px solid black"} borderRight={"1px solid black"}>
+          <EvaluatorsSearch />
+          <EvaluatorsSortFilter />
+          <EvaluatorsList currentPage={page} />
+        </Box>
+        <EvaluatorsPagination currentPage={page} />
       </Layout>
     </>
   );

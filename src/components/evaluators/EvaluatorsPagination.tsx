@@ -1,27 +1,27 @@
+import { ATTESTORS_PER_PAGE, CLAIMS_PER_PAGE } from "../../config";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-import { CLAIMS_PER_PAGE } from "../../config";
 import { useRouter } from "next/router";
+import { useTrustedAttestors } from "../../github/hooks/useTrustedAttestors";
 
-type AttestationsPageChooserProps = {
+type EvaluatorsPageChooserProps = {
   currentPage: number;
 };
 
-export default function ClaimsPagination({
+export default function EvaluatorsPagination({
   currentPage,
-}: AttestationsPageChooserProps) {
+}: EvaluatorsPageChooserProps) {
   const router = useRouter();
+  const { data: attestors, isPending } = useTrustedAttestors();
 
-  let claimsCount = 120; // Assuming a fixed count for demonstration
+  if (isPending || !attestors) return null;
 
-  if (!claimsCount) return null;
-
-  const totalPages = Math.ceil(claimsCount / CLAIMS_PER_PAGE);
+  const totalPages = Math.ceil(attestors.length / ATTESTORS_PER_PAGE);
   currentPage = Number(currentPage);
 
   const navigate = (page: number) => {
-    router.push(`/?p=${page}`, undefined, { shallow: true });
+    router.push(`/evaluators?p=${page}`, undefined, { shallow: true });
   };
 
   return (
