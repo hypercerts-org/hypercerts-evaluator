@@ -1,3 +1,3 @@
-export const formatAddress = (address: string) => {
+export const formatEthAddress = (address: string) => {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 };

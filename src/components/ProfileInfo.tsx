@@ -1,13 +1,14 @@
-import { useEnsAvatar, useEnsName } from "wagmi";
 import { Avatar, Flex, Text, VStack } from "@chakra-ui/react";
-import { formatAddress } from "@/utils/formatting";
+import { useEnsAvatar, useEnsName } from "wagmi";
+
 import React from "react";
+import { formatEthAddress } from "@/utils/formatEthAddress";
 
 export const ProfileInfo = ({ address }: { address: string }) => {
   const { data: avatarData } = useEnsAvatar();
   const { data: ensName } = useEnsName({});
 
-  const formattedAddress = formatAddress(address);
+  const formattedAddress = formatEthAddress(address);
   const name = ensName ?? formattedAddress;
 
   return (
