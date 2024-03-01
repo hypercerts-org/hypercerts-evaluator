@@ -1,4 +1,4 @@
-import { Button, Flex, IconButton } from "@chakra-ui/react";
+import { Flex, IconButton } from "@chakra-ui/react";
 
 import { EvaluationStates } from "../../eas/evaluation-states.type";
 import { FaCheckSquare } from "react-icons/fa";

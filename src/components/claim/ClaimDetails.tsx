@@ -2,7 +2,7 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { createContext, useContext } from "react";
 
 import { AttestContext } from "../../pages/claim/[id]";
-import { AttestModal } from "../../components/evaluate/AttestModal";
+import { AttestModal } from "./AttestModal";
 import ClaimContributors from "../../components/claim/ClaimContributors";
 import ClaimCreator from "../../components/claim/ClaimCreator";
 import ClaimOwner from "../../components/claim/ClaimOwner";
