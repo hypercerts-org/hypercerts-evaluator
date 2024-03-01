@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import { AttestContext } from "../../pages/claim/[id]";
-import { CopyButton } from "../CopyButton";
+import { CopyButton } from "../ui/CopyButton";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { getEasConfig } from "../../eas/getEasConfig";
 import { motion } from "framer-motion";

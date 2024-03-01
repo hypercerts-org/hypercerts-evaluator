@@ -14,7 +14,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { ConnectButton } from "@/components/ConnectButton";
+import { ConnectButton } from "@/components/ui/ConnectButton";
 import { Pivot as Hamburger } from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
