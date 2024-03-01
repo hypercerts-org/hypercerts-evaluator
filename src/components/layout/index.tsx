@@ -1,10 +1,17 @@
+import { PropsWithChildren, ReactNode } from "react";
+
 import { Flex } from "@chakra-ui/react";
 import { Header } from "@/components/layout/Header";
-import { PropsWithChildren } from "react";
 import TopMenu from "./TopMenu";
 import { colors } from "@/theme";
 
-export const Layout = ({ children }: PropsWithChildren) => {
+export const Layout = ({
+  children,
+  ...props
+}: {
+  children?: ReactNode | undefined;
+  [key: string]: any;
+}) => {
   return (
     <Flex
       flexDirection={"column"}
@@ -15,7 +22,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
     >
       <Header />
       <TopMenu />
-      <Flex flexDirection={"column"} width={"700px"} grow={1}>
+      <Flex flexDirection={"column"} width={"700px"} grow={1} {...props}>
         {children}
       </Flex>
     </Flex>

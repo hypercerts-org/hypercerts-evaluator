@@ -17,7 +17,7 @@ export const useEnsName = (address?: string) => {
   return useQuery({
     queryKey: ["ensName", address],
     queryFn: async () => {
-      if (!address) return;
+      if (!address) return null;
       return request(HYPERCERTS_API_URL, query, { id: address });
     },
   });

@@ -20,7 +20,7 @@ export const useClaim = (id?: string) => {
   return useQuery({
     queryKey: ["claim", id],
     queryFn: async () => {
-      if (!id) return;
+      if (!id) return null;
       return request(HYPERCERTS_API_URL, query, { id });
     },
   });
