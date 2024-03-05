@@ -13,11 +13,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { ConnectButton } from "@/components/ui/ConnectButton";
+import { ConnectButton } from "../ui/ConnectButton";
 import { Pivot as Hamburger } from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ProfileInfo } from "@/components/ProfileInfo";
+import { ProfileInfo } from "../ProfileInfo";
 import React from "react";
 import { useAccount } from "wagmi";
 

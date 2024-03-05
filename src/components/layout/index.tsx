@@ -1,9 +1,8 @@
-import { PropsWithChildren, ReactNode } from "react";
-
 import { Flex } from "@chakra-ui/react";
-import { Header } from "@/components/layout/Header";
+import { Header } from "./Header";
+import { ReactNode } from "react";
 import TopMenu from "./TopMenu";
-import { colors } from "@/theme";
+import { colors } from "../../theme";
 
 export const Layout = ({
   children,

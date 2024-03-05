@@ -2,7 +2,7 @@ import { Avatar, Flex, Text, VStack } from "@chakra-ui/react";
 import { useEnsAvatar, useEnsName } from "wagmi";
 
 import React from "react";
-import { formatEthAddress } from "@/utils/formatEthAddress";
+import { formatEthAddress } from "../utils/formatEthAddress";
 
 export const ProfileInfo = ({ address }: { address: string }) => {
   const { data: avatarData } = useEnsAvatar();
