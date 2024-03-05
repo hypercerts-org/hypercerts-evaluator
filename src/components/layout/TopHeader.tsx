@@ -7,7 +7,7 @@ import { ProfileInfo } from "../ProfileInfo";
 import React from "react";
 import { useAccount } from "wagmi";
 
-export const Header = () => {
+export const TopHeader = () => {
   const { isConnected, address } = useAccount();
   return (
     <Flex width={"100%"} alignItems={"center"} justifyContent={"center"} my={5}>

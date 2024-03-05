@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import { Header } from "./Header";
 import { ReactNode } from "react";
+import { TopHeader } from "./TopHeader";
 import TopMenu from "./TopMenu";
 import { colors } from "../../theme";
 
@@ -19,7 +19,7 @@ export const Layout = ({
       minHeight={"100vh"}
       backgroundColor={colors.background}
     >
-      <Header />
+      <TopHeader />
       <TopMenu />
       <Flex flexDirection={"column"} width={"700px"} grow={1} {...props}>
         {children}
