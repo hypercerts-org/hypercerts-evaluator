@@ -35,6 +35,14 @@ export const hyperTheme: ThemeOverride = extendTheme({
     Button,
     Badge,
     Tag,
+    CloseButton: {
+      baseStyle: {
+        marginTop: "5px",
+        _focus: {
+          ring: "0",
+        },
+      },
+    },
     Select: {
       variants: {
         black: {
