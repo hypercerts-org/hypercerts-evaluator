@@ -12,6 +12,6 @@ export default async function handler(
     "https://github.com/hypercerts-org/hypercerts-attestor-registry/raw/main/org.json"
   );
   const json = await result.json();
-  res.setHeader("Cache-Control", "s-maxage=86400"); // 24 hours
+  res.setHeader("Cache-Control", "s-maxage=3600"); // 1 hour
   res.status(200).json(json);
 }
