@@ -19,3 +19,23 @@ p a {
     transform: rotate(360deg);
   }
 }
+
+.tagify {
+  width: 100%;
+  --tags-border-color: black !important;
+}
+
+.tags-input {
+  width: 100%;
+}
+
+.tagify__tag {
+  --tag-bg: black;
+  --tag-text-color: white;
+  --tag-remove-btn-color: white;
+  --tag-remove-btn-bg--hover: rgba(255, 255, 255, 0.5);
+  --tag-hover: rgba(0, 0, 0, 0.8);
+  --tag-remove-bg: rgba(0, 0, 0, 0.8);
+  --tag-border-radius: 0px;
+  --tag-inset-shadow-size: 1.5em;
+}
