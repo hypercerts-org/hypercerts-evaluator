@@ -43,7 +43,7 @@ export default function ClaimDetails() {
           justifyContent={"center"}
         >
           <Image
-            src={`/api/image/${claim.id}`}
+            src={`${window.location.origin}/api/image/${claim.id}`}
             alt="Hypercert"
             width="160"
             height="200"

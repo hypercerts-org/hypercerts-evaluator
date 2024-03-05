@@ -7,11 +7,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "**",
       },
-    ],
-    domains: [
-      "localhost",
-      "hypercerts-evaluator.vercel.app",
-      "evaluator.hypercerts.org",
+      {
+        protocol: "http",
+        hostname: "**",
+      },
     ],
   },
 };

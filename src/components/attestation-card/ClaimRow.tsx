@@ -26,7 +26,7 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
   return (
     <Flex w={"100%"} gap={2}>
       <Image
-        src={`/api/image/${claim.id}`}
+        src={`${window.location.origin}/api/image/${claim.id}`}
         alt="Hypercert"
         width="30"
         height="30"

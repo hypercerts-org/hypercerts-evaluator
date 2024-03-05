@@ -16,7 +16,7 @@ export default function ClaimBox({
     <GridItem w="200px" h="200px" mt={5}>
       <Link href={`/claim/${claim.id}`}>
         <Image
-          src={`/api/image/${claim.id}`}
+          src={`${window.location.origin}/api/image/${claim.id}`}
           alt="Hypercert"
           width="200"
           height="200"
