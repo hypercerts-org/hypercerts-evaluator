@@ -14,6 +14,7 @@ export const FullClaimFragment = graphql(`
       work_timeframe_from
       work_timeframe_to
       contributors
+      properties
     }
   }
 `);
