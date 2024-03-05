@@ -80,7 +80,9 @@ export function AttestModal() {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Evaluate Hypercert</ModalHeader>
+        <ModalHeader textStyle={"secondary"} fontWeight={"100"}>
+          Evaluate Hypercert
+        </ModalHeader>
         <ModalCloseButton />
 
         {createDisabled ? (

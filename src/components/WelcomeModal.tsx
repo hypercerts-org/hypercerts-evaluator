@@ -21,13 +21,11 @@ export function WelcomeModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const initialRef = useRef(null);
-
   return (
-    <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
+    <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader ref={initialRef}>
+        <ModalHeader textStyle={"secondary"} fontWeight={"100"}>
           Welcome to the Hypercerts Evaluator
         </ModalHeader>
         <ModalCloseButton />

@@ -41,7 +41,9 @@ export function ConfirmationModal() {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Thank you!</ModalHeader>
+        <ModalHeader textStyle={"secondary"} fontWeight={"100"}>
+          Thank you!
+        </ModalHeader>
         <ModalCloseButton />
 
         <ModalBody>
