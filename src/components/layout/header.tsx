@@ -21,6 +21,8 @@ import { ProfileInfo } from "@/components/ProfileInfo";
 import React from "react";
 import { useAccount } from "wagmi";
 
+const headerHeight = "60px";
+
 export const Header = () => {
   const { isConnected, address } = useAccount();
   return (
