@@ -39,11 +39,37 @@ export function AttestModal() {
 
   const SubmitMessage = () => {
     if (!chain || !address) {
-      return <Text>Connect your wallet to attest.</Text>;
+      return (
+        <Text>
+          Connect your wallet to attest. Attestation is open to listed trusted
+          evaluators, see{" "}
+          <a
+            href="https://github.com/hypercerts-org/hypercerts-attestor-registry"
+            target="_blank"
+          >
+            {" "}
+            Hypercerts Attestor Registry
+          </a>{" "}
+          for more information.
+        </Text>
+      );
     }
 
     if (!isChainIdSupported(chain.id)) {
-      return <Text>Please connect to a supported chain to attest.</Text>;
+      return (
+        <Text>
+          Please connect to a supported chain to attest. Attestation is open to
+          listed trusted evaluators, see{" "}
+          <a
+            href="https://github.com/hypercerts-org/hypercerts-attestor-registry"
+            target="_blank"
+          >
+            {" "}
+            Hypercerts Attestor Registry
+          </a>{" "}
+          for more information.
+        </Text>
+      );
     }
 
     if (isPending) {
@@ -51,7 +77,7 @@ export function AttestModal() {
     }
 
     if (error) {
-      return <Text>Error fetching trusted attestors.</Text>;
+      return <Text>Error fetching trusted evaluators.</Text>;
     }
 
     if (!isTrustedAttestor(trustedAttestors, address as string)) {
