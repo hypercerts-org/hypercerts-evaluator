@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+    domains: [
+      "localhost",
+      "hypercerts-evaluator.vercel.app",
+      "evaluator.hypercerts.org",
+    ],
   },
 };
 
