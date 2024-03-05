@@ -1,10 +1,9 @@
-import { Box, GridItem } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
+import { GridItem } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { ListClaimFragment } from "../../hypercerts/fragments/list-claim.fragment";
-import { isValidImageSrc } from "../../utils/isValidImageSrc";
 
 export default function ClaimBox({
   data,
@@ -13,26 +12,16 @@ export default function ClaimBox({
 }) {
   const claim = readFragment(ListClaimFragment, data);
 
-  const imageSrc = isValidImageSrc(claim.metadata?.image)
-    ? claim.metadata?.image
-    : null;
-
   return (
     <GridItem w="200px" h="200px" mt={5}>
       <Link href={`/claim/${claim.id}`}>
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt="Hypercert"
-            width="200"
-            height="200"
-            style={{ objectFit: "contain", width: "200px", height: "200px" }}
-          />
-        ) : (
-          <Box border="1px" borderColor="black" p={5} h="100%">
-            <Box>{claim.metadata?.name}</Box>
-          </Box>
-        )}
+        <Image
+          src={`/api/image/${claim.id}`}
+          alt="Hypercert"
+          width="200"
+          height="200"
+          style={{ objectFit: "contain", width: "200px", height: "200px" }}
+        />
       </Link>
     </GridItem>
   );

@@ -14,7 +14,6 @@ import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragmen
 import FullpageLoader from "../../components/FullpageLoader";
 import Image from "next/image";
 import LoadError from "../../components/LoadError";
-import { isValidImageSrc } from "../../utils/isValidImageSrc";
 import { readFragment } from "gql.tada";
 import { useClaim } from "../../hypercerts/hooks/useClaim";
 import { useContext } from "react";
@@ -34,23 +33,22 @@ export default function ClaimDetails() {
 
   if (!claim || !data?.claim) return <LoadError>Claim not found.</LoadError>;
 
-  const imageSrc = isValidImageSrc(claim.metadata?.image)
-    ? claim.metadata?.image
-    : null;
-
   return (
     <>
       <Flex borderLeft={"1px solid black"} borderRight={"1px solid black"}>
-        {imageSrc && (
-          <Flex
-            borderRight={"1px solid black"}
-            p={10}
-            direction={"column"}
-            justifyContent={"center"}
-          >
-            <Image src={imageSrc} alt="Hypercert" width="160" height="200" />
-          </Flex>
-        )}
+        <Flex
+          borderRight={"1px solid black"}
+          p={10}
+          direction={"column"}
+          justifyContent={"center"}
+        >
+          <Image
+            src={`/api/image/${claim.id}`}
+            alt="Hypercert"
+            width="160"
+            height="200"
+          />
+        </Flex>
         <Flex flexDirection={"column"} width="100%">
           <ClaimTitle claim={data.claim} />
           <Flex>

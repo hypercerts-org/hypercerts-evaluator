@@ -8,7 +8,6 @@ export const FullClaimFragment = graphql(`
     metadata {
       name
       description
-      image
       external_url
       work_scope
       work_timeframe_from

@@ -6,7 +6,6 @@ export const ListClaimFragment = graphql(`
     metadata {
       name
       description
-      image
     }
   }
 `);
