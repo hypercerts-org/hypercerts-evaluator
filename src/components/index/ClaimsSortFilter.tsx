@@ -6,30 +6,16 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Select,
 } from "@chakra-ui/react";
 
+import ClaimSort from "./ClaimSort";
 import { FaFilter } from "react-icons/fa";
-import { FaSortAmountDown } from "react-icons/fa";
 
 export default function ClaimsSortFilter() {
   return (
     <Box p={5}>
       <Flex gap="5" justifyContent={"flex-end"}>
-        <Menu>
-          <MenuButton
-            as={Button}
-            rightIcon={<FaSortAmountDown />}
-            variant="blackAndWhiteOutline"
-            size={"sm"}
-          >
-            Sort
-          </MenuButton>
-          <MenuList>
-            <MenuItem>Name: A→Z</MenuItem>
-            <MenuItem>Name: Z→A</MenuItem>
-          </MenuList>
-        </Menu>
+        <ClaimSort />
         <Menu>
           <MenuButton
             as={Button}
