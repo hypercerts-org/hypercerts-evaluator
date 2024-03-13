@@ -3,7 +3,6 @@ import { Flex, Text } from "@chakra-ui/react";
 import ClaimRowSkeleton from "./ClaimRowSkeleton";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import Image from "next/image";
-import { isValidImageSrc } from "../../utils/isValidImageSrc";
 import { readFragment } from "gql.tada";
 import { useClaim } from "../../hypercerts/hooks/useClaim";
 

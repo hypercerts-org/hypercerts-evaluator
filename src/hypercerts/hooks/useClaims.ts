@@ -1,6 +1,6 @@
 import { HYPERCERTS_API_URL } from "../../config";
 import { ListClaimFragment } from "../fragments/list-claim.fragment";
-import { graphql } from "gql.tada";
+import { gqlHypercerts } from "../../graphql/hypercerts";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
@@ -10,7 +10,7 @@ export type AllClaimsSort =
   | "creation_asc"
   | "creation_desc";
 
-const query = graphql(
+const query = gqlHypercerts(
   `
     query claims(
       $first: Int

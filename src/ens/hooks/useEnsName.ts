@@ -1,9 +1,9 @@
 import { HYPERCERTS_API_URL } from "../../config";
-import { graphql } from "gql.tada";
+import { gqlEas } from "../../graphql/eas";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
-const query = graphql(
+const query = gqlEas(
   `
     query getEnsName($id: String!) {
       getEnsName(where: { id: $id }) {

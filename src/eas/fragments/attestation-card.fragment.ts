@@ -1,6 +1,6 @@
-import { graphql } from "gql.tada";
+import { gqlEas } from "../../graphql/eas";
 
-export const attestationCardFragment = graphql(`
+export const attestationCardFragment = gqlEas(`
   fragment attestationCardFragment on Attestation {
     id
     decodedDataJson

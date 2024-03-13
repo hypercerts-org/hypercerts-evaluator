@@ -1,14 +1,12 @@
 import { ETH_DEFAULT_CHAIN_ID, EVALUATIONS_SCHEMA_UID } from "../config";
 
-import { EAS } from "@ethereum-attestation-service/eas-sdk";
 import { attestationCardFragment } from "./fragments/attestation-card.fragment";
 import { getEasConfig } from "./getEasConfig";
-import { graphql } from "gql.tada";
+import { gqlEas } from "../graphql/eas";
 import request from "graphql-request";
-import { useNetwork } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 
-const query = graphql(
+const query = gqlEas(
   `
     query EvaluatorAttestations($address: String!, $schemaId: String!) {
       attestations(

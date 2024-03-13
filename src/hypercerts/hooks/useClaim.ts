@@ -1,11 +1,10 @@
-import { ResultOf, graphql } from "gql.tada";
-
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import { HYPERCERTS_API_URL } from "../../config";
+import { gqlHypercerts } from "../../graphql/hypercerts";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
-const query = graphql(
+const query = gqlHypercerts(
   `
     query claim($id: ID!) {
       claim(id: $id) {

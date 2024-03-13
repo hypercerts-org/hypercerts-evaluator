@@ -1,12 +1,11 @@
 import { ETH_DEFAULT_CHAIN_ID, EVALUATIONS_SCHEMA_UID } from "../config";
 
 import { getEasConfig } from "./getEasConfig";
-import { graphql } from "gql.tada";
+import { gqlEas } from "../graphql/eas";
 import request from "graphql-request";
-import { useNetwork } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 
-const query = graphql(
+const query = gqlEas(
   `
     query CountEvaluatorAttestations($address: String!, $schemaId: String!) {
       aggregateAttestation(

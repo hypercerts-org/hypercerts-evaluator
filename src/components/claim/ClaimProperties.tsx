@@ -58,7 +58,9 @@ export default function ClaimProperties({
 }) {
   let _claim = readFragment(FullClaimFragment, claim);
 
-  if (!_claim.metadata?.properties)
+  const properties = _claim.metadata?.properties;
+
+  if (!Array.isArray(properties) || properties.length === 0)
     return (
       <VStack p={5} alignItems={"flex-start"} width="100%" {...props}>
         <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
@@ -73,7 +75,7 @@ export default function ClaimProperties({
       <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
         Properties
       </Text>
-      {_claim.metadata?.properties.map((property, index) => (
+      {properties.map((property, index) => (
         <Property key={index} property={property} />
       ))}
     </VStack>
