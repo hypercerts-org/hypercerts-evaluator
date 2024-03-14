@@ -16,7 +16,7 @@ export default function MenuItem({
     <_MenuItem onClick={onClick}>
       <Flex justifyContent="space-between" w="100%" alignItems="center">
         {children}
-        {selected && <FaCheckSquare />}
+        {selected && <FaCheckSquare style={{ marginLeft: "10px" }} />}
       </Flex>
     </_MenuItem>
   );

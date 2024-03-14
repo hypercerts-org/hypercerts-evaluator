@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import ClaimsList from "../components/index/ClaimsList";
+import ClaimsOrderByFilter from "../components/index/ClaimsOrderByFilter";
 import ClaimsPagination from "../components/index/ClaimsPagination";
 import ClaimsSearch from "../components/index/ClaimsSearch";
-import ClaimsSortFilter from "../components/index/ClaimsSortFilter";
 import Head from "next/head";
 import { Layout } from "../components/layout";
 import { WelcomeModal } from "../components/WelcomeModal";
@@ -26,7 +26,7 @@ export default function Home() {
       <Layout>
         <Box borderLeft={"1px solid black"} borderRight={"1px solid black"}>
           <ClaimsSearch />
-          <ClaimsSortFilter />
+          <ClaimsOrderByFilter />
           <ClaimsList page={page} />
         </Box>
         <ClaimsPagination currentPage={page} />

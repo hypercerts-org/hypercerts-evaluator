@@ -1,17 +1,19 @@
-import { VariablesOf, graphql } from "gql.tada";
-
 import { HYPERCERTS_API_URL } from "../../config";
 import { ListClaimFragment } from "../fragments/list-claim.fragment";
+import { VariablesOf } from "gql.tada";
+import { gqlHypercerts } from "../../graphql/hypercerts";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
-export type AllClaimsOrderBy =
+export type ClaimsOrderBy =
   | "timestamp_asc"
   | "timestamp_desc"
   | "name_asc"
   | "name_desc";
 
-const query = graphql(
+export type ClaimsFilter = "all" | "evaluated";
+
+const query = gqlHypercerts(
   `
     query claims($first: Int, $offset: Int, $orderBy: [hypercertsOrderBy!]) {
       hypercertsCollection(first: $first, offset: $offset, orderBy: $orderBy) {
@@ -31,7 +33,8 @@ type VariableTypes = VariablesOf<typeof query>;
 export const useAllClaims = (
   first: number,
   offset: number,
-  orderBy?: AllClaimsOrderBy
+  orderBy?: ClaimsOrderBy,
+  filter?: ClaimsFilter //TODO Implement filter
 ) => {
   return useQuery({
     queryKey: ["claims", first, offset, orderBy],

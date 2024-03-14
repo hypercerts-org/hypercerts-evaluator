@@ -1,7 +1,4 @@
-import {
-  AllClaimsOrderBy,
-  useAllClaims,
-} from "../../hypercerts/hooks/useClaims";
+import { ClaimsOrderBy, useAllClaims } from "../../hypercerts/hooks/useClaims";
 
 import { CLAIMS_PER_PAGE } from "../../config";
 import ClaimBox from "./ClaimBox";
@@ -10,7 +7,7 @@ import { Grid } from "@chakra-ui/react";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 
 export default function ClaimsList({ page }: { page: number }) {
-  const orderBy = useQueryStringParameter<AllClaimsOrderBy>(
+  const orderBy = useQueryStringParameter<ClaimsOrderBy>(
     "orderBy",
     "timestamp_desc"
   );
