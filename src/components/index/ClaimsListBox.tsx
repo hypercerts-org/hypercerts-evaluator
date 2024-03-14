@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ListClaimFragment } from "../../hypercerts/fragments/list-claim.fragment";
 
-export default function ClaimBox({
+export default function ClaimsListBox({
   data,
 }: {
   data: FragmentOf<typeof ListClaimFragment>;

@@ -4,6 +4,7 @@ import { AttestContext } from "../../pages/claim/[id]";
 import { AttestModal } from "../attest/AttestModal";
 import ClaimContributors from "../../components/claim/ClaimContributors";
 import ClaimCreator from "../../components/claim/ClaimCreator";
+import ClaimEvaluationsList from "./ClaimEvaluationsList";
 import ClaimOwner from "../../components/claim/ClaimOwner";
 import ClaimOwners from "../../components/claim/ClaimOwners";
 import ClaimProperties from "../../components/claim/ClaimProperties";

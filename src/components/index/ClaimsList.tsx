@@ -2,8 +2,8 @@ import { ClaimsOrderBy, useAllClaims } from "../../hypercerts/hooks/useClaims";
 import { Grid, Text } from "@chakra-ui/react";
 
 import { CLAIMS_PER_PAGE } from "../../config";
-import ClaimBox from "./ClaimBox";
 import ClaimsGridSkeleton from "./ClaimGridSkeleton";
+import ClaimsListBox from "./ClaimsListBox";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 
 export default function ClaimsList({ page }: { page: number }) {
@@ -34,7 +34,7 @@ export default function ClaimsList({ page }: { page: number }) {
       )}
       <Grid templateColumns="repeat(3, 1fr)" gap={5} p={5} w="100%">
         {data.hypercertsCollection?.edges.map((edge, i) => (
-          <ClaimBox data={edge.node} key={i} />
+          <ClaimsListBox data={edge.node} key={i} />
         ))}
       </Grid>
     </>

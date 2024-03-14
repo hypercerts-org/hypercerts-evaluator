@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 
 import { ATTESTORS_PER_PAGE } from "../../config";
-import EvaluatorRow from "../evaluator/EvaluatorRow";
+import EvaluatorsListRow from "./EvaluatorsListRow";
 import EvaluatorsListSkeleton from "./EvaluatorsListSkeleton";
 import FullpageLoader from "../FullpageLoader";
 import LoadError from "../LoadError";
@@ -37,7 +37,7 @@ export default function EvaluatorsList({
             p={5}
             onClick={() => router.push(`/evaluator/${attestor.eth_address}`)}
           >
-            <EvaluatorRow attestor={attestor} />
+            <EvaluatorsListRow attestor={attestor} />
           </Box>
         ))}
     </Flex>

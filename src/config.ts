@@ -69,4 +69,4 @@ export const wagmiConfig = createConfig({
 // UI
 
 export const CLAIMS_PER_PAGE = 12;
-export const ATTESTORS_PER_PAGE = 2;
+export const ATTESTORS_PER_PAGE = 10;
