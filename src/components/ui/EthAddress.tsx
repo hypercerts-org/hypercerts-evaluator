@@ -5,10 +5,19 @@ import JazziconImage from "./Jazzicon";
 import { useEnsName } from "wagmi";
 import { useState } from "react";
 
-export default function EthAddress({ address }: { address?: string }) {
+export default function EthAddress({
+  address,
+  showEnsName = false,
+}: {
+  address?: string;
+  showEnsName?: boolean;
+}) {
   const [hover, setHover] = useState(false);
   const toast = useToast();
-  const ensName = useEnsName({ address: address as `0x${string}` | undefined });
+  const { data: ensName } = useEnsName({
+    address: address as `0x${string}` | undefined,
+    chainId: 1,
+  });
 
   if (!address) {
     return <Text>Unknown</Text>;
@@ -37,7 +46,9 @@ export default function EthAddress({ address }: { address?: string }) {
       >
         <JazziconImage address={address} />
         <Text onClick={copyAddress}>
-          {ensName.data || address.slice(0, 6)}...{address.slice(-4)}
+          {showEnsName && ensName
+            ? ensName
+            : address.slice(0, 6) + "..." + address.slice(-4)}
         </Text>
         {hover && <CopyButton textToCopy={address} />}
       </Flex>

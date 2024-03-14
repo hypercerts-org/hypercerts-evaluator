@@ -34,7 +34,7 @@ export default function ClaimOwners({
       <VStack alignItems="flex-start">
         {owners.map((owner, i) => (
           <Text key={i}>
-            <EthAddress address={owner?.owner as string} />
+            <EthAddress address={owner?.owner as string} showEnsName />
           </Text>
         ))}
         {owners.length === 0 && <Text>No owners</Text>}
