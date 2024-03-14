@@ -4,6 +4,7 @@ import { FragmentOf, readFragment } from "gql.tada";
 import ClaimRow from "./ClaimRow";
 import Comments from "./Comments";
 import Evaluations from "./Evaluations";
+import FormattedDate from "../ui/FormattedDate";
 import Link from "next/link";
 import { attestationCardFragment } from "../../eas/fragments/attestation-card.fragment";
 import { getDecodedValue } from "../../eas/getDecodedValue";
@@ -17,21 +18,21 @@ export default function AttestationCard({
   if (!attestation) return null;
   const decodedData = JSON.parse(attestation.decodedDataJson);
 
-  const hypercertId = getDecodedValue<string>(decodedData, "hypercert_id");
-  const evaluateBasic = getDecodedValue<string>(decodedData, "evaluate_basic");
-  const evaluateWork = getDecodedValue<string>(decodedData, "evaluate_work");
-  const evaluateProperties = getDecodedValue<string>(
+  const tokenId = getDecodedValue<string>(decodedData, "token_id");
+  const evaluateBasic = getDecodedValue<number>(decodedData, "evaluate_basic");
+  const evaluateWork = getDecodedValue<number>(decodedData, "evaluate_work");
+  const evaluateProperties = getDecodedValue<number>(
     decodedData,
     "evaluate_properties"
   );
-  const evaluateContributors = getDecodedValue<string>(
+  const evaluateContributors = getDecodedValue<number>(
     decodedData,
     "evaluate_contributors"
   );
   const comments = getDecodedValue<string>(decodedData, "comments");
 
   return (
-    <Link href={`/claim/${hypercertId}`}>
+    <Link href={`/claim/${tokenId}`}>
       <Flex
         direction="column"
         border="1px solid black"
@@ -39,7 +40,8 @@ export default function AttestationCard({
         gap={2}
         _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
       >
-        <ClaimRow claimId={hypercertId} />
+        <ClaimRow claimId={tokenId} />
+        <FormattedDate seconds={attestation.timeCreated} />
         <Evaluations
           basic={evaluateBasic}
           work={evaluateWork}

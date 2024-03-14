@@ -1,35 +1,10 @@
-import * as R from "remeda";
-
 import { Flex, GridItem, Text } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
+import FormattedDate from "../ui/FormattedDate";
 import Image from "next/image";
 import Link from "next/link";
 import { ListClaimFragment } from "../../hypercerts/fragments/list-claim.fragment";
-
-function ClaimBoxDate({ blockTimestamp }: { blockTimestamp: unknown }) {
-  if (!R.isString(blockTimestamp)) {
-    return null;
-  }
-
-  let dateNumber = Number.parseInt(blockTimestamp); // timestamp is in seconds
-
-  if (!R.isNumber(dateNumber)) {
-    return (
-      <Text fontSize="sm" opacity="50%">
-        Invalid date
-      </Text>
-    );
-  }
-
-  const date = new Date(dateNumber * 1000);
-
-  return (
-    <Text fontSize="sm" opacity="50%">
-      {date.toISOString().substring(0, 10)}
-    </Text>
-  );
-}
 
 export default function ClaimBox({
   data,
@@ -55,7 +30,7 @@ export default function ClaimBox({
               marginBottom: "10px",
             }}
           />
-          <ClaimBoxDate blockTimestamp={claim.block_timestamp} />
+          <FormattedDate seconds={claim.block_timestamp} />
           <Text size="sm">{claim.name}</Text>
         </Flex>
       </Link>

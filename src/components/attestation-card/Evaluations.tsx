@@ -2,27 +2,17 @@ import { FaCheckSquare, FaMinusCircle } from "react-icons/fa";
 import { Flex, Text, VStack } from "@chakra-ui/react";
 import { fromBytes, hexToString } from "viem";
 
-function isValid(value: string) {
-  const stringValue = hexToString(value as `0x${string}`).replace(/\0/g, ""); // Remove null characters
-  return stringValue === "valid";
-}
-
-function isInvalid(value: string) {
-  const stringValue = hexToString(value as `0x${string}`).replace(/\0/g, ""); // Remove null characters
-  return stringValue === "invalid";
-}
-
-function EvaluationSymbols({ value }: { value: string }) {
+function EvaluationSymbols({ value }: { value: number }) {
   return (
     <Flex gap={2}>
       <FaCheckSquare
         style={{
-          color: isValid(value) ? "limegreen" : "gray",
+          color: value === 1 ? "limegreen" : "gray",
         }}
       />
       <FaMinusCircle
         style={{
-          color: isInvalid(value) ? "red" : "gray",
+          color: value === 2 ? "red" : "gray",
         }}
       />
     </Flex>
@@ -36,10 +26,10 @@ export default function Evaluations({
   contributors,
   ...props
 }: {
-  basic?: string;
-  work?: string;
-  properties?: string;
-  contributors?: string;
+  basic?: number;
+  work?: number;
+  properties?: number;
+  contributors?: number;
   [key: string]: any;
 }) {
   return (

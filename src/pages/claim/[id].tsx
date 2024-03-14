@@ -1,13 +1,19 @@
+import { FragmentOf, readFragment } from "gql.tada";
 import { createContext, useState } from "react";
 
 import ClaimDetails from "../../components/claim/ClaimDetails";
 import { ConfirmationModal } from "../../components/claim/ConfirmationModal";
+import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import FullpageLoader from "../../components/FullpageLoader";
 import Head from "next/head";
 import { Layout } from "../../components/layout";
+import LoadError from "../../components/LoadError";
+import { useClaim } from "../../hypercerts/hooks/useClaim";
+import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 import { useRouter } from "next/router";
 
 type AttestContext = {
-  claimId: string;
+  claim: FragmentOf<typeof FullClaimFragment>;
   isAttestModalOpen: boolean;
   closeAttestModal: ({ success }: { success: boolean }) => void;
   openAttestModal: () => void;
@@ -25,11 +31,24 @@ export const AttestContext = createContext<AttestContext | undefined>(
 export default function Page() {
   const router = useRouter();
   const { id } = router.query;
+  const { data, isPending, error } = useClaim(Array.isArray(id) ? id[0] : id);
+
   const [isAttestModalOpen, setIsAttestModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [createdAttestationUid, setCreatedAttestationUid] = useState<string>();
 
-  if (typeof id !== "string") return null;
+  if (isPending) return <FullpageLoader />;
+
+  if (error) {
+    console.error(error);
+    return <LoadError>Failed to load claim.</LoadError>;
+  }
+
+  const claim = data?.hypercertsCollection?.edges[0]?.node;
+
+  const claimFragment = readFragment(FullClaimFragment, claim);
+
+  if (!claim || !claimFragment) return <LoadError>Claim not found.</LoadError>;
 
   const closeAttestModal = ({ success }: { success: boolean }) => {
     setIsAttestModalOpen(false);
@@ -39,7 +58,7 @@ export default function Page() {
   };
 
   const context = {
-    claimId: id,
+    claim,
     isAttestModalOpen,
     closeAttestModal,
     openAttestModal: () => setIsAttestModalOpen(true),

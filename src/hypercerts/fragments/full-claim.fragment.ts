@@ -4,6 +4,7 @@ export const FullClaimFragment = gqlHypercerts(`
   fragment FullClaimFragment on hypercerts {
     claim_id
     claim {
+      contract
       owner
       creator
     }

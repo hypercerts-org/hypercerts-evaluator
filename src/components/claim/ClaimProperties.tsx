@@ -1,7 +1,9 @@
 import { Flex, Text, VStack } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
+import { AttestContext } from "../../pages/claim/[id]";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { useContext } from "react";
 
 type Property = {
   value: string;
@@ -49,16 +51,12 @@ function Property({ property }: { property: unknown }) {
   );
 }
 
-export default function ClaimProperties({
-  claim,
-  ...props
-}: {
-  claim: FragmentOf<typeof FullClaimFragment>;
-  [key: string]: any;
-}) {
-  let _claim = readFragment(FullClaimFragment, claim);
+export default function ClaimProperties({ ...props }: { [key: string]: any }) {
+  const attestContext = useContext(AttestContext);
+  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  if (!claim) return null;
 
-  const properties = _claim.properties;
+  const properties = claim.properties;
 
   if (!Array.isArray(properties) || properties.length === 0)
     return (

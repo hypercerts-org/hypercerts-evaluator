@@ -12,13 +12,16 @@ export const HYPERCERTS_API_URL =
 
 export const GQL_QUERY_STALE_TIME = 1000 * 60 * 30; // 30 minutes
 
+export const HYPERCERTS_DEFAULT_CONTRACT =
+  "0xa16dfb32eb140a6f3f2ac68f41dad8c7e83c4941";
+
 // Ethereum Attetation Service (EAS)
 
 export const EVALUATIONS_SCHEMA_UID =
-  "0x6fc5f6423ba06f5ce1fd293d0eee50c24adf802e085fae755ad7296e35dd3f00";
+  "0x3c0d0488e4d50455ef511f2c518403d21d35aa671ca30644aa9f7f7bb2516e2f";
 
 export const EVALUATIONS_SCHEMA =
-  "string hypercert_id,bytes32 evaluate_basic,bytes32 evaluate_work,bytes32 evaluate_contributors,bytes32 evaluate_properties,string comments,string[] tags";
+  "uint40 chain_id,address contract_address,string token_id,uint8 evaluate_basic,uint8 evaluate_work,uint8 evaluate_contributors,uint8 evaluate_properties,string comments,string[] tags";
 
 type EasConfig = {
   id: number;

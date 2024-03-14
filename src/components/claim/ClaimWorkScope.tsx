@@ -3,20 +3,18 @@ import * as R from "remeda";
 import { Badge, Flex, Text, VStack } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
+import { AttestContext } from "../../pages/claim/[id]";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { useContext } from "react";
 
-export default function ClaimWorkScope({
-  claim,
-  ...props
-}: {
-  claim: FragmentOf<typeof FullClaimFragment>;
-  [key: string]: any;
-}) {
-  let _claim = readFragment(FullClaimFragment, claim);
+export default function ClaimWorkScope({ ...props }: { [key: string]: any }) {
+  const attestContext = useContext(AttestContext);
+  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  if (!claim) return null;
 
   const workScope =
-    R.isArray(_claim.work_scope) && _claim.work_scope.length > 0
-      ? _claim.work_scope
+    R.isArray(claim.work_scope) && claim.work_scope.length > 0
+      ? claim.work_scope
       : null;
 
   return (

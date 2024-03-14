@@ -34,7 +34,6 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
         height="30"
         style={{ borderRadius: "5px", objectFit: "contain" }}
       />
-
       <Text>{claim.name}</Text>
     </Flex>
   );

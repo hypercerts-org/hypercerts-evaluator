@@ -1,27 +1,27 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
+import { AttestContext } from "../../pages/claim/[id]";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import { isValidUrl } from "../../utils/isValidUrl";
+import { useContext } from "react";
 
 const DESCRIPTION_MAX_LENGTH = 250;
 const URL_MAX_LENGTH = 40;
 
-export default function ClaimTitle({
-  claim,
-}: {
-  claim: FragmentOf<typeof FullClaimFragment>;
-}) {
-  let _claim = readFragment(FullClaimFragment, claim);
+export default function ClaimTitle() {
+  const attestContext = useContext(AttestContext);
+  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  if (!claim) return null;
 
-  const externalUrl = isValidUrl(_claim.external_url)
-    ? _claim.external_url
+  const externalUrl = isValidUrl(claim.external_url)
+    ? claim.external_url
     : null;
 
   const description =
-    _claim.description && _claim.description.length > DESCRIPTION_MAX_LENGTH
-      ? _claim.description?.substring(0, DESCRIPTION_MAX_LENGTH) + "..."
-      : _claim.description;
+    claim.description && claim.description.length > DESCRIPTION_MAX_LENGTH
+      ? claim.description?.substring(0, DESCRIPTION_MAX_LENGTH) + "..."
+      : claim.description;
 
   const externalUrlDescription =
     externalUrl && externalUrl.length > URL_MAX_LENGTH
@@ -31,7 +31,7 @@ export default function ClaimTitle({
   return (
     <Flex flexDirection={"column"} gap="2" p="10" overflow="hidden">
       <Text as="h2" fontSize="lg" textStyle="secondary" fontWeight={100}>
-        {_claim.name}
+        {claim.name}
       </Text>
       <Text>{description}</Text>
       {externalUrl && (

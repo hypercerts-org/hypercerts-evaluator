@@ -1,23 +1,21 @@
 import * as R from "remeda";
 
-import { FragmentOf, readFragment } from "gql.tada";
 import { Text, VStack } from "@chakra-ui/react";
 
+import { AttestContext } from "../../pages/claim/[id]";
 import EthAddress from "../ui/EthAddress";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { readFragment } from "gql.tada";
+import { useContext } from "react";
 
-export default function ClaimOwners({
-  claim,
-  ...props
-}: {
-  claim: FragmentOf<typeof FullClaimFragment>;
-  [key: string]: any;
-}) {
-  let _claim = readFragment(FullClaimFragment, claim);
+export default function ClaimOwners({ ...props }: { [key: string]: any }) {
+  const attestContext = useContext(AttestContext);
+  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  if (!claim) return null;
 
   let owners =
-    R.isArray(_claim.fractions) && _claim.fractions.length > 0
-      ? _claim.fractions
+    R.isArray(claim.fractions) && claim.fractions.length > 0
+      ? claim.fractions
       : [];
 
   return (

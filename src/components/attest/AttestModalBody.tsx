@@ -15,10 +15,12 @@ import { useContext, useState } from "react";
 import { AllEvaluationStates } from "../../eas/types/all-evaluation-states.type";
 import { AttestContext } from "../../pages/claim/[id]";
 import EvaluateToggle from "./EvaluateToggle";
+import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import Tags from "@yaireo/tagify/dist/react.tagify";
 import { createAttestation } from "../../eas/createAttestation";
 import { errorHasMessage } from "../../utils/errorHasMessage";
 import { errorHasReason } from "../../utils/errorHasReason";
+import { readFragment } from "gql.tada";
 import { useNetwork } from "wagmi";
 import { useSigner } from "../../wagmi/hooks/useSigner";
 
@@ -45,6 +47,7 @@ export function AttestModalBody() {
   const signer = useSigner();
   const toast = useToast();
   const attestContext = useContext(AttestContext);
+  const claim = readFragment(FullClaimFragment, attestContext?.claim);
 
   // Local state
   const [isAttesting, setIsAttesting] = useState(false);
@@ -73,15 +76,16 @@ export function AttestModalBody() {
   };
 
   const attest = async () => {
-    if (!signer || !chain?.id || !attestContext) {
+    if (!signer || !chain?.id || !claim || !claim.claim || !attestContext) {
       return;
     }
     setIsAttesting(true);
     try {
       const uid = await createAttestation({
         chainId: chain.id,
+        contractAddress: claim.claim.contract,
         signer,
-        claimId: attestContext.claimId,
+        tokenId: claim.claim_id as string,
         allEvaluationStates,
         comments,
       });

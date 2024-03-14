@@ -3,18 +3,21 @@ import { EVALUATIONS_SCHEMA, EVALUATIONS_SCHEMA_UID } from "../config";
 
 import { AllEvaluationStates } from "./types/all-evaluation-states.type";
 import { JsonRpcSigner } from "@ethersproject/providers";
+import { evaluationStateToUint8 } from "./evaluationStateToUint8";
 import { getEasConfig } from "./getEasConfig";
 
 export async function createAttestation({
   chainId,
+  contractAddress,
+  tokenId,
   signer,
-  claimId,
   allEvaluationStates,
   comments,
 }: {
   chainId: number;
+  contractAddress: string;
+  tokenId: string;
   signer: JsonRpcSigner;
-  claimId: string;
   allEvaluationStates: AllEvaluationStates;
   comments: string;
 }) {
@@ -32,22 +35,28 @@ export async function createAttestation({
 
   // Encode the data according to schema
   const encodedData = schemaEncoder.encodeData([
-    { name: "hypercert_id", value: claimId, type: "string" },
+    { name: "chain_id", value: chainId, type: "uint40" },
+    { name: "contract_address", value: contractAddress, type: "address" },
+    { name: "token_id", value: tokenId, type: "string" },
     {
       name: "evaluate_basic",
-      value: allEvaluationStates.basics,
-      type: "bytes32",
+      value: evaluationStateToUint8(allEvaluationStates.basics),
+      type: "uint8",
     },
-    { name: "evaluate_work", value: allEvaluationStates.work, type: "bytes32" },
+    {
+      name: "evaluate_work",
+      value: evaluationStateToUint8(allEvaluationStates.work),
+      type: "uint8",
+    },
     {
       name: "evaluate_contributors",
-      value: allEvaluationStates.contributors,
-      type: "bytes32",
+      value: evaluationStateToUint8(allEvaluationStates.contributors),
+      type: "uint8",
     },
     {
       name: "evaluate_properties",
-      value: allEvaluationStates.properties,
-      type: "bytes32",
+      value: evaluationStateToUint8(allEvaluationStates.properties),
+      type: "uint8",
     },
     { name: "comments", value: comments, type: "string" },
     { name: "tags", value: [], type: "string[]" },
