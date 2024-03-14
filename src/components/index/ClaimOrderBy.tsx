@@ -46,6 +46,18 @@ export default function ClaimOrderBy() {
         >
           Created: Old-New
         </MenuItem>
+        <MenuItem
+          onClick={() => click("name_asc")}
+          selected={orderBy === "name_asc"}
+        >
+          Name: A-Z
+        </MenuItem>
+        <MenuItem
+          onClick={() => click("name_desc")}
+          selected={orderBy === "name_desc"}
+        >
+          Name: Z-A
+        </MenuItem>
       </MenuList>
     </Menu>
   );

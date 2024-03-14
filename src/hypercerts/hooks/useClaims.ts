@@ -5,7 +5,11 @@ import { ListClaimFragment } from "../fragments/list-claim.fragment";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
-export type AllClaimsOrderBy = "timestamp_asc" | "timestamp_desc";
+export type AllClaimsOrderBy =
+  | "timestamp_asc"
+  | "timestamp_desc"
+  | "name_asc"
+  | "name_desc";
 
 const query = graphql(
   `
@@ -40,6 +44,14 @@ export const useAllClaims = (
           _orderBy = [
             {
               block_timestamp:
+                orderByDirection === "asc" ? "AscNullsFirst" : "DescNullsFirst",
+            },
+          ];
+        }
+        if (orderByAttribute === "name") {
+          _orderBy = [
+            {
+              name:
                 orderByDirection === "asc" ? "AscNullsFirst" : "DescNullsFirst",
             },
           ];
