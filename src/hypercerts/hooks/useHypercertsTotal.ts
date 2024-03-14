@@ -1,9 +1,9 @@
 import { HYPERCERTS_API_URL } from "../../config";
-import { graphql } from "gql.tada";
+import { gqlHypercerts } from "../../graphql/hypercerts";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
-const query = graphql(
+const query = gqlHypercerts(
   `
     query hypercertsTotal {
       hypercerts_total
