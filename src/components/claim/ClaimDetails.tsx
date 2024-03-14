@@ -1,9 +1,10 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
 
 import { AttestContext } from "../../pages/claim/[id]";
 import { AttestModal } from "../attest/AttestModal";
 import ClaimContributors from "../../components/claim/ClaimContributors";
 import ClaimCreator from "../../components/claim/ClaimCreator";
+import ClaimEvaluateButton from "./ClaimEvaluateButton";
 import ClaimEvaluationsList from "./ClaimEvaluationsList";
 import ClaimOwner from "../../components/claim/ClaimOwner";
 import ClaimOwners from "../../components/claim/ClaimOwners";
@@ -41,7 +42,7 @@ export default function ClaimDetails() {
             />
           </Box>
         </Flex>
-        <Flex flexDirection={"column"} w="inherit">
+        <Flex flexDirection={"column"} w="100%" h="100%">
           <ClaimTitle />
           <Flex>
             <ClaimCreator
@@ -53,41 +54,41 @@ export default function ClaimDetails() {
         </Flex>
       </Flex>
 
-      <Flex borderLeft={"1px solid black"} borderRight={"1px solid black"}>
-        <Flex flexDirection={"column"} w="50%">
-          <ClaimWorkScope
-            borderTop="1px solid black"
-            borderRight="1px solid black"
-          />
-          <ClaimWorkTimeFrame
-            borderTop="1px solid black"
-            borderRight="1px solid black"
-          />
-          <ClaimContributors
-            borderTop="1px solid black"
-            borderRight="1px solid black"
-          />
+      <Grid
+        templateColumns="repeat(2, 1fr)"
+        borderLeft={"1px solid black"}
+        borderRight="1px solid black"
+      >
+        <Flex flexDirection={"column"}>
+          <ClaimWorkScope borderTop="1px solid black" />
+          <ClaimWorkTimeFrame borderTop="1px solid black" />
+          <ClaimContributors borderTop="1px solid black" />
         </Flex>
-        <Flex flexDirection={"column"} w="50%">
+        <Flex flexDirection={"column"} borderLeft="1px solid black">
           <ClaimProperties borderTop="1px solid black" />
           <ClaimOwners borderTop="1px solid black" />
         </Flex>
-      </Flex>
+      </Grid>
 
       <Flex
         width="100%"
-        justifyContent={"center"}
+        justifyContent={"space-between"}
         borderTop={"1px solid black"}
-        p={5}
+        py={5}
       >
-        <Button
-          variant="blackAndWhite"
-          onClick={() => attestContext?.openAttestModal()}
+        {" "}
+        <Heading
+          textStyle={"secondary"}
+          fontWeight={"100"}
+          size={"md"}
+          whiteSpace={"nowrap"}
         >
-          Evaluate this Hypercert
-        </Button>
-        <AttestModal />
+          Evaluations
+        </Heading>
+        <ClaimEvaluateButton />
       </Flex>
+      <ClaimEvaluationsList />
+      <AttestModal />
     </>
   );
 }

@@ -21,7 +21,13 @@ export const Layout = ({
     >
       <TopHeader />
       <TopMenu />
-      <Flex flexDirection={"column"} width={"700px"} grow={1} {...props}>
+      <Flex
+        flexDirection={"column"}
+        width={"700px"}
+        grow={1}
+        pb="40px"
+        {...props}
+      >
         {children}
       </Flex>
     </Flex>

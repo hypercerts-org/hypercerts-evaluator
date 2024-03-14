@@ -10,12 +10,10 @@ export default function ClaimEvaluationsList() {
   const claimFragment = readFragment(FullClaimFragment, attestContext?.claim);
   if (!claimFragment) return null;
 
-  console.log("claimFragment", claimFragment);
-
   const attestations = claimFragment.attestations;
 
   return (
-    <Flex borderLeft={"1px solid black"} borderRight={"1px solid black"}>
+    <Flex>
       <Flex flexDirection={"column"} w="50%">
         {attestations ? (
           attestations.map(
@@ -30,7 +28,7 @@ export default function ClaimEvaluationsList() {
               )
           )
         ) : (
-          <Text>No attestations</Text>
+          <Text>No evaluations.</Text>
         )}
       </Flex>
     </Flex>
