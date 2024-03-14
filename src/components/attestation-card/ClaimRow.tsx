@@ -18,21 +18,24 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
     return null;
   }
 
-  const claim = readFragment(FullClaimFragment, data?.claim);
+  const claim = readFragment(
+    FullClaimFragment,
+    data?.hypercertsCollection?.edges[0]?.node
+  );
 
-  if (!claim || !data?.claim) return <div>Claim not found</div>;
+  if (!claim || !data) return <div>Claim not found</div>;
 
   return (
     <Flex w={"100%"} gap={2}>
       <Image
-        src={`${window.location.origin}/api/image/${claim.id}`}
+        src={`${window.location.origin}/api/image/${claim.claim_id}`}
         alt="Hypercert"
         width="30"
         height="30"
         style={{ borderRadius: "5px", objectFit: "contain" }}
       />
 
-      <Text>{claim.metadata?.name}</Text>
+      <Text>{claim.name}</Text>
     </Flex>
   );
 }
