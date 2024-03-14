@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 
 import { AttestContext } from "../../pages/claim/[id]";
 import { AttestModal } from "../attest/AttestModal";
@@ -29,9 +29,14 @@ export default function ClaimDetails() {
     return <LoadError>Failed to load claim.</LoadError>;
   }
 
-  const claim = readFragment(FullClaimFragment, data?.claim);
+  const claim = readFragment(
+    FullClaimFragment,
+    data?.hypercertsCollection?.edges[0]?.node
+  );
 
-  if (!claim || !data?.claim) return <LoadError>Claim not found.</LoadError>;
+  const claimFragment = data?.hypercertsCollection?.edges[0]?.node;
+
+  if (!claim || !claimFragment) return <LoadError>Claim not found.</LoadError>;
 
   return (
     <>
@@ -42,22 +47,24 @@ export default function ClaimDetails() {
           direction={"column"}
           justifyContent={"center"}
         >
-          <Image
-            src={`${window.location.origin}/api/image/${claim.id}`}
-            alt="Hypercert"
-            width="160"
-            height="200"
-          />
+          <Box w="160px" h="200px">
+            <Image
+              src={`${window.location.origin}/api/image/${claim.claim_id}`}
+              alt="Hypercert"
+              width="160"
+              height="200"
+            />
+          </Box>
         </Flex>
-        <Flex flexDirection={"column"} width="100%">
-          <ClaimTitle claim={data.claim} />
+        <Flex flexDirection={"column"} w="inherit">
+          <ClaimTitle claim={claimFragment} />
           <Flex>
             <ClaimCreator
-              claim={data.claim}
+              claim={claimFragment}
               borderTop="1px solid black"
               borderRight="1px solid black"
             />
-            <ClaimOwner claim={data.claim} borderTop="1px solid black" />
+            <ClaimOwner claim={claimFragment} borderTop="1px solid black" />
           </Flex>
         </Flex>
       </Flex>
@@ -65,24 +72,24 @@ export default function ClaimDetails() {
       <Flex borderLeft={"1px solid black"} borderRight={"1px solid black"}>
         <Flex flexDirection={"column"} w="50%">
           <ClaimWorkScope
-            claim={data.claim}
+            claim={claimFragment}
             borderTop="1px solid black"
             borderRight="1px solid black"
           />
           <ClaimWorkTimeFrame
-            claim={data.claim}
+            claim={claimFragment}
             borderTop="1px solid black"
             borderRight="1px solid black"
           />
           <ClaimContributors
-            claim={data.claim}
+            claim={claimFragment}
             borderTop="1px solid black"
             borderRight="1px solid black"
           />
         </Flex>
         <Flex flexDirection={"column"} w="50%">
-          <ClaimProperties claim={data.claim} borderTop="1px solid black" />
-          <ClaimOwners claim={data.claim} borderTop="1px solid black" />
+          <ClaimProperties claim={claimFragment} borderTop="1px solid black" />
+          <ClaimOwners claim={claimFragment} borderTop="1px solid black" />
         </Flex>
       </Flex>
 

@@ -22,8 +22,8 @@ export default function ClaimsList({ page }: { page: number }) {
 
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={5} p={5} w="100%">
-      {data.claims.map((claim, i) => (
-        <ClaimBox data={claim} key={i} />
+      {data.hypercertsCollection?.edges.map((edge, i) => (
+        <ClaimBox data={edge.node} key={i} />
       ))}
     </Grid>
   );

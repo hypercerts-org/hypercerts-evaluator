@@ -2,6 +2,7 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 import { CLAIMS_PER_PAGE } from "../../config";
+import { useHypercertsTotal } from "../../hypercerts/hooks/useHypercertsTotal";
 import { useRouter } from "next/router";
 
 type AttestationsPageChooserProps = {
@@ -13,8 +14,8 @@ export default function ClaimsPagination({
 }: AttestationsPageChooserProps) {
   const router = useRouter();
 
-  let claimsCount = 120; // Assuming a fixed count for demonstration
-
+  const { data } = useHypercertsTotal();
+  const claimsCount = data?.hypercerts_total;
   if (!claimsCount) return null;
 
   const totalPages = Math.ceil(claimsCount / CLAIMS_PER_PAGE);

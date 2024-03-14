@@ -18,7 +18,7 @@ export default function ClaimCreator({
         Creator
       </Text>
       <Text>
-        <EthAddress address={_claim.creator as string} />
+        <EthAddress address={_claim.claim?.creator as string} />
       </Text>
     </VStack>
   );

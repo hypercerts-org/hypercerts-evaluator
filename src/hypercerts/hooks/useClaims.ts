@@ -3,7 +3,6 @@ import { ListClaimFragment } from "../fragments/list-claim.fragment";
 import { gqlHypercerts } from "../../graphql/hypercerts";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
-
 export type AllClaimsSort =
   | "creation_asc"
   | "creation_desc"
@@ -14,18 +13,17 @@ const query = gqlHypercerts(
   `
     query claims(
       $first: Int
-      $skip: Int
-      $orderBy: Claim_orderBy
-      $orderDirection: OrderDirection
+      $offset: Int
     ) {
-      claims(
+      hypercertsCollection(
         first: $first
-        skip: $skip
-        orderBy: $orderBy
-        orderDirection: $orderDirection
-        where: { uri_not_starts_with: "ipfs://null" }
+        offset: $offset
       ) {
-        ...ListClaimFragment
+        edges {
+          node {
+            ...ListClaimFragment
+          }
+        }
       }
     }
   `,
@@ -34,20 +32,21 @@ const query = gqlHypercerts(
 
 export const useAllClaims = (
   first: number,
-  skip: number,
+  offset: number,
   sort: AllClaimsSort
 ) => {
   return useQuery({
-    queryKey: ["claims", first, skip, sort],
+    queryKey: ["claims", first, offset, sort],
     queryFn: async () => {
-      const orderBy = sort.split("_")[0] as "creation";
-      const orderDirection = sort.split("_")[1] as "asc" | "desc";
+      // const orderBy = sort.split("_")[0] as "creation";
+      // const orderDirection = sort.split("_")[1] as "asc" | "desc";
+      // const orderBy: hypercertsOrderBy = {
+      //   block_timestamp: "DescNullsFirst" as const,
+      // };
 
       return request(HYPERCERTS_API_URL, query, {
         first,
-        skip,
-        orderBy,
-        orderDirection,
+        offset,
       });
     },
   });

@@ -58,7 +58,7 @@ export default function ClaimProperties({
 }) {
   let _claim = readFragment(FullClaimFragment, claim);
 
-  const properties = _claim.metadata?.properties;
+  const properties = _claim.properties;
 
   if (!Array.isArray(properties) || properties.length === 0)
     return (

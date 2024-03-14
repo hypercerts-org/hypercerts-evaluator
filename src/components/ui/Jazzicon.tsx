@@ -10,7 +10,12 @@ export default function Jazzicon({
 }): JSX.Element {
   return (
     <Box
-      style={{ width: "15px", height: "15px", marginBottom: "4px" }}
+      style={{
+        ...props.style,
+        width: "15px",
+        height: "15px",
+        marginBottom: "4px",
+      }}
       {...props}
     >
       <_Jazzicon address={address} />

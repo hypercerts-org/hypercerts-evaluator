@@ -5,10 +5,12 @@ import { gqlHypercerts } from "../../../graphql/hypercerts";
 import request from "graphql-request";
 
 const CLAIM_QUERY = gqlHypercerts(`
-  query Claim($id: ID!) {
-    claim(id: $id) {
-      metadata {
-        image
+  query ClaimImage($claim_id: BigFloat!) {
+    hypercertsCollection(filter: {claim_id: { eq: $claim_id }}) {
+      edges {
+        node {
+          image
+        }
       }
     }
   }
@@ -57,8 +59,10 @@ export default async function handler(
   }
 
   try {
-    const response = await request(HYPERCERTS_API_URL, CLAIM_QUERY, { id });
-    const imageOrUrl = response.claim?.metadata?.image;
+    const response = await request(HYPERCERTS_API_URL, CLAIM_QUERY, {
+      claim_id: id,
+    });
+    const imageOrUrl = response.hypercertsCollection?.edges[0]?.node?.image;
 
     if (!imageOrUrl) {
       await placeholderImageResponse(req, res);

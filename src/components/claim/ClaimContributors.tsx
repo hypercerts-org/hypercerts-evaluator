@@ -15,7 +15,7 @@ export default function ClaimContributors({
 }) {
   let _claim = readFragment(FullClaimFragment, claim);
 
-  const contributors = _claim.metadata?.contributors;
+  const contributors = _claim.contributors;
   return (
     <VStack
       p={5}

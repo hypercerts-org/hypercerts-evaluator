@@ -6,21 +6,25 @@ import { useQuery } from "@tanstack/react-query";
 
 const query = gqlHypercerts(
   `
-    query claim($id: ID!) {
-      claim(id: $id) {
-        ...FullClaimFragment
+  query claim($claim_id: BigFloat!) {
+    hypercertsCollection(filter: {claim_id: { eq: $claim_id }}) {
+      edges {
+        node {
+          ...FullClaimFragment
+        }
       }
     }
-  `,
+  }
+`,
   [FullClaimFragment]
 );
 
-export const useClaim = (id?: string) => {
+export const useClaim = (claim_id?: string) => {
   return useQuery({
-    queryKey: ["claim", id],
+    queryKey: ["claim", claim_id],
     queryFn: async () => {
-      if (!id) return null;
-      return request(HYPERCERTS_API_URL, query, { id });
+      if (!claim_id) return null;
+      return request(HYPERCERTS_API_URL, query, { claim_id });
     },
   });
 };

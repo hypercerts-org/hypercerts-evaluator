@@ -1,7 +1,8 @@
-import { Badge, Box, Flex, Text, VStack } from "@chakra-ui/react";
+import * as R from "remeda";
+
+import { Badge, Flex, Text, VStack } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
-import EthAddress from "../ui/EthAddress";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 
 export default function ClaimWorkScope({
@@ -13,9 +14,10 @@ export default function ClaimWorkScope({
 }) {
   let _claim = readFragment(FullClaimFragment, claim);
 
-  const workScope = Array.isArray(_claim.metadata?.work_scope)
-    ? _claim.metadata?.work_scope
-    : null;
+  const workScope =
+    R.isArray(_claim.work_scope) && _claim.work_scope.length > 0
+      ? _claim.work_scope
+      : null;
 
   return (
     <VStack p={5} alignItems={"flex-start"} width="100%" {...props}>
