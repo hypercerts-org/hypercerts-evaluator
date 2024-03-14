@@ -8,14 +8,14 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 
-import ClaimSort from "./ClaimSort";
+import ClaimOrderBy from "./ClaimOrderBy";
 import { FaFilter } from "react-icons/fa";
 
 export default function ClaimsSortFilter() {
   return (
     <Box p={5}>
       <Flex gap="5" justifyContent={"flex-end"}>
-        <ClaimSort />
+        <ClaimOrderBy />
         <Menu>
           <MenuButton
             as={Button}

@@ -1,4 +1,7 @@
-import { AllClaimsSort, useAllClaims } from "../../hypercerts/hooks/useClaims";
+import {
+  AllClaimsOrderBy,
+  useAllClaims,
+} from "../../hypercerts/hooks/useClaims";
 
 import { CLAIMS_PER_PAGE } from "../../config";
 import ClaimBox from "./ClaimBox";
@@ -7,13 +10,18 @@ import { Grid } from "@chakra-ui/react";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 
 export default function ClaimsList({ page }: { page: number }) {
-  const sort = useQueryStringParameter<AllClaimsSort>("sort", "creation_asc");
+  const orderBy = useQueryStringParameter<AllClaimsOrderBy>(
+    "orderBy",
+    "timestamp_desc"
+  );
+
+  console.log("ClaimsList -> orderBy", orderBy);
 
   page = page || 1;
   const { data, isPending, error } = useAllClaims(
     CLAIMS_PER_PAGE,
     (page - 1) * CLAIMS_PER_PAGE,
-    sort
+    orderBy
   );
 
   if (isPending) return <ClaimsGridSkeleton />;

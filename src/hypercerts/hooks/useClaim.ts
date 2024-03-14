@@ -1,21 +1,21 @@
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import { HYPERCERTS_API_URL } from "../../config";
-import { gqlHypercerts } from "../../graphql/hypercerts";
+import { graphql } from "gql.tada";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
-const query = gqlHypercerts(
+const query = graphql(
   `
-  query claim($claim_id: BigFloat!) {
-    hypercertsCollection(filter: {claim_id: { eq: $claim_id }}) {
-      edges {
-        node {
-          ...FullClaimFragment
+    query claim($claim_id: BigFloat!) {
+      hypercertsCollection(filter: { claim_id: { eq: $claim_id } }) {
+        edges {
+          node {
+            ...FullClaimFragment
+          }
         }
       }
     }
-  }
-`,
+  `,
   [FullClaimFragment]
 );
 

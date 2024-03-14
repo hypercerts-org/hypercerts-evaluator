@@ -1,20 +1,24 @@
 import { Button, Flex, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 
-import { AllClaimsSort } from "../../hypercerts/hooks/useClaims";
+import { AllClaimsOrderBy } from "../../hypercerts/hooks/useClaims";
 import { FaSortAmountDown } from "react-icons/fa";
 import MenuItem from "../ui/MenuItem";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 import { useRouter } from "next/router";
 
-export default function ClaimSort() {
+export default function ClaimOrderBy() {
   const router = useRouter();
-  const sort = useQueryStringParameter<AllClaimsSort>("sort", "creation_asc");
+  const orderBy = useQueryStringParameter<AllClaimsOrderBy>(
+    "orderBy",
+    "timestamp_desc"
+  );
 
-  function click(sort: string) {
+  function click(orderBy: string) {
     router.push({
       query: {
         ...router.query,
-        sort: sort,
+        orderBy,
+        p: 1,
       },
     });
   }
@@ -31,14 +35,14 @@ export default function ClaimSort() {
       </MenuButton>
       <MenuList>
         <MenuItem
-          onClick={() => click("creation_asc")}
-          selected={sort === "creation_asc"}
+          onClick={() => click("timestamp_desc")}
+          selected={orderBy === "timestamp_desc"}
         >
           Created: New-Old
         </MenuItem>
         <MenuItem
-          onClick={() => click("creation_desc")}
-          selected={sort === "creation_desc"}
+          onClick={() => click("timestamp_asc")}
+          selected={orderBy === "timestamp_asc"}
         >
           Created: Old-New
         </MenuItem>

@@ -1,24 +1,16 @@
+import { VariablesOf, graphql } from "gql.tada";
+
 import { HYPERCERTS_API_URL } from "../../config";
 import { ListClaimFragment } from "../fragments/list-claim.fragment";
-import { gqlHypercerts } from "../../graphql/hypercerts";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
-export type AllClaimsSort =
-  | "creation_asc"
-  | "creation_desc"
-  | "creation_asc"
-  | "creation_desc";
 
-const query = gqlHypercerts(
+export type AllClaimsOrderBy = "timestamp_asc" | "timestamp_desc";
+
+const query = graphql(
   `
-    query claims(
-      $first: Int
-      $offset: Int
-    ) {
-      hypercertsCollection(
-        first: $first
-        offset: $offset
-      ) {
+    query claims($first: Int, $offset: Int, $orderBy: [hypercertsOrderBy!]) {
+      hypercertsCollection(first: $first, offset: $offset, orderBy: $orderBy) {
         edges {
           node {
             ...ListClaimFragment
@@ -30,23 +22,34 @@ const query = gqlHypercerts(
   [ListClaimFragment]
 );
 
+type VariableTypes = VariablesOf<typeof query>;
+
 export const useAllClaims = (
   first: number,
   offset: number,
-  sort: AllClaimsSort
+  orderBy?: AllClaimsOrderBy
 ) => {
   return useQuery({
-    queryKey: ["claims", first, offset, sort],
+    queryKey: ["claims", first, offset, orderBy],
     queryFn: async () => {
-      // const orderBy = sort.split("_")[0] as "creation";
-      // const orderDirection = sort.split("_")[1] as "asc" | "desc";
-      // const orderBy: hypercertsOrderBy = {
-      //   block_timestamp: "DescNullsFirst" as const,
-      // };
+      let _orderBy: VariableTypes["orderBy"] = [];
+      if (orderBy) {
+        const orderByAttribute = orderBy.split("_")[0];
+        const orderByDirection = orderBy.split("_")[1];
+        if (orderByAttribute === "timestamp") {
+          _orderBy = [
+            {
+              block_timestamp:
+                orderByDirection === "asc" ? "AscNullsFirst" : "DescNullsFirst",
+            },
+          ];
+        }
+      }
 
       return request(HYPERCERTS_API_URL, query, {
         first,
         offset,
+        orderBy: _orderBy,
       });
     },
   });

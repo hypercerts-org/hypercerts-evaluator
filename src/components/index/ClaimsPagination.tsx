@@ -22,7 +22,12 @@ export default function ClaimsPagination({
   currentPage = Number(currentPage);
 
   const navigate = (page: number) => {
-    router.push(`/?p=${page}`, undefined, { shallow: true });
+    router.push({
+      query: {
+        ...router.query,
+        p: page,
+      },
+    });
   };
 
   return (

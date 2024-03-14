@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { HYPERCERTS_API_URL } from "../../../config";
-import { gqlHypercerts } from "../../../graphql/hypercerts";
+import { graphql } from "gql.tada";
 import request from "graphql-request";
 
-const CLAIM_QUERY = gqlHypercerts(`
+const CLAIM_QUERY = graphql(`
   query ClaimImage($claim_id: BigFloat!) {
-    hypercertsCollection(filter: {claim_id: { eq: $claim_id }}) {
+    hypercertsCollection(filter: { claim_id: { eq: $claim_id } }) {
       edges {
         node {
           image

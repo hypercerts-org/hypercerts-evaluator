@@ -1,6 +1,6 @@
-import { gqlHypercerts } from "../../graphql/hypercerts";
+import { graphql } from "gql.tada";
 
-export const FullClaimFragment = gqlHypercerts(`
+export const FullClaimFragment = graphql(`
   fragment FullClaimFragment on hypercerts {
     claim_id
     claim {

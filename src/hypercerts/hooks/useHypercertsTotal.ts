@@ -1,14 +1,14 @@
 import { HYPERCERTS_API_URL } from "../../config";
-import { gqlHypercerts } from "../../graphql/hypercerts";
+import { graphql } from "gql.tada";
 import request from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 
-const query = gqlHypercerts(
+const query = graphql(
   `
-  query hypercertsTotal() {
-    hypercerts_total
-  }
-`
+    query hypercertsTotal {
+      hypercerts_total
+    }
+  `
 );
 
 export const useHypercertsTotal = () => {

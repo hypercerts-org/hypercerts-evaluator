@@ -8,7 +8,6 @@ import { Layout } from "../components/layout";
 import { WelcomeModal } from "../components/WelcomeModal";
 import { useGlobalState } from "../state";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
