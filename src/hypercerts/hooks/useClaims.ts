@@ -19,6 +19,7 @@ const query = gqlHypercerts(
   `
     query claims($first: Int, $offset: Int, $orderBy: [hypercertsOrderBy!], $filter: hypercertsFilter!) {
       hypercertsCollection(first: $first, offset: $offset, orderBy: $orderBy, filter: $filter) {
+        totalCount
         edges {
           node {
             ...ListClaimFragment

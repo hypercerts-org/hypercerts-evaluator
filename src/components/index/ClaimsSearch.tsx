@@ -17,7 +17,12 @@ export default function ClaimsSearch() {
   };
 
   return (
-    <Box borderBottom={"1px solid black"} padding={"20px"}>
+    <Box
+      borderBottom={"1px solid black"}
+      padding={"20px"}
+      borderLeft={"1px solid black"}
+      borderRight={"1px solid black"}
+    >
       <InputGroup>
         <InputLeftElement pointerEvents="none">
           <FaSearch />

@@ -16,9 +16,11 @@ export const FullClaimFragment = gqlHypercerts(`
     work_timeframe_from
     work_timeframe_to
     properties
-    attestations {
-      attestation_uid
-      decoded_attestation
+    claimAttestations {
+      count
+      data {
+        attestation_uid
+      }
     }
     contributors
     fractions {

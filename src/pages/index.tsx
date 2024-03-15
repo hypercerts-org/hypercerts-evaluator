@@ -24,12 +24,11 @@ export default function Home() {
         <title>Hypercerts Evaluator</title>
       </Head>
       <Layout>
-        <Box borderLeft={"1px solid black"} borderRight={"1px solid black"}>
+        <Box>
           <ClaimsSearch />
           <ClaimsOrderByFilter />
           <ClaimsList page={page} />
         </Box>
-        <ClaimsPagination currentPage={page} />
       </Layout>
       <WelcomeModal
         isOpen={welcomeModalOpen}

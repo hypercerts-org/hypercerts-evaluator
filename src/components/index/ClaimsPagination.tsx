@@ -5,21 +5,16 @@ import { CLAIMS_PER_PAGE } from "../../config";
 import { useHypercertsTotal } from "../../hypercerts/hooks/useHypercertsTotal";
 import { useRouter } from "next/router";
 
-type AttestationsPageChooserProps = {
-  currentPage: number;
-};
-
 export default function ClaimsPagination({
   currentPage,
-}: AttestationsPageChooserProps) {
+  totalCount,
+}: {
+  currentPage: number;
+  totalCount?: number;
+}) {
   const router = useRouter();
 
-  const { data } = useHypercertsTotal();
-  const claimsCount = data?.hypercerts_total;
-  if (!claimsCount) return null;
-
-  const totalPages = Math.ceil(claimsCount / CLAIMS_PER_PAGE);
-  currentPage = Number(currentPage);
+  const totalPages = Math.ceil((totalCount || 0) / CLAIMS_PER_PAGE);
 
   const navigate = (page: number) => {
     router.push({

@@ -4,6 +4,7 @@ import { ClaimsOrderBy, useAllClaims } from "../../hypercerts/hooks/useClaims";
 import { CLAIMS_PER_PAGE } from "../../config";
 import ClaimsGridSkeleton from "./ClaimGridSkeleton";
 import ClaimsListBox from "./ClaimsListBox";
+import ClaimsPagination from "./ClaimsPagination";
 import LoadError from "../LoadError";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 
@@ -29,7 +30,11 @@ export default function ClaimsList({ page }: { page: number }) {
   return (
     <>
       {search && search.length > 2 && (
-        <Text px={5}>
+        <Text
+          px={5}
+          borderLeft={"1px solid black"}
+          borderRight={"1px solid black"}
+        >
           Showing search results for <strong>{search}</strong>
         </Text>
       )}
@@ -41,11 +46,20 @@ export default function ClaimsList({ page }: { page: number }) {
           </LoadError>
         </Box>
       )}
-      <Grid templateColumns="repeat(3, 1fr)" w="100%">
+      <Grid
+        templateColumns="repeat(3, 1fr)"
+        w="100%"
+        borderLeft={"1px solid black"}
+        borderRight={"1px solid black"}
+      >
         {data.hypercertsCollection?.edges.map((edge, i) => (
           <ClaimsListBox data={edge.node} key={i} />
         ))}
       </Grid>
+      <ClaimsPagination
+        currentPage={page}
+        totalCount={data.hypercertsCollection?.totalCount}
+      />
     </>
   );
 }
