@@ -8,12 +8,16 @@ import FormattedDate from "../ui/FormattedDate";
 import Link from "next/link";
 import { attestationCardFragment } from "../../eas/fragments/attestation-card.fragment";
 import { getDecodedValue } from "../../eas/getDecodedValue";
+import { useRouter } from "next/router";
 
 export default function AttestationCard({
   data,
+  ...props
 }: {
   data: FragmentOf<typeof attestationCardFragment> | null;
+  [key: string]: any;
 }) {
+  const router = useRouter();
   const attestation = readFragment(attestationCardFragment, data);
   if (!attestation) return null;
   const decodedData = JSON.parse(attestation.decodedDataJson);
@@ -32,23 +36,27 @@ export default function AttestationCard({
   const comments = getDecodedValue<string>(decodedData, "comments");
 
   return (
-    <Link href={`/claim/${tokenId}`}>
-      <Flex
-        direction="column"
-        p={5}
-        gap={2}
-        _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
-      >
-        <FormattedDate seconds={attestation.timeCreated} />
-        <ClaimRow claimId={tokenId} />
-        <Evaluations
-          basic={evaluateBasic}
-          work={evaluateWork}
-          properties={evaluateProperties}
-          contributors={evaluateContributors}
-        />
-        <Comments comments={comments} />
-      </Flex>
-    </Link>
+    <Flex
+      direction="column"
+      _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
+      h="100%"
+      onClick={() => router.push(`/claim/${tokenId}`)}
+      cursor="pointer"
+      {...props}
+    >
+      <Link href={`/claim/${tokenId}`}>
+        <Flex direction="column" p={5} gap={2} h="100%">
+          <FormattedDate seconds={attestation.timeCreated} />
+          <ClaimRow claimId={tokenId} />
+          <Evaluations
+            basic={evaluateBasic}
+            work={evaluateWork}
+            properties={evaluateProperties}
+            contributors={evaluateContributors}
+          />
+          <Comments comments={comments} />
+        </Flex>
+      </Link>
+    </Flex>
   );
 }

@@ -32,7 +32,7 @@ export default function ClaimsList({ page }: { page: number }) {
           Showing search results for <strong>{search}</strong>
         </Text>
       )}
-      <Grid templateColumns="repeat(3, 1fr)" gap={5} p={5} w="100%">
+      <Grid templateColumns="repeat(3, 1fr)" w="100%">
         {data.hypercertsCollection?.edges.map((edge, i) => (
           <ClaimsListBox data={edge.node} key={i} />
         ))}

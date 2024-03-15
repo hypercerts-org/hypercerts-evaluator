@@ -13,7 +13,7 @@ export default function ClaimsListBox({
 }) {
   const claim = readFragment(ListClaimFragment, data);
   return (
-    <GridItem mt={5}>
+    <GridItem mt={5} p={5} _hover={{ background: "rgba(0,0,0,0.1)" }}>
       <Link href={`/claim/${claim.claim_id}`}>
         <Flex direction="column" alignItems="flex-start">
           <Image
@@ -25,13 +25,15 @@ export default function ClaimsListBox({
               objectFit: "contain",
               width: "200px",
               height: "200px",
-              background: "RGBA(0,0,0,0.1)",
+              background: "white",
               padding: "20px",
               marginBottom: "10px",
             }}
           />
           <FormattedDate seconds={claim.block_timestamp} />
-          <Text size="sm">{claim.name}</Text>
+          <Text as="span" textStyle={"secondary"}>
+            {claim.name}
+          </Text>
         </Flex>
       </Link>
     </GridItem>

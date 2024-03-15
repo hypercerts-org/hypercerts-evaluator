@@ -19,7 +19,7 @@ export const hyperTheme: ThemeOverride = extendTheme({
     },
     secondary: {
       fontFamily: `'Director-Variable', sans-serif`,
-      fontWeight: 100,
+      fontWeight: 400,
       textTransform: "uppercase",
     },
   },
@@ -27,6 +27,8 @@ export const hyperTheme: ThemeOverride = extendTheme({
     xxl: "48px",
     xl: "28px",
     lg: "24px",
+    md: "18px",
+    sm: "16px",
   },
   colors: {
     background: "#F1F1F1",

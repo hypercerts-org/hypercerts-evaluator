@@ -5,17 +5,17 @@ const Fonts = () => (
       @font-face {
         font-family: "Director-Regular";
         font-style: normal;
-        font-weight: 100 900;
-        font-display: optional;
-        src: url(/fonts/Director-Regular.woff2) format("woff2");
+        font-weight: 400;
+        font-display: swap;
+        src: url(/fonts/Director-Regular.woff2) format("woff2"), url(/fonts/Director-Regular.woff) format("woff");
       }
 
       @font-face {
         font-family: "Director-Variable";
         font-style: normal;
-        font-weight: 100 900;
-        font-display: optional;
-        src: url(/fonts/Director-Variable.woff2) format("woff2");
+        font-weight: 100;
+        font-display: swap;
+        src: url(/fonts/Director-Variable.woff2) format("woff2"), url(/fonts/Director-Variable.woff) format("woff");
       }
       `}
   />

@@ -20,14 +20,19 @@ export const TopHeader = () => {
         p={5}
       >
         <Link href="/">
-          <Flex gap={5} w={"400px"}>
+          <Flex gap={5} w={"400px"} alignItems="center">
             <Image
               src="/hypercerts_logo.svg"
               alt="Hypercerts Logo"
               width={30}
               height={30}
             />
-            <Heading fontWeight={"100"} fontSize={"lg"} whiteSpace={"nowrap"}>
+            <Heading
+              fontWeight={"100"}
+              fontSize={"md"}
+              whiteSpace={"nowrap"}
+              textStyle="secondary"
+            >
               Hypercerts Evaluator
             </Heading>
           </Flex>

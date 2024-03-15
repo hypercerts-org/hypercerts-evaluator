@@ -23,7 +23,7 @@ export default function EvaluatorsListRow({
         alignItems={"start"}
         w="200px"
       >
-        <EnsName address={attestor.eth_address} as="b" />
+        <EnsName address={attestor.eth_address} textStyle={"secondary"} />
         <EthAddress address={attestor.eth_address} />{" "}
       </Flex>
       <Flex grow={1} />

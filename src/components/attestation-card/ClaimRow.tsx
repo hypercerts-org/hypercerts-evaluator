@@ -26,15 +26,23 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
   if (!claim || !data) return <div>Claim not found</div>;
 
   return (
-    <Flex w={"100%"} gap={3}>
+    <Flex w={"100%"} gap={3} borderRadius={5} alignItems="center">
       <Image
         src={`${window.location.origin}/api/image/${claim.claim_id}`}
         alt="Hypercert"
         width="70"
         height="70"
-        style={{ borderRadius: "5px", objectFit: "contain" }}
+        style={{
+          width: "70px",
+          height: "70px",
+          objectFit: "contain",
+          background: "white",
+          padding: "5px",
+        }}
       />
-      <Text>{claim.name}</Text>
+      <Text as="span" textStyle={"secondary"}>
+        {claim.name}
+      </Text>
     </Flex>
   );
 }
