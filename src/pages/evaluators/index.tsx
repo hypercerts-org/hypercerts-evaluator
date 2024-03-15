@@ -17,6 +17,18 @@ export default function Page() {
         <title>Evaluators - Hypercerts Evalutaor</title>
       </Head>
       <Layout>
+        <Box
+          borderLeft={"1px solid black"}
+          borderRight={"1px solid black"}
+          borderBottom={"1px solid black"}
+          p={5}
+        >
+          Evaluations are a cornerstone of the hypercerts ecosystem. This first
+          version of the Hypercerts Evaluator allows a group of trusted
+          evaluators attest to the correctness of the hypercert claim data. In
+          future versions, we will extend the group of evaluators as well as the
+          scope of evaluations to include impact evaluations, etc.
+        </Box>
         <Box borderLeft={"1px solid black"} borderRight={"1px solid black"}>
           <EvaluatorsList currentPage={page} />
         </Box>
