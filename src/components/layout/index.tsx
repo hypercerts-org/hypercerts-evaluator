@@ -1,4 +1,5 @@
 import { Flex } from "@chakra-ui/react";
+import Footer from "./Footer";
 import { ReactNode } from "react";
 import { TopHeader } from "./TopHeader";
 import TopMenu from "./TopMenu";
@@ -25,11 +26,12 @@ export const Layout = ({
         flexDirection={"column"}
         width={"700px"}
         grow={1}
-        pb="40px"
+        pb="10"
         {...props}
       >
         {children}
       </Flex>
+      <Footer />
     </Flex>
   );
 };

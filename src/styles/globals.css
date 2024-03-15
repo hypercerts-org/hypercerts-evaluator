@@ -39,3 +39,7 @@ p a {
   --tag-border-radius: 0px;
   --tag-inset-shadow-size: 1.5em;
 }
+
+.evaluations-list > *:nth-child(odd) {
+  border-right: 1px solid #000;
+}

@@ -24,7 +24,12 @@ export default function EvaluatorEvaluationsList({
   }
 
   return (
-    <Grid templateColumns="repeat(2, 1fr)" gap={5}>
+    <Grid
+      templateColumns="repeat(2, 1fr)"
+      gap={5}
+      border="1px solid black"
+      className="evaluations-list"
+    >
       {data?.attestations.map((attestationFragment, i) => (
         <AttestationCard key={i} data={attestationFragment} />
       ))}

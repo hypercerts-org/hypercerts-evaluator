@@ -35,13 +35,12 @@ export default function AttestationCard({
     <Link href={`/claim/${tokenId}`}>
       <Flex
         direction="column"
-        border="1px solid black"
         p={5}
         gap={2}
         _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
       >
-        <ClaimRow claimId={tokenId} />
         <FormattedDate seconds={attestation.timeCreated} />
+        <ClaimRow claimId={tokenId} />
         <Evaluations
           basic={evaluateBasic}
           work={evaluateWork}

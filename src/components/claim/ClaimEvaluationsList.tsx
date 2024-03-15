@@ -13,7 +13,7 @@ export default function ClaimEvaluationsList() {
   const attestations = claimFragment.attestations;
 
   return (
-    <Flex>
+    <Flex border={"1px solid black"} w="100%" p="5">
       <Flex flexDirection={"column"} w="50%">
         {attestations ? (
           attestations.map(

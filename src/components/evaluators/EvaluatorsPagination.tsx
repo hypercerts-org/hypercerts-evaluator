@@ -32,7 +32,6 @@ export default function EvaluatorsPagination({
       w="full"
       border={"1px solid black"}
       p={5}
-      mb={20}
     >
       <Flex alignItems="center" justifyContent="start" gap={2} w="250px">
         {/* First Button */}
