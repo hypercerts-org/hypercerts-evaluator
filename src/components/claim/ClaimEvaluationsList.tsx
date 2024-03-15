@@ -22,13 +22,17 @@ export default function ClaimEvaluationsList() {
 
   const attestations = claimFragment?.claimAttestations?.data;
 
+  if (!attestations || attestations.length === 0) {
+    return <Text>This Hypercert has not been evaluated yet.</Text>;
+  }
+
   return (
     <Grid
       templateColumns="repeat(2, 1fr)"
       border="1px solid black"
       className="evaluations-list"
     >
-      {attestations ? (
+      {attestations &&
         attestations.map((attestation, i) => {
           if (!attestation) return null;
           const data = JSON.parse(attestation.decoded_attestation as string);
@@ -76,10 +80,7 @@ export default function ClaimEvaluationsList() {
               <Comments comments={data.comments} />
             </Flex>
           );
-        })
-      ) : (
-        <Text>No evaluations found.</Text>
-      )}
+        })}
     </Grid>
   );
 }
