@@ -1,7 +1,9 @@
-import AttestationCard from "../attestation-card/AttestationCard";
+import EvaluatorEvaluationsListItem from "./EvaluatorEvaluationsListItem";
 import EvaluatorEvaluationsListSkeleton from "./EvaluatorEvaluationsListSkeleton";
 import { Grid } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { attestationCardFragment } from "../../eas/fragments/attestation-card.fragment";
+import { gridCardBorder } from "../../utils/gridCardBorder";
+import { readFragment } from "gql.tada";
 import { useEvaluatorAttestations } from "../../eas/useEvaluatorAttestations";
 
 export default function EvaluatorEvaluationsList({
@@ -24,38 +26,26 @@ export default function EvaluatorEvaluationsList({
     return <div>No evaluations found.</div>;
   }
 
-  const cardBorder = (index: number, length: number) => {
-    let styles: {
-      borderBottom?: string;
-      borderRight?: string;
-    } = { borderBottom: "1px solid black" }; // All rows get bottom border by default
-    if (index % 2 === 0) {
-      // Odd rows in zero-indexed system are even numbers
-      styles.borderRight = "1px solid black"; // Odd rows get right border
-    }
-    if (
-      (length % 2 === 0 && index >= length - 2) || // If even number of rows, last two rows get no bottom border
-      (length % 2 !== 0 && index === length - 1)
-    ) {
-      // If odd number of rows, last row gets no bottom border
-      delete styles.borderBottom;
-    }
-    return styles;
-  };
-
   return (
     <Grid
       templateColumns="repeat(2, 1fr)"
       border="1px solid black"
       className="evaluations-list"
     >
-      {data?.attestations.map((attestationFragment, i) => (
-        <AttestationCard
-          key={i}
-          data={attestationFragment}
-          style={cardBorder(i, data.attestations.length)}
-        />
-      ))}
+      {data?.attestations.map((attestation, i) => {
+        const _attestation = readFragment(attestationCardFragment, attestation);
+        if (!attestation) return null;
+        const attestationData = JSON.parse(_attestation.decodedDataJson);
+
+        return (
+          <EvaluatorEvaluationsListItem
+            key={i}
+            created={_attestation.timeCreated}
+            data={attestationData}
+            style={gridCardBorder(i, data.attestations.length)}
+          />
+        );
+      })}
     </Grid>
   );
 }

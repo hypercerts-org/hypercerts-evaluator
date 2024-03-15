@@ -19,7 +19,10 @@ export const FullClaimFragment = gqlHypercerts(`
     claimAttestations {
       count
       data {
+        decoded_attestation
         attestation_uid
+        block_timestamp
+        attester_address
       }
     }
     contributors
