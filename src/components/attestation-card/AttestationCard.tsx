@@ -6,6 +6,7 @@ import Comments from "./Comments";
 import Evaluations from "./Evaluations";
 import FormattedDate from "../ui/FormattedDate";
 import Link from "next/link";
+import Tags from "./Tags";
 import { attestationCardFragment } from "../../eas/fragments/attestation-card.fragment";
 import { getDecodedValue } from "../../eas/getDecodedValue";
 import { useRouter } from "next/router";
@@ -34,7 +35,7 @@ export default function AttestationCard({
     "evaluate_contributors"
   );
   const comments = getDecodedValue<string>(decodedData, "comments");
-
+  const tags = getDecodedValue<string[]>(decodedData, "tags");
   return (
     <Flex
       direction="column"
@@ -54,6 +55,7 @@ export default function AttestationCard({
             properties={evaluateProperties}
             contributors={evaluateContributors}
           />
+          <Tags tags={tags} />
           <Comments comments={comments} />
         </Flex>
       </Link>

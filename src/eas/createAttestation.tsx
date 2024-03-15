@@ -12,6 +12,7 @@ export async function createAttestation({
   tokenId,
   signer,
   allEvaluationStates,
+  tags,
   comments,
 }: {
   chainId: number;
@@ -19,6 +20,7 @@ export async function createAttestation({
   tokenId: string;
   signer: JsonRpcSigner;
   allEvaluationStates: AllEvaluationStates;
+  tags: string[];
   comments: string;
 }) {
   const easConfig = getEasConfig(chainId);
@@ -59,7 +61,7 @@ export async function createAttestation({
       type: "uint8",
     },
     { name: "comments", value: comments, type: "string" },
-    { name: "tags", value: [], type: "string[]" },
+    { name: "tags", value: tags, type: "string[]" },
   ]);
 
   const tx = await eas.attest({

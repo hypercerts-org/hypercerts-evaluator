@@ -22,7 +22,7 @@ export default function ClaimWorkScope({ ...props }: { [key: string]: any }) {
       <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
         Work Scope
       </Text>
-      <Flex gap={2} wrap={"wrap"} w="100%">
+      <Flex gap={1} wrap={"wrap"} w="100%">
         {workScope ? (
           workScope.map((scope, i) => (
             <Badge

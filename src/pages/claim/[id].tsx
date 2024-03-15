@@ -9,7 +9,6 @@ import Head from "next/head";
 import { Layout } from "../../components/layout";
 import LoadError from "../../components/LoadError";
 import { useClaim } from "../../hypercerts/hooks/useClaim";
-import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 import { useRouter } from "next/router";
 
 type AttestContext = {

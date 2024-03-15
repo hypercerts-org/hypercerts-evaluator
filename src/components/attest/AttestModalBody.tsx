@@ -10,7 +10,7 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 
 import { AllEvaluationStates } from "../../eas/types/all-evaluation-states.type";
 import { AttestContext } from "../../pages/claim/[id]";
@@ -21,6 +21,7 @@ import { createAttestation } from "../../eas/createAttestation";
 import { errorHasMessage } from "../../utils/errorHasMessage";
 import { errorHasReason } from "../../utils/errorHasReason";
 import { readFragment } from "gql.tada";
+import { useGlobalState } from "../../state";
 import { useNetwork } from "wagmi";
 import { useSigner } from "../../wagmi/hooks/useSigner";
 
@@ -48,6 +49,13 @@ export function AttestModalBody() {
   const toast = useToast();
   const attestContext = useContext(AttestContext);
   const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const tagifyRef = useRef<Tagify<Tagify.BaseTagData>>();
+  const whitelistAttestTags = useGlobalState(
+    (state) => state.whitelistAttestTags
+  );
+  const addWhitelistAttestTag = useGlobalState(
+    (state) => state.addWhitelistAttestTag
+  );
 
   // Local state
   const [isAttesting, setIsAttesting] = useState(false);
@@ -59,6 +67,16 @@ export function AttestModalBody() {
       contributors: "not-evaluated",
     });
   const [comments, setComments] = useState<string>("");
+
+  useEffect(() => {
+    if (tagifyRef.current) {
+      tagifyRef.current.on("add", (e) => {
+        if (e.detail.data?.value) {
+          addWhitelistAttestTag(e.detail.data.value);
+        }
+      });
+    }
+  }, [tagifyRef, addWhitelistAttestTag]);
 
   // At least one of the sections must be evaluated, and if any section is invalid,
   // a comment is required.
@@ -87,6 +105,7 @@ export function AttestModalBody() {
         signer,
         tokenId: claim.claim_id as string,
         allEvaluationStates,
+        tags: tagifyRef.current?.value.map((tag) => tag.value) || [],
         comments,
       });
       attestContext.setCreatedAttestationUid(uid);
@@ -199,7 +218,11 @@ export function AttestModalBody() {
             <Text>
               Tags add context to the attestation and makes it easier to find.
             </Text>
-            <Tags defaultValue="a,b,c" className="tags" />
+            <Tags
+              className="tags"
+              whitelist={whitelistAttestTags}
+              tagifyRef={tagifyRef}
+            />
           </VStack>
 
           <VStack alignItems={"flex-start"} width="100%">
