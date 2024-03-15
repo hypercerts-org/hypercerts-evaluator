@@ -1,8 +1,11 @@
 import {
   Button,
+  Flex,
   List,
   ListIcon,
   ListItem,
+  Tag,
+  TagLabel,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -38,9 +41,17 @@ export default function ClaimContributors({
       textOverflow={"ellipsis"}
       overflow={"hidden"}
     >
-      <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-        Contributors
-      </Text>
+      <Flex width="100%" justifyContent="space-between">
+        <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+          Contributors
+        </Text>
+        {contributors.length > MAX_CONTRIBUTORS_DISPLAYED && (
+          <Tag size={"sm"} borderRadius="full">
+            <TagLabel>{contributors.length}</TagLabel>
+          </Tag>
+        )}
+      </Flex>
+
       <List spacing={2}>
         {contributors?.slice(0, MAX_CONTRIBUTORS_DISPLAYED).map((c, i) => {
           if (!c) return null;
@@ -63,20 +74,24 @@ export default function ClaimContributors({
           );
         })}
       </List>
-      <Button
-        aria-label="More"
-        visibility={
-          contributors?.length > MAX_CONTRIBUTORS_DISPLAYED
-            ? "visible"
-            : "hidden"
-        }
-        rightIcon={<FaChevronDown style={{ width: "10px", height: "10px" }} />}
-        onClick={() => setContributorDialogOpen(true)}
-        variant="ghost"
-        size="sm"
-      >
-        More
-      </Button>
+      <Flex width="100%" justifyContent="center">
+        <Button
+          aria-label="More"
+          visibility={
+            contributors?.length > MAX_CONTRIBUTORS_DISPLAYED
+              ? "visible"
+              : "hidden"
+          }
+          rightIcon={
+            <FaChevronDown style={{ width: "10px", height: "10px" }} />
+          }
+          onClick={() => setContributorDialogOpen(true)}
+          variant="ghost"
+          size="sm"
+        >
+          More
+        </Button>
+      </Flex>
       <ClaimContributorsModal
         isOpen={contributorDialogOpen}
         onClose={() => setContributorDialogOpen(false)}

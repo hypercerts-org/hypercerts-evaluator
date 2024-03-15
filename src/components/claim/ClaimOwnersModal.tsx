@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { AttestContext } from "../../pages/claim/[id]";
+import ClaimOwnersRow from "./ClaimOwnersRow";
 import EthAddress from "../ui/EthAddress";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import { readFragment } from "gql.tada";
@@ -46,11 +47,12 @@ export function ClaimOwnersModal({
 
         <ModalBody>
           <VStack alignItems="flex-start">
-            {owners.map((owner, i) => (
-              <Text key={i}>
-                <EthAddress address={owner?.owner as string} showEnsName />
-              </Text>
-            ))}
+            <VStack alignItems="flex-start" w="100%">
+              {owners.map((owner, i) => (
+                <ClaimOwnersRow key={i} owner={owner} />
+              ))}
+              {owners.length === 0 && <Text>No owners</Text>}
+            </VStack>
             {owners.length === 0 && <Text>No owners</Text>}
           </VStack>
         </ModalBody>

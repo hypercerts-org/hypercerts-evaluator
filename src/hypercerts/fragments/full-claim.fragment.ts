@@ -7,6 +7,7 @@ export const FullClaimFragment = gqlHypercerts(`
       contract
       owner
       creator
+      totalUnits
     }
     name
     description

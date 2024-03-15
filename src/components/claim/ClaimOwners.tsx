@@ -1,10 +1,11 @@
 import * as R from "remeda";
 
-import { Button, Text, VStack } from "@chakra-ui/react";
+import { Button, Flex, Tag, TagLabel, Text, VStack } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
 import { AttestContext } from "../../pages/claim/[id]";
 import { ClaimOwnersModal } from "./ClaimOwnersModal";
+import ClaimOwnersRow from "./ClaimOwnersRow";
 import EthAddress from "../ui/EthAddress";
 import { FaChevronDown } from "react-icons/fa";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
@@ -25,27 +26,46 @@ export default function ClaimOwners({ ...props }: { [key: string]: any }) {
 
   return (
     <VStack p={5} alignItems={"flex-start"} width="100%" {...props}>
-      <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-        Owners
-      </Text>
-      <VStack alignItems="flex-start">
+      <Flex width="100%" justifyContent="space-between">
+        <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+          Total units
+        </Text>
+        <Tag size={"sm"} borderRadius="full">
+          <TagLabel>{claim.claim?.totalUnits as string}</TagLabel>
+        </Tag>
+      </Flex>
+      <Flex width="100%" justifyContent="space-between">
+        <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
+          Owners
+        </Text>
+        {owners.length > MAX_OWNERS_DISPLAYED && (
+          <Tag size={"sm"} borderRadius="full">
+            <TagLabel>{owners.length}</TagLabel>
+          </Tag>
+        )}
+      </Flex>
+      <VStack alignItems="flex-start" w="100%">
         {owners.slice(0, MAX_OWNERS_DISPLAYED).map((owner, i) => (
-          <Text key={i}>
-            <EthAddress address={owner?.owner as string} showEnsName />
-          </Text>
+          <ClaimOwnersRow key={i} owner={owner} />
         ))}
         {owners.length === 0 && <Text>No owners</Text>}
       </VStack>
-      <Button
-        visibility={owners.length > MAX_OWNERS_DISPLAYED ? "visible" : "hidden"}
-        aria-label="More"
-        rightIcon={<FaChevronDown style={{ width: "10px", height: "10px" }} />}
-        onClick={() => setOwnerDialogOpen(true)}
-        variant="ghost"
-        size="sm"
-      >
-        More
-      </Button>
+      <Flex width="100%" justifyContent="center">
+        <Button
+          visibility={
+            owners.length > MAX_OWNERS_DISPLAYED ? "visible" : "hidden"
+          }
+          aria-label="More"
+          rightIcon={
+            <FaChevronDown style={{ width: "10px", height: "10px" }} />
+          }
+          onClick={() => setOwnerDialogOpen(true)}
+          variant="ghost"
+          size="sm"
+        >
+          More
+        </Button>
+      </Flex>
       <ClaimOwnersModal
         isOpen={ownerDialogOpen}
         onClose={() => setOwnerDialogOpen(false)}
