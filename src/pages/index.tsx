@@ -1,8 +1,7 @@
 import { Box } from "@chakra-ui/react";
-import ClaimsList from "../components/index/ClaimsList";
-import ClaimsOrderByFilter from "../components/index/ClaimsOrderByFilter";
-import ClaimsPagination from "../components/index/ClaimsPagination";
-import ClaimsSearch from "../components/index/ClaimsSearch";
+import ClaimsList from "../components/claims/ClaimsList";
+import ClaimsOrderByFilter from "../components/claims/ClaimsOrderByFilter";
+import ClaimsSearch from "../components/claims/ClaimsSearch";
 import Head from "next/head";
 import { Layout } from "../components/layout";
 import { WelcomeModal } from "../components/WelcomeModal";

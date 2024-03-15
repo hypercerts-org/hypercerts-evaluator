@@ -27,7 +27,7 @@ export const AttestContext = createContext<AttestContext | undefined>(
   undefined
 );
 
-function AttestContextProvider() {
+function PageContent() {
   const router = useRouter();
   const { id } = router.query;
   const { data, isPending, error } = useClaim(Array.isArray(id) ? id[0] : id);
@@ -81,10 +81,10 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Claims - Hypercerts Evaluator</title>
+        <title>Hypercerts Evaluator</title>
       </Head>
       <Layout>
-        <AttestContextProvider />
+        <PageContent />
       </Layout>
     </>
   );

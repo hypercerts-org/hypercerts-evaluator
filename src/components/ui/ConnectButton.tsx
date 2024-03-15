@@ -43,6 +43,7 @@ export const ConnectButton = ({ ...buttonProps }: ButtonProps) => {
                     variant={"blackAndWhite"}
                     onClick={openConnectModal}
                     type="button"
+                    size={"sm"}
                   >
                     Connect
                   </Button>
@@ -56,6 +57,7 @@ export const ConnectButton = ({ ...buttonProps }: ButtonProps) => {
                     variant={"blackAndWhite"}
                     onClick={openChainModal}
                     type="button"
+                    size={"sm"}
                   >
                     Wrong network
                   </Button>
@@ -69,6 +71,7 @@ export const ConnectButton = ({ ...buttonProps }: ButtonProps) => {
                     onClick={openAccountModal}
                     type="button"
                     variant={"blackAndWhite"}
+                    size={"sm"}
                   >
                     {account.displayName}
                   </Button>

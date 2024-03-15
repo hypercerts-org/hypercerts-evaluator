@@ -27,6 +27,8 @@ export default function ClaimsList({ page }: { page: number }) {
 
   if (error) return "An error has occurred: " + error.message;
 
+  const totalCount = data.hypercertsCollection?.totalCount;
+  const edges = data.hypercertsCollection?.edges;
   return (
     <>
       {search && search.length > 2 && (
@@ -39,13 +41,19 @@ export default function ClaimsList({ page }: { page: number }) {
         </Text>
       )}
 
-      {data.hypercertsCollection?.edges.length === 0 && (
-        <Box p={5} borderBottom={"1px solid black"}>
+      {edges && edges.length === 0 && (
+        <Box
+          p={5}
+          borderBottom={"1px solid black"}
+          borderLeft={"1px solid black"}
+          borderRight={"1px solid black"}
+        >
           <LoadError>
             No Hypercerts found for the current search and filter criteria.
           </LoadError>
         </Box>
       )}
+
       <Grid
         templateColumns="repeat(3, 1fr)"
         w="100%"
@@ -56,10 +64,13 @@ export default function ClaimsList({ page }: { page: number }) {
           <ClaimsListBox data={edge.node} key={i} />
         ))}
       </Grid>
-      <ClaimsPagination
-        currentPage={page}
-        totalCount={data.hypercertsCollection?.totalCount}
-      />
+
+      {typeof totalCount !== "undefined" && totalCount > 0 && (
+        <ClaimsPagination
+          currentPage={page}
+          totalCount={data.hypercertsCollection?.totalCount}
+        />
+      )}
     </>
   );
 }
