@@ -1,9 +1,10 @@
+import { Box, Grid, Text } from "@chakra-ui/react";
 import { ClaimsOrderBy, useAllClaims } from "../../hypercerts/hooks/useClaims";
-import { Grid, Text } from "@chakra-ui/react";
 
 import { CLAIMS_PER_PAGE } from "../../config";
 import ClaimsGridSkeleton from "./ClaimGridSkeleton";
 import ClaimsListBox from "./ClaimsListBox";
+import LoadError from "../LoadError";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 
 export default function ClaimsList({ page }: { page: number }) {
@@ -31,6 +32,14 @@ export default function ClaimsList({ page }: { page: number }) {
         <Text px={5}>
           Showing search results for <strong>{search}</strong>
         </Text>
+      )}
+
+      {data.hypercertsCollection?.edges.length === 0 && (
+        <Box p={5} borderBottom={"1px solid black"}>
+          <LoadError>
+            No Hypercerts found for the current search and filter criteria.
+          </LoadError>
+        </Box>
       )}
       <Grid templateColumns="repeat(3, 1fr)" w="100%">
         {data.hypercertsCollection?.edges.map((edge, i) => (

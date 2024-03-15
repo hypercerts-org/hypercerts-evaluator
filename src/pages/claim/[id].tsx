@@ -47,7 +47,8 @@ function AttestContextProvider() {
 
   const claimFragment = readFragment(FullClaimFragment, claim);
 
-  if (!claim || !claimFragment) return <LoadError>Claim not found.</LoadError>;
+  if (!claim || !claimFragment)
+    return <LoadError>Hypercert not found.</LoadError>;
 
   const closeAttestModal = ({ success }: { success: boolean }) => {
     setIsAttestModalOpen(false);
