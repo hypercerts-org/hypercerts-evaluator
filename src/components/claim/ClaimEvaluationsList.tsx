@@ -10,27 +10,28 @@ export default function ClaimEvaluationsList() {
   const claimFragment = readFragment(FullClaimFragment, attestContext?.claim);
   if (!claimFragment) return null;
 
-  const attestations = claimFragment.attestations;
+  return null;
+  // const attestations = claimFragment.attestations;
 
-  return (
-    <Flex border={"1px solid black"} w="100%" p="5">
-      <Flex flexDirection={"column"} w="50%">
-        {attestations ? (
-          attestations.map(
-            (attestation) =>
-              attestation && (
-                <Flex
-                  key={attestation.attestation_uid}
-                  borderBottom={"1px solid black"}
-                >
-                  {JSON.stringify(attestation.decoded_attestation)}
-                </Flex>
-              )
-          )
-        ) : (
-          <Text>No evaluations.</Text>
-        )}
-      </Flex>
-    </Flex>
-  );
+  // return (
+  //   <Flex border={"1px solid black"} w="100%" p="5">
+  //     <Flex flexDirection={"column"} w="50%">
+  //       {attestations ? (
+  //         attestations.map(
+  //           (attestation) =>
+  //             attestation && (
+  //               <Flex
+  //                 key={attestation.attestation_uid}
+  //                 borderBottom={"1px solid black"}
+  //               >
+  //                 {JSON.stringify(attestation.decoded_attestation)}
+  //               </Flex>
+  //             )
+  //         )
+  //       ) : (
+  //         <Text>No evaluations.</Text>
+  //       )}
+  //     </Flex>
+  //   </Flex>
+  // );
 }
