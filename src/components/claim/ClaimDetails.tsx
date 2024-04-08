@@ -3,6 +3,7 @@ import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
 import { AttestContext } from "../../pages/claim/[id]";
 import { AttestModal } from "../attest/AttestModal";
 import ClaimContributors from "../../components/claim/ClaimContributors";
+import ClaimCreatedDate from "./ClaimCreatedDate";
 import ClaimCreator from "../../components/claim/ClaimCreator";
 import ClaimEvaluateButton from "./ClaimEvaluateButton";
 import ClaimEvaluationsList from "./ClaimEvaluationsList";
@@ -49,10 +50,17 @@ export default function ClaimDetails() {
               borderTop="1px solid black"
               borderRight="1px solid black"
             />
-            <ClaimOwner borderTop="1px solid black" />
+
+            <ClaimCreatedDate borderTop="1px solid black" />
           </Flex>
         </Flex>
       </Flex>
+
+      <ClaimWorkScope
+        borderTop="1px solid black"
+        borderLeft="1px solid black"
+        borderRight="1px solid black"
+      />
 
       <Grid
         templateColumns="repeat(2, 1fr)"
@@ -60,12 +68,10 @@ export default function ClaimDetails() {
         borderRight="1px solid black"
       >
         <Flex flexDirection={"column"}>
-          <ClaimWorkScope borderTop="1px solid black" />
           <ClaimWorkTimeFrame borderTop="1px solid black" />
           <ClaimContributors borderTop="1px solid black" />
         </Flex>
         <Flex flexDirection={"column"} borderLeft="1px solid black">
-          <ClaimProperties borderTop="1px solid black" />
           <ClaimOwners borderTop="1px solid black" />
         </Flex>
       </Grid>

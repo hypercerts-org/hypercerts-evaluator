@@ -2,6 +2,7 @@ import { gqlHypercerts } from "../../graphql/hypercerts";
 
 export const FullClaimFragment = gqlHypercerts(`
   fragment FullClaimFragment on hypercerts {
+    block_timestamp
     claim_id
     claim {
       contract
