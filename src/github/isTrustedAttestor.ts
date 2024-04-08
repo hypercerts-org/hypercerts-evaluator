@@ -7,5 +7,7 @@ export function isTrustedAttestor(
   if (!trustedAttestors) {
     return false;
   }
-  return trustedAttestors.some((attestor) => attestor.eth_address === address);
+  return trustedAttestors.some(
+    (attestor) => attestor.eth_address.toLowerCase() === address.toLowerCase()
+  );
 }
