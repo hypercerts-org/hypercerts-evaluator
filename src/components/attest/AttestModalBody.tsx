@@ -139,6 +139,27 @@ export function AttestModalBody() {
             where you confidently can attest to the correctness of the data.
           </Text>
 
+          <Flex
+            justifyContent="space-between"
+            w="100%"
+            alignItems="center"
+            borderBottom="1px solid RGB(0, 0, 0, 0.1)"
+            pb={4}
+          >
+            <Text>Evaluate all</Text>
+            <EvaluateToggle
+              setState={(state) =>
+                setAllEvaluationStates({
+                  ...allEvaluationStates,
+                  basics: state,
+                  work: state,
+                  properties: state,
+                  contributors: state,
+                })
+              }
+            />
+          </Flex>
+
           <VStack alignItems={"flex-start"} width="100%">
             <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
               Basics
@@ -180,7 +201,7 @@ export function AttestModalBody() {
               Properties
             </Text>
             <Flex justifyContent="space-between" w="100%" alignItems="center">
-              <Text>(Not available on all certs)</Text>
+              <Text>(Not available on all Hypercerts)</Text>
               <EvaluateToggle
                 state={allEvaluationStates.properties}
                 setState={(state) =>
@@ -234,7 +255,8 @@ export function AttestModalBody() {
               value={comments}
               onChange={(e) => setComments(e.target.value)}
               variant={"black"}
-              maxLength={250}
+              maxLength={280}
+              fontSize={"sm"}
             />
           </VStack>
         </Flex>

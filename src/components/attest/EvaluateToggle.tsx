@@ -8,7 +8,7 @@ export default function EvaluateToggle({
   state,
   setState,
 }: {
-  state: EvaluationStates;
+  state?: EvaluationStates;
   setState: (state: EvaluationStates) => void;
 }) {
   const handleClick = (s: EvaluationStates) => {
