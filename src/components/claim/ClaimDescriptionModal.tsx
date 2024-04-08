@@ -33,7 +33,7 @@ export function ClaimDescriptionModal({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader textStyle={"secondary"} fontWeight={"100"}>
-          Hypercert Description
+          Description
         </ModalHeader>
         <ModalCloseButton />
 
