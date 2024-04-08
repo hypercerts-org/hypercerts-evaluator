@@ -69,13 +69,16 @@ function createFilter({
   search?: string;
 }): VariableTypes["filter"] {
   if (search && search.length > 2) {
-    const searchNumber = Number.parseInt(search);
-    if (R.isNumber(searchNumber)) {
-      return {
-        claim_id: { eq: searchNumber },
-      };
+    // Don't treat hex strings as numbers
+    if (!search.startsWith("0x")) {
+      const searchNumber = Number.parseInt(search);
+      if (R.isNumber(searchNumber)) {
+        return {
+          claim_id: { eq: searchNumber },
+        };
+      }
     }
-    return { name: { like: `%${search}%` } };
+    return { name: { ilike: `%${search}%` } };
   }
   return {};
 }
