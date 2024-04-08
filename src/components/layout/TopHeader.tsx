@@ -12,7 +12,7 @@ export const TopHeader = () => {
   return (
     <Flex width={"100%"} alignItems={"center"} justifyContent={"center"} my={5}>
       <Flex
-        width={"700px"}
+        width={"800px"}
         height={"100%"}
         justifyContent={"space-between"}
         alignItems={"center"}

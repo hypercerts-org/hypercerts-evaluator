@@ -41,12 +41,12 @@ export default function ClaimsListBox({
           <Image
             src={`${window.location.origin}/api/image/${claim.claim_id}`}
             alt="Hypercert"
-            width="200"
-            height="200"
+            width="225"
+            height="225"
             style={{
               objectFit: "contain",
-              width: "200px",
-              height: "200px",
+              width: "225px",
+              height: "225px",
               background: "white",
               padding: "20px",
               marginBottom: "10px",

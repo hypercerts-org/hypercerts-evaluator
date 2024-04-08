@@ -24,7 +24,7 @@ export const Layout = ({
       <TopMenu />
       <Flex
         flexDirection={"column"}
-        width={"700px"}
+        width={"800px"}
         grow={1}
         pb="10"
         {...props}

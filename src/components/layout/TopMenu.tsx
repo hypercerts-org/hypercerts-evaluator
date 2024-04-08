@@ -11,7 +11,7 @@ export default function TopMenu() {
 
   return (
     <Flex width={"100%"} justifyContent={"center"}>
-      <Flex width={"700px"} border={"1px solid black"}>
+      <Flex width={"800px"} border={"1px solid black"}>
         <Link href="/" style={{ width: "50%" }}>
           <Box
             justifyContent={"center"}
