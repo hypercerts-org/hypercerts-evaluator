@@ -1,12 +1,18 @@
 import { Box, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 import { FaSearch } from "react-icons/fa";
+import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 export default function ClaimsSearch() {
   const router = useRouter();
   const [search, setSearch] = useState<string>("");
+  const searchQuerystring = useQueryStringParameter<string>("search", "");
+
+  useEffect(() => {
+    setSearch(searchQuerystring);
+  }, [searchQuerystring]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
