@@ -1,18 +1,34 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 
 import Link from "next/link";
+import { useEffect } from "react";
+import { useGlobalState } from "../../state";
 import { useRouter } from "next/router";
 
 export default function TopMenu() {
   const router = useRouter();
+  const hypercertsCurrentPath = useGlobalState(
+    (state) => state.hypercertsCurrentPath
+  );
+  const setHypercertsCurrentPath = useGlobalState(
+    (state) => state.setHypercertsCurrentPath
+  );
 
   const isCertRoute =
     router.pathname.startsWith("/claim") || router.pathname === "/";
 
+  // Remember the current path for the Hypercerts link so we can return to it
+  // when clicking on the Hypercerts top menu item
+  useEffect(() => {
+    if (router.asPath.startsWith("/?")) {
+      setHypercertsCurrentPath(router.asPath);
+    }
+  }, [router.asPath, setHypercertsCurrentPath]);
+
   return (
     <Flex width={"100%"} justifyContent={"center"}>
       <Flex width={"800px"} border={"1px solid black"}>
-        <Link href="/" style={{ width: "50%" }}>
+        <Link href={hypercertsCurrentPath} style={{ width: "50%" }}>
           <Box
             justifyContent={"center"}
             display={"flex"}

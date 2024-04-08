@@ -5,6 +5,8 @@ type GlobalState = {
   setWelcomeModalOpen: (isOpen: boolean) => void;
   whitelistAttestTags: string[];
   addWhitelistAttestTag: (tag: string) => void;
+  hypercertsCurrentPath: string;
+  setHypercertsCurrentPath: (path: string) => void;
 };
 
 export const useGlobalState = create<GlobalState>((set) => ({
@@ -18,4 +20,7 @@ export const useGlobalState = create<GlobalState>((set) => ({
         : [...state.whitelistAttestTags, tag],
     }));
   },
+  hypercertsCurrentPath: "/",
+  setHypercertsCurrentPath: (path: string) =>
+    set({ hypercertsCurrentPath: path }),
 }));
