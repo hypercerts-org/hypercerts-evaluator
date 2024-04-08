@@ -6,7 +6,6 @@ import { useContext, useState } from "react";
 import { AttestContext } from "../../pages/claim/[id]";
 import { ClaimOwnersModal } from "./ClaimOwnersModal";
 import ClaimOwnersRow from "./ClaimOwnersRow";
-import EthAddress from "../ui/EthAddress";
 import { FaChevronDown } from "react-icons/fa";
 import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import { readFragment } from "gql.tada";
@@ -28,15 +27,7 @@ export default function ClaimOwners({ ...props }: { [key: string]: any }) {
     <VStack p={5} alignItems={"flex-start"} width="100%" {...props}>
       <Flex width="100%" justifyContent="space-between">
         <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-          Total units
-        </Text>
-        <Tag size={"sm"} borderRadius="full">
-          <TagLabel>{claim.claim?.totalUnits as string}</TagLabel>
-        </Tag>
-      </Flex>
-      <Flex width="100%" justifyContent="space-between">
-        <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-          Owners
+          Ownership
         </Text>
         {owners.length > MAX_OWNERS_DISPLAYED && (
           <Tag size={"sm"} borderRadius="full">
@@ -46,7 +37,11 @@ export default function ClaimOwners({ ...props }: { [key: string]: any }) {
       </Flex>
       <VStack alignItems="flex-start" w="100%">
         {owners.slice(0, MAX_OWNERS_DISPLAYED).map((owner, i) => (
-          <ClaimOwnersRow key={i} owner={owner} />
+          <ClaimOwnersRow
+            key={i}
+            owner={owner}
+            totalUnits={claim.claim?.totalUnits as number}
+          />
         ))}
         {owners.length === 0 && <Text>No owners</Text>}
       </VStack>

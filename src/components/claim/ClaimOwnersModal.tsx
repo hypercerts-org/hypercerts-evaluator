@@ -41,7 +41,7 @@ export function ClaimOwnersModal({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader textStyle={"secondary"} fontWeight={"100"}>
-          Owners
+          Ownership
         </ModalHeader>
         <ModalCloseButton />
 
@@ -49,7 +49,11 @@ export function ClaimOwnersModal({
           <VStack alignItems="flex-start">
             <VStack alignItems="flex-start" w="100%">
               {owners.map((owner, i) => (
-                <ClaimOwnersRow key={i} owner={owner} />
+                <ClaimOwnersRow
+                  key={i}
+                  owner={owner}
+                  totalUnits={claim.claim?.totalUnits}
+                />
               ))}
               {owners.length === 0 && <Text>No owners</Text>}
             </VStack>
