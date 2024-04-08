@@ -44,15 +44,18 @@ export default function ClaimEvaluationsList() {
               gap={4}
               h="100%"
               style={gridCardBorder(i, attestations.length)}
-              _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
-              onClick={() =>
-                router.push(`/evaluator/${attestation.attester_address}`)
-              }
-              cursor="pointer"
             >
               <FormattedDate seconds={attestation.block_timestamp} />
 
-              <Flex gap={2}>
+              <Flex
+                gap={2}
+                p={2}
+                _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
+                onClick={() =>
+                  router.push(`/evaluator/${attestation.attester_address}`)
+                }
+                cursor="pointer"
+              >
                 <UserIcon address={attestation.attester_address} size="large" />
                 <Flex
                   direction={"column"}
