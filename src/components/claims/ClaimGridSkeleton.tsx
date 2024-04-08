@@ -7,11 +7,12 @@ export default function ClaimsGridSkeleton() {
       gap={5}
       p={5}
       w="100%"
-      borderLeft={"1px solid black"}
+      borderLeft="1px solid black"
       borderRight="1px solid black"
+      borderBottom="1px solid black"
     >
       {Array.from({ length: 12 }).map((_, index) => (
-        <GridItem w="200px" h="260px" key={index} p={5}>
+        <GridItem w="225px" h="320px" key={index}>
           <Skeleton
             w="100%"
             h="100%"
