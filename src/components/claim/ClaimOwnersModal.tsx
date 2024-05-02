@@ -16,7 +16,7 @@ import {
 import { AttestContext } from "../../pages/claim/[id]";
 import ClaimOwnersRow from "./ClaimOwnersRow";
 import EthAddress from "../ui/EthAddress";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import { readFragment } from "gql.tada";
 import { useContext } from "react";
 
@@ -28,7 +28,7 @@ export function ClaimOwnersModal({
   onClose: () => void;
 }) {
   const attestContext = useContext(AttestContext);
-  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
 
   let owners =
@@ -52,7 +52,7 @@ export function ClaimOwnersModal({
                 <ClaimOwnersRow
                   key={i}
                   owner={owner}
-                  totalUnits={claim.claim?.totalUnits}
+                  totalUnits={claim.units}
                 />
               ))}
               {owners.length === 0 && <Text>No owners</Text>}

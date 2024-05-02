@@ -1,8 +1,6 @@
 import { configureChains, createConfig, mainnet, sepolia } from "wagmi";
-
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { getDefaultWallets } from "@rainbow-me/rainbowkit";
-import { optimism } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 // Hypercerts API
@@ -50,7 +48,7 @@ const { chains, publicClient } = configureChains(
   [
     alchemyProvider({ apiKey: "hmHpo1v4GNpkau5frOZ744RIS5nOxtXF" }),
     publicProvider(),
-  ]
+  ],
 );
 export { chains as supportedChains };
 

@@ -3,16 +3,16 @@ import { createContext, useState } from "react";
 
 import ClaimDetails from "../../components/claim/ClaimDetails";
 import { ConfirmationModal } from "../../components/claim/ConfirmationModal";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
 import FullpageLoader from "../../components/FullpageLoader";
 import Head from "next/head";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import { Layout } from "../../components/layout";
 import LoadError from "../../components/LoadError";
-import { useClaim } from "../../hypercerts/hooks/useClaim";
+import { useHypercert } from "../../hypercerts/hooks/useHypercert";
 import { useRouter } from "next/router";
 
 type AttestContext = {
-  claim: FragmentOf<typeof FullClaimFragment>;
+  claim: FragmentOf<typeof HypercertFullFragment>;
   isAttestModalOpen: boolean;
   closeAttestModal: ({ success }: { success: boolean }) => void;
   openAttestModal: () => void;
@@ -30,7 +30,9 @@ export const AttestContext = createContext<AttestContext | undefined>(
 function PageContent() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, isPending, error } = useClaim(Array.isArray(id) ? id[0] : id);
+  const { data, isPending, error } = useHypercert(
+    Array.isArray(id) ? id[0] : id
+  );
 
   const [isAttestModalOpen, setIsAttestModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
@@ -43,9 +45,9 @@ function PageContent() {
     return <LoadError>Failed to load claim.</LoadError>;
   }
 
-  const claim = data?.hypercertsCollection?.edges[0]?.node;
+  const claim = data?.hypercerts?.data?.[0];
 
-  const claimFragment = readFragment(FullClaimFragment, claim);
+  const claimFragment = readFragment(HypercertFullFragment, claim);
 
   if (!claim || !claimFragment)
     return <LoadError>Hypercert not found.</LoadError>;

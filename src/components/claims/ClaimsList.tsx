@@ -1,5 +1,8 @@
 import { Box, Grid, Text } from "@chakra-ui/react";
-import { ClaimsOrderBy, useAllClaims } from "../../hypercerts/hooks/useClaims";
+import {
+  ClaimsOrderBy,
+  useAllHypercerts,
+} from "../../hypercerts/hooks/useAllHypercerts";
 
 import { CLAIMS_PER_PAGE } from "../../config";
 import ClaimsGridSkeleton from "./ClaimGridSkeleton";
@@ -16,9 +19,9 @@ export default function ClaimsList({ page }: { page: number }) {
   const search = useQueryStringParameter<string>("search", "");
 
   page = page || 1;
-  const { data, isPending, error } = useAllClaims({
-    first: CLAIMS_PER_PAGE,
+  const { data, isPending, error } = useAllHypercerts({
     offset: (page - 1) * CLAIMS_PER_PAGE,
+    limit: CLAIMS_PER_PAGE,
     orderBy,
     search,
   });
@@ -27,8 +30,10 @@ export default function ClaimsList({ page }: { page: number }) {
 
   if (error) return "An error has occurred: " + error.message;
 
-  const totalCount = data.hypercertsCollection?.totalCount;
-  const edges = data.hypercertsCollection?.edges;
+  const totalCount = data.hypercerts.totalCount;
+  const hypercertsData = data.hypercerts.data;
+
+  console.log("hypercertsData", hypercertsData);
   return (
     <>
       {search && search.length > 2 && (
@@ -41,7 +46,7 @@ export default function ClaimsList({ page }: { page: number }) {
         </Text>
       )}
 
-      {edges && edges.length === 0 && (
+      {hypercertsData && hypercertsData.length === 0 && (
         <Box
           p={5}
           borderBottom={"1px solid black"}
@@ -60,16 +65,13 @@ export default function ClaimsList({ page }: { page: number }) {
         borderLeft={"1px solid black"}
         borderRight={"1px solid black"}
       >
-        {data.hypercertsCollection?.edges.map((edge, i) => (
-          <ClaimsListBox data={edge.node} key={i} />
+        {hypercertsData.map((cert, i) => (
+          <ClaimsListBox data={cert} key={i} />
         ))}
       </Grid>
 
       {typeof totalCount !== "undefined" && totalCount > 0 && (
-        <ClaimsPagination
-          currentPage={page}
-          totalCount={data.hypercertsCollection?.totalCount}
-        />
+        <ClaimsPagination currentPage={page} totalCount={totalCount} />
       )}
     </>
   );

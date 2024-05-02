@@ -6,7 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 const query = gqlHypercerts(
   `
     query hypercertsTotal {
-      hypercerts_total
+      hypercerts {
+        totalCount
+      }
     }
   `
 );

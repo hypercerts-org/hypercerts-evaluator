@@ -14,7 +14,7 @@ import {
 import { useContext, useRef } from "react";
 
 import { AttestContext } from "../../pages/claim/[id]";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import { readFragment } from "gql.tada";
 
 export function ClaimDescriptionModal({
@@ -25,7 +25,7 @@ export function ClaimDescriptionModal({
   onClose: () => void;
 }) {
   const attestContext = useContext(AttestContext);
-  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
 
   return (
@@ -39,7 +39,7 @@ export function ClaimDescriptionModal({
 
         <ModalBody>
           <VStack>
-            <Text>{claim.description}</Text>
+            <Text>{claim.metadata?.description}</Text>
           </VStack>
         </ModalBody>
       </ModalContent>

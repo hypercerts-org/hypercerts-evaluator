@@ -6,7 +6,7 @@ import EnsName from "../ui/EnsName";
 import EthAddress from "../ui/EthAddress";
 import Evaluations from "../attestation-card/Evaluations";
 import FormattedDate from "../ui/FormattedDate";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import Tags from "../attestation-card/Tags";
 import { UserIcon } from "../ui/UserIcon";
 import { gridCardBorder } from "../../utils/gridCardBorder";
@@ -14,13 +14,28 @@ import { readFragment } from "gql.tada";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 
+type Evaluation = {
+  chain_id: number;
+  comments: string;
+  contract_address: string;
+  evaluate_basic: number;
+  evaluate_work: number;
+  evaluate_properties: number;
+  evaluate_contributors: number;
+  tags: string[];
+  token_id: string;
+};
+
 export default function ClaimEvaluationsList() {
   const router = useRouter();
   const attestContext = useContext(AttestContext);
-  const claimFragment = readFragment(FullClaimFragment, attestContext?.claim);
+  const claimFragment = readFragment(
+    HypercertFullFragment,
+    attestContext?.claim
+  );
   if (!claimFragment) return null;
 
-  const attestations = claimFragment?.claimAttestations?.data;
+  const attestations = claimFragment?.attestations?.data;
 
   if (!attestations || attestations.length === 0) {
     return <Text>This Hypercert has not been evaluated yet.</Text>;
@@ -35,7 +50,8 @@ export default function ClaimEvaluationsList() {
       {attestations &&
         attestations.map((attestation, i) => {
           if (!attestation) return null;
-          const data = JSON.parse(attestation.decoded_attestation as string);
+
+          const evaluation = attestation.attestation as Evaluation;
           return (
             <Flex
               key={attestation.attestation_uid}
@@ -56,7 +72,10 @@ export default function ClaimEvaluationsList() {
                 }
                 cursor="pointer"
               >
-                <UserIcon address={attestation.attester_address} size="large" />
+                <UserIcon
+                  address={attestation.attester_address as string}
+                  size="large"
+                />
                 <Flex
                   direction={"column"}
                   justifyContent={"center"}
@@ -64,23 +83,25 @@ export default function ClaimEvaluationsList() {
                   w="200px"
                 >
                   <EnsName
-                    address={attestation.attester_address}
+                    address={attestation.attester_address as string}
                     textStyle={"secondary"}
                   />
-                  <EthAddress address={attestation.attester_address} />{" "}
+                  <EthAddress
+                    address={attestation.attester_address as string}
+                  />{" "}
                 </Flex>
               </Flex>
 
               <Evaluations
-                basic={data.evaluate_basic}
-                work={data.evaluate_work}
-                properties={data.evaluate_properties}
-                contributors={data.evaluate_contributors}
+                basic={evaluation.evaluate_basic}
+                work={evaluation.evaluate_work}
+                properties={evaluation.evaluate_properties}
+                contributors={evaluation.evaluate_contributors}
               />
 
-              <Tags tags={data.tags} />
+              <Tags tags={evaluation.tags} />
 
-              <Comments comments={data.comments} />
+              <Comments comments={evaluation.comments} />
             </Flex>
           );
         })}

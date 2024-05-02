@@ -1,13 +1,13 @@
 import { Flex, Text } from "@chakra-ui/react";
 
 import ClaimRowSkeleton from "./ClaimRowSkeleton";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import Image from "next/image";
 import { readFragment } from "gql.tada";
-import { useClaim } from "../../hypercerts/hooks/useClaim";
+import { useHypercert } from "../../hypercerts/hooks/useHypercert";
 
 export default function HypercertRow({ claimId }: { claimId?: string }) {
-  const { data, isPending, error } = useClaim(claimId);
+  const { data, isPending, error } = useHypercert(claimId);
 
   if (isPending) {
     return <ClaimRowSkeleton />;
@@ -18,17 +18,14 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
     return null;
   }
 
-  const claim = readFragment(
-    FullClaimFragment,
-    data?.hypercertsCollection?.edges[0]?.node
-  );
+  const claim = readFragment(HypercertFullFragment, data?.hypercerts.data[0]);
 
   if (!claim || !data) return <div>Claim not found</div>;
 
   return (
     <Flex w={"100%"} gap={3} borderRadius={5} alignItems="center">
       <Image
-        src={`${window.location.origin}/api/image/${claim.claim_id}`}
+        src={`${window.location.origin}/api/image/${claim.hypercert_id}`}
         alt="Hypercert"
         width="70"
         height="70"
@@ -41,7 +38,7 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
         }}
       />
       <Text as="span" textStyle={"secondary"}>
-        {claim.name}
+        {claim.metadata?.name}
       </Text>
     </Flex>
   );

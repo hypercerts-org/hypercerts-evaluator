@@ -1,6 +1,6 @@
 import { Button, Flex, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 
-import { ClaimsOrderBy } from "../../hypercerts/hooks/useClaims";
+import { ClaimsOrderBy } from "../../hypercerts/hooks/useAllHypercerts";
 import { FaSortAmountDown } from "react-icons/fa";
 import MenuItem from "../ui/MenuItem";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";

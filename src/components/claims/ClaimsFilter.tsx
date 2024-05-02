@@ -1,6 +1,6 @@
 import { Button, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 
-import { ClaimsFilter } from "../../hypercerts/hooks/useClaims";
+import { ClaimsFilter } from "../../hypercerts/hooks/useAllHypercerts";
 import { FaFilter } from "react-icons/fa";
 import MenuItem from "../ui/MenuItem";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";

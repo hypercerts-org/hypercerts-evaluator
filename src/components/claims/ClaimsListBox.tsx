@@ -2,22 +2,22 @@ import { Badge, Box, Flex, GridItem, Text } from "@chakra-ui/react";
 import { FragmentOf, readFragment } from "gql.tada";
 
 import FormattedDate from "../ui/FormattedDate";
+import { HypercertListFragment } from "../../hypercerts/fragments/hypercert-list.fragment";
 import Image from "next/image";
 import Link from "next/link";
-import { ListClaimFragment } from "../../hypercerts/fragments/list-claim.fragment";
 
 export default function ClaimsListBox({
   data,
 }: {
-  data: FragmentOf<typeof ListClaimFragment>;
+  data: FragmentOf<typeof HypercertListFragment>;
 }) {
-  const claim = readFragment(ListClaimFragment, data);
+  const cert = readFragment(HypercertListFragment, data);
 
-  const attestationCount = claim.claimAttestations?.count || 0;
+  const attestationCount = cert.attestations?.totalCount || 0;
 
   return (
     <GridItem mt={5} p={5} _hover={{ background: "rgba(0,0,0,0.1)" }}>
-      <Link href={`/claim/${claim.claim_id}`}>
+      <Link href={`/claim/${cert.hypercert_id}`}>
         <Flex direction="column" alignItems="flex-start" position="relative">
           {attestationCount > 0 && (
             <Flex
@@ -39,7 +39,7 @@ export default function ClaimsListBox({
             </Flex>
           )}
           <Image
-            src={`${window.location.origin}/api/image/${claim.claim_id}`}
+            src={`${window.location.origin}/api/image/${cert.hypercert_id}`}
             alt="Hypercert"
             width="225"
             height="225"
@@ -52,9 +52,9 @@ export default function ClaimsListBox({
               marginBottom: "10px",
             }}
           />
-          <FormattedDate seconds={claim.block_timestamp} />
+          <FormattedDate seconds={cert.creation_block_timestamp} />
           <Text as="span" textStyle={"secondary"}>
-            {claim.name}
+            {cert.metadata?.name}
           </Text>
         </Flex>
       </Link>

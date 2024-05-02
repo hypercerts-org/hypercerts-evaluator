@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 
 import { AttestContext } from "../../pages/claim/[id]";
 import { ClaimDescriptionModal } from "./ClaimDescriptionModal";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import { isValidUrl } from "../../utils/isValidUrl";
 import { readFragment } from "gql.tada";
 
@@ -13,20 +13,20 @@ const URL_MAX_LENGTH = 40;
 export default function ClaimTitle() {
   const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false);
   const attestContext = useContext(AttestContext);
-  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
 
-  const externalUrl = isValidUrl(claim.external_url)
-    ? claim.external_url
+  const externalUrl = isValidUrl(claim.metadata?.external_url)
+    ? claim.metadata?.external_url
     : null;
 
   const truncateDescription =
-    claim.description !== null &&
-    claim.description.length > DESCRIPTION_MAX_LENGTH;
+    claim.metadata?.description != null &&
+    claim.metadata?.description?.length > DESCRIPTION_MAX_LENGTH;
 
   const description = truncateDescription
-    ? claim.description?.substring(0, DESCRIPTION_MAX_LENGTH) + "..."
-    : claim.description;
+    ? claim.metadata?.description?.substring(0, DESCRIPTION_MAX_LENGTH) + "..."
+    : claim.metadata?.description;
 
   const externalUrlDescription =
     externalUrl && externalUrl.length > URL_MAX_LENGTH
@@ -42,7 +42,7 @@ export default function ClaimTitle() {
   return (
     <Flex flexDirection={"column"} gap="2" p="10" overflow="hidden">
       <Text as="h2" fontSize="lg" textStyle="secondary" fontWeight={100}>
-        {claim.name}
+        {claim.metadata?.name}
       </Text>
       <Text
         onClick={clickDescription}

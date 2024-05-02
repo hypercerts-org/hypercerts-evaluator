@@ -7,7 +7,7 @@ import { AttestContext } from "../../pages/claim/[id]";
 import { ClaimOwnersModal } from "./ClaimOwnersModal";
 import ClaimOwnersRow from "./ClaimOwnersRow";
 import { FaChevronDown } from "react-icons/fa";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import { readFragment } from "gql.tada";
 
 const MAX_OWNERS_DISPLAYED = 5;
@@ -15,7 +15,7 @@ const MAX_OWNERS_DISPLAYED = 5;
 export default function ClaimOwners({ ...props }: { [key: string]: any }) {
   const [ownerDialogOpen, setOwnerDialogOpen] = useState(false);
   const attestContext = useContext(AttestContext);
-  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
 
   let owners =
@@ -37,11 +37,7 @@ export default function ClaimOwners({ ...props }: { [key: string]: any }) {
       </Flex>
       <VStack alignItems="flex-start" w="100%">
         {owners.slice(0, MAX_OWNERS_DISPLAYED).map((owner, i) => (
-          <ClaimOwnersRow
-            key={i}
-            owner={owner}
-            totalUnits={claim.claim?.totalUnits as number}
-          />
+          <ClaimOwnersRow key={i} owner={owner} totalUnits={claim.units} />
         ))}
         {owners.length === 0 && <Text>No owners</Text>}
       </VStack>

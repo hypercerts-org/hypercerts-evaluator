@@ -4,9 +4,8 @@ import EthAddress from "../ui/EthAddress";
 import { isNumber } from "remeda";
 
 type Owner = {
-  owner: unknown;
+  owner_address: unknown;
   units: unknown;
-  tokenID: unknown;
 };
 
 export default function ClaimOwnersRow({
@@ -23,7 +22,7 @@ export default function ClaimOwnersRow({
   const percentage = ((_units / _totalUnits) * 100) as number;
   return (
     <Flex width="100%" justifyContent="space-between">
-      <EthAddress address={owner.owner as string} showEnsName />
+      <EthAddress address={owner.owner_address as string} showEnsName />
       {percentage.toFixed(2)}%
     </Flex>
   );

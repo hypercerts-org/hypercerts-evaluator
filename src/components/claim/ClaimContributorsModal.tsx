@@ -15,7 +15,7 @@ import {
 import { AttestContext } from "../../pages/claim/[id]";
 import EthAddress from "../ui/EthAddress";
 import { FaUser } from "react-icons/fa";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import { isAddress } from "viem";
 import { readFragment } from "gql.tada";
 import { useContext } from "react";
@@ -28,10 +28,10 @@ export function ClaimContributorsModal({
   onClose: () => void;
 }) {
   const attestContext = useContext(AttestContext);
-  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
 
-  const contributors = claim.contributors;
+  const contributors = claim.metadata?.contributors;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl" scrollBehavior="inside">

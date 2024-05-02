@@ -15,7 +15,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { AllEvaluationStates } from "../../eas/types/all-evaluation-states.type";
 import { AttestContext } from "../../pages/claim/[id]";
 import EvaluateToggle from "./EvaluateToggle";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import Tags from "@yaireo/tagify/dist/react.tagify";
 import { createAttestation } from "../../eas/createAttestation";
 import { errorHasMessage } from "../../utils/errorHasMessage";
@@ -48,7 +48,7 @@ export function AttestModalBody() {
   const signer = useSigner();
   const toast = useToast();
   const attestContext = useContext(AttestContext);
-  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   const tagifyRef = useRef<Tagify<Tagify.BaseTagData>>();
   const whitelistAttestTags = useGlobalState(
     (state) => state.whitelistAttestTags
@@ -94,16 +94,22 @@ export function AttestModalBody() {
   };
 
   const attest = async () => {
-    if (!signer || !chain?.id || !claim || !claim.claim || !attestContext) {
+    if (
+      !signer ||
+      !chain?.id ||
+      !claim ||
+      !claim.contracts_id ||
+      !attestContext
+    ) {
       return;
     }
     setIsAttesting(true);
     try {
       const uid = await createAttestation({
         chainId: chain.id,
-        contractAddress: claim.claim.contract,
+        contractAddress: claim.contracts_id,
         signer,
-        tokenId: claim.claim_id as string,
+        tokenId: claim.hypercert_id as string,
         allEvaluationStates,
         tags: tagifyRef.current?.value.map((tag) => tag.value) || [],
         comments,

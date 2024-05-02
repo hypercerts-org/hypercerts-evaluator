@@ -15,7 +15,7 @@ import { useContext, useState } from "react";
 import { AttestContext } from "../../pages/claim/[id]";
 import { ClaimContributorsModal } from "./ClaimContributorsModal";
 import EthAddress from "../ui/EthAddress";
-import { FullClaimFragment } from "../../hypercerts/fragments/full-claim.fragment";
+import { HypercertFullFragment } from "../../hypercerts/fragments/hypercert-full.fragment";
 import { isAddress } from "viem";
 import { readFragment } from "gql.tada";
 
@@ -28,9 +28,9 @@ export default function ClaimContributors({
 }) {
   const [contributorDialogOpen, setContributorDialogOpen] = useState(false);
   const attestContext = useContext(AttestContext);
-  const claim = readFragment(FullClaimFragment, attestContext?.claim);
+  const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
-  const contributors = claim.contributors;
+  const contributors = claim.metadata?.contributors;
   if (!contributors) return null;
   return (
     <VStack
