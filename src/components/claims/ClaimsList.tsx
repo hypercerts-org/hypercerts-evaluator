@@ -12,26 +12,26 @@ import LoadError from "../LoadError";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 
 export default function ClaimsList({ page }: { page: number }) {
-  const orderBy = useQueryStringParameter<ClaimsOrderBy>(
-    "orderBy",
-    "timestamp_desc"
-  );
+  // const orderBy = useQueryStringParameter<ClaimsOrderBy>(
+  //   "orderBy",
+  //   "timestamp_desc"
+  // );
   const search = useQueryStringParameter<string>("search", "");
 
   page = page || 1;
   const { data, isPending, error } = useAllHypercerts({
     offset: (page - 1) * CLAIMS_PER_PAGE,
-    limit: CLAIMS_PER_PAGE,
-    orderBy,
-    search,
+    first: CLAIMS_PER_PAGE,
   });
 
   if (isPending) return <ClaimsGridSkeleton />;
 
   if (error) return "An error has occurred: " + error.message;
 
-  const totalCount = data.hypercerts.totalCount;
+  const totalCount = data.hypercerts.count;
   const hypercertsData = data.hypercerts.data;
+
+  if (!hypercertsData || !totalCount) return "No data found.";
 
   console.log("hypercertsData", hypercertsData);
   return (

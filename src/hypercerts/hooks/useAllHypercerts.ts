@@ -17,9 +17,9 @@ export type ClaimsFilter = "all" | "evaluated";
 
 const query = gqlHypercerts(
   `
-    query AllHypercerts($offset: Int, $limit: Int, $where: HypercertsWhereInput! ) {
-      hypercerts(page: { offset: $offset, limit: $limit }, where: $where) {
-        totalCount
+    query AllHypercerts($first: Int, $offset: Int ) {
+      hypercerts(first: $first, offset: $offset, count: COUNT) {
+        count
         data {
           ...HypercertListFragment
         }
@@ -28,6 +28,20 @@ const query = gqlHypercerts(
   `,
   [HypercertListFragment]
 );
+
+// const query = gqlHypercerts(
+//   `
+//     query AllHypercerts($offset: Int, $limit: Int, $where: HypercertsWhereInput! ) {
+//       hypercerts(page: { offset: $offset, limit: $limit }, where: $where) {
+//         count
+//         data {
+//           ...HypercertListFragment
+//         }
+//       }
+//     }
+//   `,
+//   [HypercertListFragment]
+// );
 
 type VariableTypes = VariablesOf<typeof query>;
 
@@ -81,29 +95,47 @@ type VariableTypes = VariablesOf<typeof query>;
 //   return {};
 // }
 
+// export const useAllHypercerts = ({
+//   offset,
+//   limit,
+//   orderBy,
+//   filter,
+//   search,
+// }: {
+//   offset: number;
+//   limit: number;
+//   orderBy?: ClaimsOrderBy;
+//   filter?: ClaimsFilter; //TODO Implement filter
+//   search?: string;
+// }) => {
+//   return useQuery({
+//     queryKey: ["hypercerts", offset, limit, orderBy, filter, search],
+//     queryFn: async () => {
+//       // const _orderBy = createOrderBy({ orderBy });
+//       // const _filter = createFilter({ filter, search });
+
+//       return request(HYPERCERTS_API_URL, query, {
+//         offset,
+//         limit,
+//         where: {},
+//       });
+//     },
+//   });
+// };
+
 export const useAllHypercerts = ({
+  first,
   offset,
-  limit,
-  orderBy,
-  filter,
-  search,
 }: {
+  first: number;
   offset: number;
-  limit: number;
-  orderBy?: ClaimsOrderBy;
-  filter?: ClaimsFilter; //TODO Implement filter
-  search?: string;
 }) => {
   return useQuery({
-    queryKey: ["hypercerts", offset, limit, orderBy, filter, search],
+    queryKey: ["hypercerts", first, offset],
     queryFn: async () => {
-      // const _orderBy = createOrderBy({ orderBy });
-      // const _filter = createFilter({ filter, search });
-
       return request(HYPERCERTS_API_URL, query, {
+        first,
         offset,
-        limit,
-        where: {},
       });
     },
   });
