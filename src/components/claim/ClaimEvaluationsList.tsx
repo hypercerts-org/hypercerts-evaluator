@@ -51,10 +51,10 @@ export default function ClaimEvaluationsList() {
         attestations.map((attestation, i) => {
           if (!attestation) return null;
 
-          const evaluation = attestation.attestation as Evaluation;
+          const evaluation = attestation.data as Evaluation;
           return (
             <Flex
-              key={attestation.attestation_uid}
+              key={i}
               direction="column"
               p={5}
               gap={4}
@@ -68,12 +68,12 @@ export default function ClaimEvaluationsList() {
                 p={2}
                 _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
                 onClick={() =>
-                  router.push(`/evaluator/${attestation.attester_address}`)
+                  router.push(`/evaluator/${attestation.attester}`)
                 }
                 cursor="pointer"
               >
                 <UserIcon
-                  address={attestation.attester_address as string}
+                  address={attestation.attester as string}
                   size="large"
                 />
                 <Flex
@@ -83,12 +83,10 @@ export default function ClaimEvaluationsList() {
                   w="200px"
                 >
                   <EnsName
-                    address={attestation.attester_address as string}
+                    address={attestation.attester as string}
                     textStyle={"secondary"}
                   />
-                  <EthAddress
-                    address={attestation.attester_address as string}
-                  />{" "}
+                  <EthAddress address={attestation.attester as string} />{" "}
                 </Flex>
               </Flex>
 

@@ -16,17 +16,20 @@ export default function ClaimTitle() {
   const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
 
-  const externalUrl = isValidUrl(claim.metadata?.external_url)
-    ? claim.metadata?.external_url
+  const externalUrl = isValidUrl(claim.metadata?.data?.[0]?.external_url)
+    ? claim.metadata?.data?.[0]?.external_url
     : null;
 
   const truncateDescription =
-    claim.metadata?.description != null &&
-    claim.metadata?.description?.length > DESCRIPTION_MAX_LENGTH;
+    claim.metadata?.data?.[0]?.description != null &&
+    claim.metadata?.data?.[0]?.description?.length > DESCRIPTION_MAX_LENGTH;
 
   const description = truncateDescription
-    ? claim.metadata?.description?.substring(0, DESCRIPTION_MAX_LENGTH) + "..."
-    : claim.metadata?.description;
+    ? claim.metadata?.data?.[0]?.description?.substring(
+        0,
+        DESCRIPTION_MAX_LENGTH
+      ) + "..."
+    : claim.metadata?.data?.[0]?.description;
 
   const externalUrlDescription =
     externalUrl && externalUrl.length > URL_MAX_LENGTH
@@ -42,7 +45,7 @@ export default function ClaimTitle() {
   return (
     <Flex flexDirection={"column"} gap="2" p="10" overflow="hidden">
       <Text as="h2" fontSize="lg" textStyle="secondary" fontWeight={100}>
-        {claim.metadata?.name}
+        {claim.metadata?.data?.[0]?.name}
       </Text>
       <Text
         onClick={clickDescription}

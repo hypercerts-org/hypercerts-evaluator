@@ -19,8 +19,8 @@ export default function ClaimOwners({ ...props }: { [key: string]: any }) {
   if (!claim) return null;
 
   let owners =
-    R.isArray(claim.fractions) && claim.fractions.length > 0
-      ? claim.fractions
+    R.isArray(claim.fractions?.data) && claim.fractions?.data?.length > 0
+      ? claim.fractions.data
       : [];
 
   return (

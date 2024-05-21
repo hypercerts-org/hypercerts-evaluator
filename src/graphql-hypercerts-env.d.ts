@@ -405,7 +405,7 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "attestation_uid",
+            "name": "uid",
             "type": {
               "kind": "SCALAR",
               "name": "ID",
@@ -423,7 +423,7 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "attester_address",
+            "name": "attester",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -432,7 +432,7 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "recipient_address",
+            "name": "recipient",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -459,7 +459,7 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "attestation",
+            "name": "data",
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
@@ -1042,7 +1042,7 @@ export type introspection = {
             }
           },
           {
-            "name": "attestation_uid",
+            "name": "uid",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
@@ -1066,7 +1066,7 @@ export type introspection = {
             }
           },
           {
-            "name": "attester_address",
+            "name": "attester",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
@@ -1074,7 +1074,7 @@ export type introspection = {
             }
           },
           {
-            "name": "recipient_address",
+            "name": "recipient",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
@@ -1290,7 +1290,7 @@ export type introspection = {
             }
           },
           {
-            "name": "attestation_uid",
+            "name": "uid",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
@@ -1314,7 +1314,7 @@ export type introspection = {
             }
           },
           {
-            "name": "attester_address",
+            "name": "attester",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
@@ -1322,7 +1322,7 @@ export type introspection = {
             }
           },
           {
-            "name": "recipient_address",
+            "name": "recipient",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
@@ -1425,6 +1425,14 @@ export type introspection = {
           },
           {
             "name": "uri",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "hypercert_id",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
@@ -1802,6 +1810,14 @@ export type introspection = {
             }
           },
           {
+            "name": "hypercert_id",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          },
+          {
             "name": "metadata",
             "type": {
               "kind": "INPUT_OBJECT",
@@ -2030,6 +2046,14 @@ export type introspection = {
           },
           {
             "name": "uri",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "hypercert_id",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringSearchOptions",
