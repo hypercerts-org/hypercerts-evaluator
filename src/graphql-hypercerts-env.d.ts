@@ -128,6 +128,59 @@ export type introspection = {
             ]
           },
           {
+            "name": "hypercerts",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "GetHypercertsResponse",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "count",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "CountKeys",
+                  "ofType": null
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              {
+                "name": "where",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "HypercertsWhereInput",
+                  "ofType": null
+                }
+              },
+              {
+                "name": "sort",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "HypercertFetchInput",
+                  "ofType": null
+                }
+              }
+            ]
+          },
+          {
             "name": "metadata",
             "type": {
               "kind": "NON_NULL",
@@ -234,59 +287,6 @@ export type introspection = {
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "ContractFetchInput",
-                  "ofType": null
-                }
-              }
-            ]
-          },
-          {
-            "name": "hypercerts",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "GetHypercertsResponse",
-                "ofType": null
-              }
-            },
-            "args": [
-              {
-                "name": "count",
-                "type": {
-                  "kind": "ENUM",
-                  "name": "CountKeys",
-                  "ofType": null
-                }
-              },
-              {
-                "name": "first",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              {
-                "name": "offset",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              {
-                "name": "where",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "HypercertsWhereInput",
-                  "ofType": null
-                }
-              },
-              {
-                "name": "sort",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "HypercertFetchInput",
                   "ofType": null
                 }
               }
@@ -590,19 +590,19 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "attestations",
+            "name": "contract",
             "type": {
               "kind": "OBJECT",
-              "name": "GetAttestationsResponse",
+              "name": "Contract",
               "ofType": null
             },
             "args": []
           },
           {
-            "name": "contracts",
+            "name": "metadata",
             "type": {
               "kind": "OBJECT",
-              "name": "GetContractsResponse",
+              "name": "Metadata",
               "ofType": null
             },
             "args": []
@@ -617,10 +617,10 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "metadata",
+            "name": "attestations",
             "type": {
               "kind": "OBJECT",
-              "name": "GetMetadataResponse",
+              "name": "GetAttestationsResponse",
               "ofType": null
             },
             "args": []
@@ -631,37 +631,6 @@ export type introspection = {
       {
         "kind": "SCALAR",
         "name": "EthBigInt"
-      },
-      {
-        "kind": "OBJECT",
-        "name": "GetContractsResponse",
-        "fields": [
-          {
-            "name": "data",
-            "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Contract",
-                  "ofType": null
-                }
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "count",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
       },
       {
         "kind": "OBJECT",
@@ -702,136 +671,6 @@ export type introspection = {
             "type": {
               "kind": "SCALAR",
               "name": "BigInt",
-              "ofType": null
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Int"
-      },
-      {
-        "kind": "OBJECT",
-        "name": "GetFractionsResponse",
-        "fields": [
-          {
-            "name": "data",
-            "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Fraction",
-                  "ofType": null
-                }
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "count",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Fraction",
-        "fields": [
-          {
-            "name": "id",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "owner_address",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "units",
-            "type": {
-              "kind": "SCALAR",
-              "name": "EthBigInt",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "creation_block_timestamp",
-            "type": {
-              "kind": "SCALAR",
-              "name": "BigInt",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "last_block_update_timestamp",
-            "type": {
-              "kind": "SCALAR",
-              "name": "BigInt",
-              "ofType": null
-            },
-            "args": []
-          },
-          {
-            "name": "hypercert_id",
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
-      },
-      {
-        "kind": "OBJECT",
-        "name": "GetMetadataResponse",
-        "fields": [
-          {
-            "name": "data",
-            "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Metadata",
-                  "ofType": null
-                }
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "count",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "args": []
@@ -1016,6 +855,105 @@ export type introspection = {
           }
         ],
         "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "GetFractionsResponse",
+        "fields": [
+          {
+            "name": "data",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Fraction",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "count",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Fraction",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "owner_address",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "units",
+            "type": {
+              "kind": "SCALAR",
+              "name": "EthBigInt",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "creation_block_timestamp",
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "last_block_update_timestamp",
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "hypercert_id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Int"
       },
       {
         "kind": "ENUM",
@@ -1758,6 +1696,291 @@ export type introspection = {
         ]
       },
       {
+        "kind": "OBJECT",
+        "name": "GetHypercertsResponse",
+        "fields": [
+          {
+            "name": "data",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Hypercert",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "count",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "HypercertsWhereInput",
+        "inputFields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IdSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "creation_block_timestamp",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "token_id",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "owner_address",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "last_block_update_timestamp",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "uri",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "hypercert_id",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "contract",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BasicContractWhereInput",
+              "ofType": null
+            }
+          },
+          {
+            "name": "metadata",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BasicMetadataWhereInput",
+              "ofType": null
+            }
+          },
+          {
+            "name": "attestations",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BasicAttestationWhereInput",
+              "ofType": null
+            }
+          },
+          {
+            "name": "fractions",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BasicFractionWhereInput",
+              "ofType": null
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "BasicContractWhereInput",
+        "inputFields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IdSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "contract_address",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "chain_id",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "BasicFractionWhereInput",
+        "inputFields": [
+          {
+            "name": "creation_block_timestamp",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "last_block_update_timestamp",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "token_id",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "units",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NumberSearchOptions",
+              "ofType": null
+            }
+          },
+          {
+            "name": "owner_address",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringSearchOptions",
+              "ofType": null
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "HypercertFetchInput",
+        "inputFields": [
+          {
+            "name": "by",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "HypercertSortOptions",
+              "ofType": null
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "HypercertSortOptions",
+        "inputFields": [
+          {
+            "name": "hypercert_id",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          },
+          {
+            "name": "creation_block_timestamp",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          },
+          {
+            "name": "token_id",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          },
+          {
+            "name": "units",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          },
+          {
+            "name": "owner_address",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          },
+          {
+            "name": "last_block_update_timestamp",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          },
+          {
+            "name": "uri",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          },
+          {
+            "name": "claim_attestation_count",
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            }
+          }
+        ]
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "MetadataWhereInput",
         "inputFields": [
@@ -1896,34 +2119,35 @@ export type introspection = {
         ]
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "BasicContractWhereInput",
-        "inputFields": [
+        "kind": "OBJECT",
+        "name": "GetContractsResponse",
+        "fields": [
           {
-            "name": "id",
+            "name": "data",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IdSearchOptions",
-              "ofType": null
-            }
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Contract",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
           },
           {
-            "name": "contract_address",
+            "name": "count",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringSearchOptions",
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
-            }
-          },
-          {
-            "name": "chain_id",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
+            },
+            "args": []
           }
-        ]
+        ],
+        "interfaces": []
       },
       {
         "kind": "INPUT_OBJECT",
@@ -1961,261 +2185,6 @@ export type introspection = {
           },
           {
             "name": "chain_id",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          }
-        ]
-      },
-      {
-        "kind": "OBJECT",
-        "name": "GetHypercertsResponse",
-        "fields": [
-          {
-            "name": "data",
-            "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Hypercert",
-                  "ofType": null
-                }
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "count",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "HypercertsWhereInput",
-        "inputFields": [
-          {
-            "name": "id",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IdSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "creation_block_timestamp",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "token_id",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "owner_address",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "last_block_update_timestamp",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "uri",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "hypercert_id",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "contracts",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "BasicContractWhereInput",
-              "ofType": null
-            }
-          },
-          {
-            "name": "metadata",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "BasicMetadataWhereInput",
-              "ofType": null
-            }
-          },
-          {
-            "name": "attestations",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "BasicAttestationWhereInput",
-              "ofType": null
-            }
-          },
-          {
-            "name": "fractions",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "BasicFractionWhereInput",
-              "ofType": null
-            }
-          }
-        ]
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "BasicFractionWhereInput",
-        "inputFields": [
-          {
-            "name": "creation_block_timestamp",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "last_block_update_timestamp",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "token_id",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "units",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NumberSearchOptions",
-              "ofType": null
-            }
-          },
-          {
-            "name": "owner_address",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringSearchOptions",
-              "ofType": null
-            }
-          }
-        ]
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "HypercertFetchInput",
-        "inputFields": [
-          {
-            "name": "by",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "HypercertSortOptions",
-              "ofType": null
-            }
-          }
-        ]
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "HypercertSortOptions",
-        "inputFields": [
-          {
-            "name": "hypercert_id",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          },
-          {
-            "name": "creation_block_timestamp",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          },
-          {
-            "name": "token_id",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          },
-          {
-            "name": "units",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          },
-          {
-            "name": "owner_address",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          },
-          {
-            "name": "last_block_update_timestamp",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          },
-          {
-            "name": "uri",
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            }
-          },
-          {
-            "name": "claim_attestation_count",
             "type": {
               "kind": "ENUM",
               "name": "SortOrder",
