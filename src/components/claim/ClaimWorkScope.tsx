@@ -13,9 +13,9 @@ export default function ClaimWorkScope({ ...props }: { [key: string]: any }) {
   if (!claim) return null;
 
   const workScope =
-    R.isArray(claim.metadata?.data?.[0]?.work_scope) &&
-    claim.metadata?.data?.[0]?.work_scope.length > 0
-      ? claim.metadata?.data?.[0]?.work_scope
+    R.isArray(claim.metadata?.work_scope) &&
+    claim.metadata?.work_scope.length > 0
+      ? claim.metadata?.work_scope
       : null;
 
   return (

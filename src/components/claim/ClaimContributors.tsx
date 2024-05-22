@@ -30,7 +30,7 @@ export default function ClaimContributors({
   const attestContext = useContext(AttestContext);
   const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
-  const contributors = claim.metadata?.data?.[0]?.contributors;
+  const contributors = claim.metadata?.contributors;
   if (!contributors) return null;
   return (
     <VStack

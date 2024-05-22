@@ -31,7 +31,7 @@ export function ClaimContributorsModal({
   const claim = readFragment(HypercertFullFragment, attestContext?.claim);
   if (!claim) return null;
 
-  const contributors = claim.metadata?.data?.[0]?.contributors;
+  const contributors = claim.metadata?.contributors;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl" scrollBehavior="inside">

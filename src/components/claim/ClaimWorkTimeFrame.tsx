@@ -26,14 +26,14 @@ export default function ClaimWorkTimeFrame({
   let workTimeFrameFrom = claim.metadata?.work_timeframe_from
     ? new Date(claim.metadata?.work_timeframe_from)
     : null;
-  let workTimeFrameTo = claim.metadata?.work_timeframe_to
-    ? new Date(claim.metadata?.work_timeframe_to)
+  let workTimeFrameTo = claim.metadata.work_timeframe_to
+    ? new Date(claim.metadata.work_timeframe_to)
     : null;
 
   return (
     <VStack p={5} alignItems={"flex-start"} width="100%" {...props}>
       <Text as="span" textStyle={"secondary"} fontSize={"sm"}>
-        Work Scope
+        Work Timeframe
       </Text>
       <Text>
         {workTimeFrameFrom && workTimeFrameTo

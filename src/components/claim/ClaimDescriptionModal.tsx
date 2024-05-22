@@ -39,7 +39,7 @@ export function ClaimDescriptionModal({
 
         <ModalBody>
           <VStack>
-            <Text>{claim.metadata?.data?.[0]?.description}</Text>
+            <Text>{claim.metadata?.description}</Text>
           </VStack>
         </ModalBody>
       </ModalContent>

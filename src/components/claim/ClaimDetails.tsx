@@ -41,6 +41,7 @@ export default function ClaimDetails() {
               alt="Hypercert"
               width="160"
               height="200"
+              style={{ width: "auto", height: "auto" }}
             />
           </Box>
         </Flex>

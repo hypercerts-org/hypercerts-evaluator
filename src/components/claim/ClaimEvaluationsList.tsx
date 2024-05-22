@@ -51,7 +51,7 @@ export default function ClaimEvaluationsList() {
         attestations.map((attestation, i) => {
           if (!attestation) return null;
 
-          const evaluation = attestation.data as Evaluation;
+          const evaluation: Evaluation = JSON.parse(attestation.data as string);
           return (
             <Flex
               key={i}
@@ -89,7 +89,6 @@ export default function ClaimEvaluationsList() {
                   <EthAddress address={attestation.attester as string} />{" "}
                 </Flex>
               </Flex>
-
               <Evaluations
                 basic={evaluation.evaluate_basic}
                 work={evaluation.evaluate_work}

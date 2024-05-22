@@ -18,7 +18,10 @@ export default function HypercertRow({ claimId }: { claimId?: string }) {
     return null;
   }
 
-  const claim = readFragment(HypercertFullFragment, data?.hypercerts.data[0]);
+  const claim = readFragment(
+    HypercertFullFragment,
+    data?.hypercerts?.data?.[0]
+  );
 
   if (!claim || !data) return <div>Claim not found</div>;
 

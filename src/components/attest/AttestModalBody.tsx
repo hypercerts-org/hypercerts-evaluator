@@ -98,8 +98,9 @@ export function AttestModalBody() {
       !signer ||
       !chain?.id ||
       !claim ||
-      !claim.contracts_id ||
-      !attestContext
+      !claim.contract?.contract_address ||
+      !attestContext ||
+      !claim.token_id
     ) {
       return;
     }
@@ -107,9 +108,9 @@ export function AttestModalBody() {
     try {
       const uid = await createAttestation({
         chainId: chain.id,
-        contractAddress: claim.contracts_id,
+        contractAddress: claim.contract?.contract_address,
         signer,
-        tokenId: claim.hypercert_id as string,
+        tokenId: claim.token_id as string,
         allEvaluationStates,
         tags: tagifyRef.current?.value.map((tag) => tag.value) || [],
         comments,
