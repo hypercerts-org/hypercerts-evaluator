@@ -1,5 +1,6 @@
 import { Box, Grid, Text } from "@chakra-ui/react";
 import {
+  ClaimsFilter,
   ClaimsOrderBy,
   useAllHypercerts,
 } from "../../hypercerts/hooks/useAllHypercerts";
@@ -12,16 +13,20 @@ import LoadError from "../LoadError";
 import { useQueryStringParameter } from "../../utils/useQueryStringParameter";
 
 export default function ClaimsList({ page }: { page: number }) {
-  // const orderBy = useQueryStringParameter<ClaimsOrderBy>(
-  //   "orderBy",
-  //   "timestamp_desc"
-  // );
+  const orderBy = useQueryStringParameter<ClaimsOrderBy>(
+    "orderBy",
+    "timestamp_desc"
+  );
+  const filter = useQueryStringParameter<ClaimsFilter>("filter", "all");
   const search = useQueryStringParameter<string>("search", "");
 
   page = page || 1;
   const { data, isPending, error } = useAllHypercerts({
     offset: (page - 1) * CLAIMS_PER_PAGE,
     first: CLAIMS_PER_PAGE,
+    orderBy,
+    search,
+    filter,
   });
 
   if (isPending) return <ClaimsGridSkeleton />;
@@ -33,7 +38,6 @@ export default function ClaimsList({ page }: { page: number }) {
 
   if (!hypercertsData || !totalCount) return "No data found.";
 
-  console.log("hypercertsData", hypercertsData);
   return (
     <>
       {search && search.length > 2 && (

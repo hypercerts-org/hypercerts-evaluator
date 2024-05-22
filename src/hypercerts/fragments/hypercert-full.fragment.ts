@@ -13,20 +13,26 @@ export const HypercertFullFragment = gqlHypercerts(`
     }
     creation_block_timestamp
     hypercert_id
-    contracts_id
+    contract {
+      chain_id
+      contract_address
+    }
     owner_address
     units
     attestations {
       data {
-        attestation
-        attestation_uid
+        data
+        uid
         block_timestamp
-        attester_address
+        attester
       }
     }
     fractions {
-      units
-      owner_address
+      data {
+        units
+        owner_address
+      }
     }
+    token_id
   }
 `);

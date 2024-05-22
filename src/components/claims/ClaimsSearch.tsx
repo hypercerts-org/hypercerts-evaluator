@@ -17,7 +17,11 @@ export default function ClaimsSearch() {
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       router.push({
-        query: { search, p: 1 },
+        query: {
+          ...router.query,
+          search,
+          p: 1,
+        },
       });
     }
   };

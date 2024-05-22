@@ -2,7 +2,6 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 import { CLAIMS_PER_PAGE } from "../../config";
-import { useHypercertsTotal } from "../../hypercerts/hooks/useHypercertsTotal";
 import { useRouter } from "next/router";
 
 export default function ClaimsPagination({

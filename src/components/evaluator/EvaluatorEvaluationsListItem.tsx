@@ -18,6 +18,8 @@ export default function EvaluatorEvaluationsListItem({
   [key: string]: any;
 }) {
   const router = useRouter();
+  const chainId = getDecodedValue<number>(data, "chain_id");
+  const contractAddress = getDecodedValue<string>(data, "contract_address");
   const tokenId = getDecodedValue<string>(data, "token_id");
   const evaluateBasic = getDecodedValue<number>(data, "evaluate_basic");
   const evaluateWork = getDecodedValue<number>(data, "evaluate_work");
@@ -31,19 +33,21 @@ export default function EvaluatorEvaluationsListItem({
   );
   const comments = getDecodedValue<string>(data, "comments");
   const tags = getDecodedValue<string[]>(data, "tags");
+
+  const hypercertId = `${chainId}-${contractAddress}-${tokenId}`;
   return (
     <Flex
       direction="column"
       _hover={{ backgroundColor: "rgba(0,0,0,0.1)" }}
       h="100%"
-      onClick={() => router.push(`/claim/${tokenId}`)}
+      onClick={() => router.push(`/claim/${hypercertId}`)}
       cursor="pointer"
       {...props}
     >
-      <Link href={`/claim/${tokenId}`}>
+      <Link href={`/claim/${hypercertId}`}>
         <Flex direction="column" p={5} gap={4} h="100%">
           <FormattedDate seconds={created} />
-          <ClaimRow claimId={tokenId} />
+          <ClaimRow claimId={hypercertId} />
           <Evaluations
             basic={evaluateBasic}
             work={evaluateWork}

@@ -13,7 +13,7 @@ export default function ClaimsListBox({
 }) {
   const cert = readFragment(HypercertListFragment, data);
 
-  const attestationCount = cert.attestations?.totalCount || 0;
+  const attestationCount = cert.attestations?.count || 0;
 
   return (
     <GridItem mt={5} p={5} _hover={{ background: "rgba(0,0,0,0.1)" }}>
@@ -54,7 +54,7 @@ export default function ClaimsListBox({
           />
           <FormattedDate seconds={cert.creation_block_timestamp} />
           <Text as="span" textStyle={"secondary"}>
-            {cert.metadata?.name}
+            {cert.metadata?.name || "No name"}
           </Text>
         </Flex>
       </Link>

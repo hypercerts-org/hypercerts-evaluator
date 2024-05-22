@@ -35,6 +35,7 @@ export async function createAttestation({
   // Initialize SchemaEncoder with the schema string
   const schemaEncoder = new SchemaEncoder(EVALUATIONS_SCHEMA);
 
+  console.log("token_id", tokenId);
   // Encode the data according to schema
   const encodedData = schemaEncoder.encodeData([
     { name: "chain_id", value: chainId, type: "uint40" },

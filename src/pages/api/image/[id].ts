@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { HYPERCERTS_API_URL } from "../../../config";
 import { gqlHypercerts } from "../../../graphql/hypercerts";
+import { prop } from "remeda";
 import request from "graphql-request";
 
 const IMAGE_QUERY = gqlHypercerts(`
@@ -62,7 +63,7 @@ export default async function handler(
     const response = await request(HYPERCERTS_API_URL, IMAGE_QUERY, {
       hypercert_id: id,
     });
-    const imageOrUrl = response.hypercerts.data[0]?.metadata?.image;
+    const imageOrUrl = response.hypercerts.data?.[0]?.metadata?.image;
 
     if (!imageOrUrl) {
       await placeholderImageResponse(req, res);

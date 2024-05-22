@@ -7,7 +7,7 @@ const query = gqlHypercerts(
   `
     query hypercertsTotal {
       hypercerts {
-        totalCount
+        count
       }
     }
   `
@@ -15,7 +15,7 @@ const query = gqlHypercerts(
 
 export const useHypercertsTotal = () => {
   return useQuery({
-    queryKey: ["hypercertsTotal"],
+    queryKey: ["hypercerts-count"],
     queryFn: async () => {
       return request(HYPERCERTS_API_URL, query);
     },

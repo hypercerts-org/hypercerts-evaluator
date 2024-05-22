@@ -37,6 +37,7 @@ export default function ClaimEvaluationsList() {
 
   const attestations = claimFragment?.attestations?.data;
 
+  console.log("attestations", attestations);
   if (!attestations || attestations.length === 0) {
     return <Text>This Hypercert has not been evaluated yet.</Text>;
   }
@@ -51,7 +52,11 @@ export default function ClaimEvaluationsList() {
         attestations.map((attestation, i) => {
           if (!attestation) return null;
 
-          const evaluation: Evaluation = JSON.parse(attestation.data as string);
+          const evaluation: Evaluation =
+            typeof attestation.data === "string"
+              ? JSON.parse(attestation.data)
+              : attestation.data;
+
           return (
             <Flex
               key={i}

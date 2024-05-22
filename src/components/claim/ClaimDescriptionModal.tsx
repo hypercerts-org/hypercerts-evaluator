@@ -39,7 +39,9 @@ export function ClaimDescriptionModal({
 
         <ModalBody>
           <VStack>
-            <Text>{claim.metadata?.description}</Text>
+            <Text style={{ overflow: "scroll", width: "100%" }}>
+              {claim.metadata?.description}
+            </Text>
           </VStack>
         </ModalBody>
       </ModalContent>

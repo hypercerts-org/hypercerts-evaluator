@@ -46,7 +46,7 @@ export default function ClaimsOrderBy() {
         >
           Created: Old-New
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           onClick={() => click("name_asc")}
           selected={orderBy === "name_asc"}
         >
@@ -57,6 +57,18 @@ export default function ClaimsOrderBy() {
           selected={orderBy === "name_desc"}
         >
           Name: Z-A
+        </MenuItem> */}
+        <MenuItem
+          onClick={() => click("attestations_desc")}
+          selected={orderBy === "attestations_desc"}
+        >
+          Evaluations: Many-Few
+        </MenuItem>
+        <MenuItem
+          onClick={() => click("attestations_asc")}
+          selected={orderBy === "attestations_asc"}
+        >
+          Evaluations: Few-Many
         </MenuItem>
       </MenuList>
     </Menu>

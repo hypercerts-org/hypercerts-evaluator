@@ -51,7 +51,7 @@ export function ConfirmationModal() {
             gap={5}
             alignItems={"center"}
             justifyContent={"center"}
-            h={"100px"}
+            h={"150px"}
           >
             <motion.div
               className="box"
@@ -69,6 +69,10 @@ export function ConfirmationModal() {
               <Text fontSize="m">
                 Your evaluation has been successfully submitted and saved as an
                 attestation.
+              </Text>
+              <Text fontSize="m">
+                Allow for up to a minute for the attestation to be confirmed and
+                viewable on the blockchain and in the UI.
               </Text>
               <Text fontSize="m">
                 View at easscan.org:{" "}

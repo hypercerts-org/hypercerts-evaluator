@@ -3,9 +3,7 @@ import { gqlHypercerts } from "../../graphql/hypercerts";
 export const HypercertListFragment = gqlHypercerts(`
   fragment HypercertListFragment on Hypercert {
     metadata {
-      data { 
-        name
-      }
+      name
     }
     attestations {
       count

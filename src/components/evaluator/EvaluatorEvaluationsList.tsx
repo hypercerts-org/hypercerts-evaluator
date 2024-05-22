@@ -36,7 +36,6 @@ export default function EvaluatorEvaluationsList({
         const _attestation = readFragment(attestationCardFragment, attestation);
         if (!attestation) return null;
         const attestationData = JSON.parse(_attestation.decodedDataJson);
-
         return (
           <EvaluatorEvaluationsListItem
             key={i}

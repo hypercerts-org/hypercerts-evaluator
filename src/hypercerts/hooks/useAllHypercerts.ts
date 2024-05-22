@@ -1,5 +1,3 @@
-import * as R from "remeda";
-
 import { HYPERCERTS_API_URL } from "../../config";
 import { HypercertListFragment } from "../fragments/hypercert-list.fragment";
 import { VariablesOf } from "gql.tada";
@@ -11,14 +9,16 @@ export type ClaimsOrderBy =
   | "timestamp_asc"
   | "timestamp_desc"
   | "name_asc"
-  | "name_desc";
+  | "name_desc"
+  | "attestations_asc"
+  | "attestations_desc";
 
 export type ClaimsFilter = "all" | "evaluated";
 
 const query = gqlHypercerts(
   `
-    query AllHypercerts($first: Int, $offset: Int ) {
-      hypercerts(first: $first, offset: $offset, count: COUNT) {
+    query AllHypercerts($where: HypercertsWhereInput, $sort: HypercertFetchInput, $first: Int, $offset: Int) {
+      hypercerts(where: $where, first: $first, offset: $offset, count: COUNT, sort: $sort) {
         count
         data {
           ...HypercertListFragment
@@ -29,113 +29,73 @@ const query = gqlHypercerts(
   [HypercertListFragment]
 );
 
-// const query = gqlHypercerts(
-//   `
-//     query AllHypercerts($offset: Int, $limit: Int, $where: HypercertsWhereInput! ) {
-//       hypercerts(page: { offset: $offset, limit: $limit }, where: $where) {
-//         count
-//         data {
-//           ...HypercertListFragment
-//         }
-//       }
-//     }
-//   `,
-//   [HypercertListFragment]
-// );
-
 type VariableTypes = VariablesOf<typeof query>;
 
-// function createOrderBy({
-//   orderBy,
-// }: {
-//   orderBy?: ClaimsOrderBy;
-// }): VariableTypes["orderBy"] {
-//   if (orderBy) {
-//     const orderByAttribute = orderBy.split("_")[0];
-//     const orderByDirection = orderBy.split("_")[1];
-//     if (orderByAttribute === "timestamp") {
-//       return [
-//         {
-//           block_timestamp:
-//             orderByDirection === "asc" ? "AscNullsFirst" : "DescNullsFirst",
-//         },
-//       ];
-//     }
-//     if (orderByAttribute === "name") {
-//       return [
-//         {
-//           name: orderByDirection === "asc" ? "AscNullsFirst" : "DescNullsFirst",
-//         },
-//       ];
-//     }
-//   }
+function createOrderBy({
+  orderBy,
+}: {
+  orderBy?: ClaimsOrderBy;
+}): VariableTypes["sort"] {
+  if (orderBy) {
+    const orderByAttribute = orderBy.split("_")[0];
+    const orderByDirection = orderBy.split("_")[1];
+    if (orderByAttribute === "timestamp") {
+      return {
+        by: {
+          creation_block_timestamp:
+            orderByDirection === "asc" ? "ascending" : "descending",
+        },
+      };
+    }
+    if (orderByAttribute === "attestations") {
+      return {
+        by: {
+          claim_attestation_count:
+            orderByDirection === "asc" ? "ascending" : "descending",
+        },
+      };
+    }
+  }
+}
 
-//   return [];
-// }
-
-// function createFilter({
-//   filter,
-//   search,
-// }: {
-//   filter?: ClaimsFilter;
-//   search?: string;
-// }): VariableTypes["where"] {
-//   if (search && search.length > 2) {
-//     // Don't treat hex strings as numbers
-//     // if (!search.startsWith("0x")) {
-//     //   const searchNumber = Number.parseInt(search);
-//     //   if (R.isNumber(searchNumber)) {
-//     //     return {
-//     //       id: { eq: searchNumber },
-//     //     };
-//     //   }
-//     // }
-//     return { name: { ilike: `%${search}%` } };
-//   }
-//   return {};
-// }
-
-// export const useAllHypercerts = ({
-//   offset,
-//   limit,
-//   orderBy,
-//   filter,
-//   search,
-// }: {
-//   offset: number;
-//   limit: number;
-//   orderBy?: ClaimsOrderBy;
-//   filter?: ClaimsFilter; //TODO Implement filter
-//   search?: string;
-// }) => {
-//   return useQuery({
-//     queryKey: ["hypercerts", offset, limit, orderBy, filter, search],
-//     queryFn: async () => {
-//       // const _orderBy = createOrderBy({ orderBy });
-//       // const _filter = createFilter({ filter, search });
-
-//       return request(HYPERCERTS_API_URL, query, {
-//         offset,
-//         limit,
-//         where: {},
-//       });
-//     },
-//   });
-// };
+function createFilter({
+  filter,
+  search,
+}: {
+  filter?: ClaimsFilter;
+  search?: string;
+}): VariableTypes["where"] {
+  const where: VariableTypes["where"] = {};
+  if (search && search.length > 2) {
+    where.metadata = { name: { contains: search } };
+  }
+  if (filter === "evaluated") {
+    where.attestations = {};
+  }
+  return where;
+}
 
 export const useAllHypercerts = ({
   first,
   offset,
+  orderBy,
+  search,
+  filter,
 }: {
   first: number;
   offset: number;
+  orderBy?: ClaimsOrderBy;
+  search?: string;
+  filter?: ClaimsFilter;
 }) => {
   return useQuery({
-    queryKey: ["hypercerts", first, offset],
+    queryKey: ["hypercerts", first, offset, orderBy, search, filter],
     queryFn: async () => {
       return request(HYPERCERTS_API_URL, query, {
         first,
         offset,
+        sort: createOrderBy({ orderBy }),
+        where: createFilter({ search, filter }),
       });
     },
   });
